@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#12161b">
 <script>(function(){try{var t=localStorage.getItem('baq-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<title>Админка BAQ LIGA CS2</title>
+<title>Админка Media Esports League KZ</title>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon-48.png" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -575,7 +575,7 @@ html { scroll-padding-top: 76px; }
 body:not(.admin) { background: transparent; }
 html { background: #06111f; }
 .page-bg { position: fixed; inset: 0; z-index: -1; background: #06111f; overflow: hidden; pointer-events: none; }
-.page-bg::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: max(calc(100vw * 0.4), 70vh); transform: translateY(-50%); background: url(bg.jpg) center / cover no-repeat;
+.page-bg::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: max(calc(100vw * 0.4), 70vh); transform: translateY(-50%); background: var(--bg-d, url(bg.jpg)) center / cover no-repeat;
   -webkit-mask-image: linear-gradient(transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(transparent, #000 12%, #000 88%, transparent); }
 .page-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6,17,31,0) 0%, rgba(6,17,31,.25) 22%, rgba(6,17,31,.5) 50%, rgba(6,17,31,.25) 78%, rgba(6,17,31,0) 100%); }
 body:not(.admin) .wrap { max-width: 980px; }
@@ -758,6 +758,59 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
   .pl-row .pl-name { grid-column: 1 / -1; }
 }
 
+/* ---------- Новое название, мобильный первый экран без постера ---------- */
+.brand-crown { width: 26px; height: auto; fill: #e8b84e; filter: drop-shadow(0 0 6px rgba(232,184,78,.35)); }
+.h-baq { font-size: clamp(40px, 6.6vw, 100px); letter-spacing: .005em; }
+.h-cs { font-size: clamp(42px, 7vw, 106px); margin-top: .02em; }
+.h-sub { letter-spacing: .2em; }
+@media (max-width: 760px) {
+  .page-bg::before { background-image: var(--bg-m, var(--bg-d, url(bg.jpg))); background-position: 50% 50%; opacity: .75; }
+  .hero4 { display: flex; min-height: calc(100svh - 55px); color: #ece6d8; }
+  .hero4-in { padding-top: 22px; padding-bottom: 28px; }
+  .hero4-in > .crown, .hero4-in > .h-sub, .hero4-in > .h-info, .hero4-in > .h-total, .hero4-in > .orgs { display: flex; }
+  .hero4-in > .crown { display: block; width: 44px; }
+  .hero4-in > .h-title { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+  .hero4-in > .h-sub { display: block; font-size: 12px; letter-spacing: .14em; margin: 12px 0 18px; }
+  .h-baq { font-size: clamp(34px, 11vw, 52px); }
+  .h-cs { font-size: clamp(36px, 11.5vw, 56px); }
+  .orgs { margin-bottom: 20px; gap: 6px; padding: 6px; }
+  .orgs li { width: calc(33.33% - 4px); height: 40px; padding: 0 6px; }
+  .orgs img { height: 22px; max-width: 100%; }
+  .orgs li:nth-child(1) img { height: 20px; } .orgs li:nth-child(5) img { height: 26px; }
+  .h-info { grid-template-columns: 1fr; width: 100%; }
+  .hi { flex-direction: row; flex-wrap: wrap; justify-content: space-between; padding: 12px 16px; gap: 4px 10px; text-align: left; }
+  .hi + .hi { border-left: 0; border-top: 1px solid rgba(232,184,78,.3); }
+  .hi svg { display: none; }
+  .hi span { flex: 1 0 auto; }
+  .hi small { width: 100%; text-align: right; }
+  .h-total { font-size: 14px; padding: 9px 16px; }
+  .hero4 .livebar { color: #ece6d8; margin-top: 16px; }
+  .hero4 .btn.ghost { color: #ece6d8; background: rgba(6,17,31,.6); }
+}
+body:not(.admin) .site-top-in { max-width: 1240px; }
+.brand-logo, .theme-btn, .lnav a { white-space: nowrap; }
+.h-baq, .h-cs { text-transform: uppercase; }
+.h-baq { font-size: clamp(36px, 5.6vw, 88px); }
+.h-cs { font-size: clamp(38px, 6.2vw, 94px); }
+@media (max-width: 1100px) and (min-width: 761px) { .lnav a { padding: 8px 8px; font-size: 13px; } }
+@media (max-width: 760px) { .h-baq { font-size: clamp(30px, 9.4vw, 46px); } .h-cs { font-size: clamp(32px, 10vw, 50px); } }
+@media (max-width: 760px) {
+  .hero4-in > .h-info { display: grid; grid-template-columns: 1fr; }
+  .hero4-in > .h-total { display: block; }
+  .hi b { font-size: 17px; }
+}
+
+/* ---------- Новые фоны и эмблема ---------- */
+.page-bg::before { height: max(calc(100vw * 0.4286), 70vh); }
+.brand-logo img { width: 34px; height: 34px; border-radius: 0; }
+.hero-mark { width: 92px; height: auto; filter: drop-shadow(0 0 22px rgba(232,184,78,.28)); margin-bottom: 4px; }
+.hero4-in > .hero-mark { animation-delay: 0s; }
+@media (max-width: 760px) {
+  .page-bg::before { background-image: var(--bg-m, url(bg-m.jpg)); background-position: 50% 50%; opacity: 1; height: 100%; top: 0; transform: none; }
+  .hero-mark { width: 64px; }
+  .brand-logo img { width: 30px; height: 30px; }
+}
+
 </style>
 </head>
 <body class="admin">
@@ -777,7 +830,7 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
   <div id="loginView" hidden>
     <form class="card login" id="loginForm" novalidate>
       <h1>Вход в админку</h1>
-      <p style="color:var(--muted);margin:0 0 20px;font-size:14px">BAQ LIGA CS2</p>
+      <p style="color:var(--muted);margin:0 0 20px;font-size:14px">Media Esports League KZ</p>
       <div class="field"><label class="f" for="email">Email</label><input type="email" id="email" autocomplete="username" value="e.dossetov@gmail.com"></div>
       <div class="field"><label class="f" for="pass">Пароль</label><input type="password" id="pass" autocomplete="current-password"></div>
       <button class="btn" type="submit" style="width:100%;justify-content:center">Войти</button>
@@ -789,7 +842,7 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
   <div id="panel" hidden>
     <h1>Админка</h1>
     <nav class="anav" aria-label="Разделы">
-      <a href="#s-matches">Матчи <b id="navLive"></b></a><a href="#s-media">Постеры</a><a href="#s-draw">Жеребьевка</a><a href="#s-table">Таблица</a><a href="#s-teams">Команды и взносы</a><a href="#s-settings">Настройки</a><a href="#s-reset">Сброс</a>
+      <a href="#s-matches">Матчи <b id="navLive"></b></a><a href="#s-media">Фоны</a><a href="#s-draw">Жеребьевка</a><a href="#s-table">Таблица</a><a href="#s-teams">Команды и взносы</a><a href="#s-settings">Настройки</a><a href="#s-reset">Сброс</a>
     </nav>
     <div class="banner" id="demo" hidden>Демо-режим: данные сохраняются только в этом браузере. Откройте страницу зрителей в соседней вкладке, чтобы проверить обновление в реальном времени.</div>
 
@@ -800,11 +853,11 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
     </section>
 
     <section class="block" id="s-media">
-      <h2>Постеры первого экрана</h2>
-      <p class="lead">Горизонтальный постер показывается на компьютере, вертикальный на телефоне. Выберите файл и нажмите «Загрузить»: картинка сожмется и сразу заменится у всех зрителей. «Вернуть стандартный» показывает постер из файлов сайта.</p>
+      <h2>Фоны страницы</h2>
+      <p class="lead">Фон без текста, на котором стоит весь сайт: горизонтальный для компьютера (лучше 21:9 или 16:9, от 2560 пикселей в ширину), вертикальный для телефона (9:16). Выберите файл и нажмите «Загрузить»: фон сменится у всех зрителей. «Вернуть стандартный» показывает нынешний фон с CT и T.</p>
       <div class="media-grid">
-        <div class="card media-card"><label class="f">Компьютер, горизонтальный</label><img id="mPrevD" src="poster-desktop.jpg" alt="Текущий горизонтальный постер"><p class="note" id="mInfoD"></p><input type="file" id="mFileD" accept="image/png,image/jpeg,image/webp"><div class="row-actions"><button class="btn" type="button" data-up="desktop">Загрузить</button><button class="btn ghost" type="button" data-reset="desktop">Вернуть стандартный</button></div></div>
-        <div class="card media-card"><label class="f">Телефон, вертикальный</label><img id="mPrevM" src="poster-mobile.jpg" alt="Текущий вертикальный постер"><p class="note" id="mInfoM"></p><input type="file" id="mFileM" accept="image/png,image/jpeg,image/webp"><div class="row-actions"><button class="btn" type="button" data-up="mobile">Загрузить</button><button class="btn ghost" type="button" data-reset="mobile">Вернуть стандартный</button></div></div>
+        <div class="card media-card"><label class="f">Компьютер, горизонтальный</label><img id="mPrevD" src="bg.jpg" alt="Текущий фон для компьютера"><p class="note" id="mInfoD"></p><input type="file" id="mFileD" accept="image/png,image/jpeg,image/webp"><div class="row-actions"><button class="btn" type="button" data-up="desktop">Загрузить</button><button class="btn ghost" type="button" data-reset="desktop">Вернуть стандартный</button></div></div>
+        <div class="card media-card"><label class="f">Телефон, вертикальный</label><img id="mPrevM" src="bg-m.jpg" alt="Текущий фон для телефона"><p class="note" id="mInfoM"></p><input type="file" id="mFileM" accept="image/png,image/jpeg,image/webp"><div class="row-actions"><button class="btn" type="button" data-up="mobile">Загрузить</button><button class="btn ghost" type="button" data-reset="mobile">Вернуть стандартный</button></div></div>
       </div>
     </section>
 
@@ -872,7 +925,7 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
       </div>
     </section>
 
-    <footer class="foot"><div class="foot-row"><span>© 2026 Ернар Досетов</span><span id="who"></span></div></footer>
+    <footer class="foot"><div class="foot-row"><span>© 2026 Ернар Досетов. Media Esports League KZ</span><span id="who"></span></div></footer>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -911,8 +964,8 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
 
   const DEFAULT_STATE = {
     meta: {
-      title: "BAQ LIGA CS2",
-      subtitle: "Турнир по Counter-Strike 2 среди СМИ РК",
+      title: "Media Esports League KZ",
+      subtitle: "CS2. Сезон 1. Турнир среди СМИ РК",
       info: "",
       dates: "16-17 октября",
       place: "",
@@ -1462,7 +1515,7 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
   });
 
   /* ---------- Постеры ---------- */
-  const MEDIA = { desktop: { max: 2400, file: "mFileD", prev: "mPrevD", info: "mInfoD", def: "poster-desktop.jpg" }, mobile: { max: 1280, file: "mFileM", prev: "mPrevM", info: "mInfoM", def: "poster-mobile.jpg" } };
+  const MEDIA = { desktop: { key: "bg_desktop", max: 3200, file: "mFileD", prev: "mPrevD", info: "mInfoD", def: "bg.jpg" }, mobile: { key: "bg_mobile", max: 1440, file: "mFileM", prev: "mPrevM", info: "mInfoM", def: "bg-m.jpg" } };
   function loadImage(file) {
     return new Promise((ok, fail) => {
       const url = URL.createObjectURL(file), img = new Image();
@@ -1483,7 +1536,7 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
   function showMedia(key, v) {
     const m = MEDIA[key];
     $(m.prev).src = v && v.data ? v.data : m.def;
-    $(m.info).textContent = v && v.data ? `Загружен${v.at ? " " + B.fmtStamp(v.at) : ""}, ${v.w}×${v.h}, ${Math.round(v.data.length * 0.75 / 1024)} КБ` : "Сейчас показывается стандартный постер из файлов сайта";
+    $(m.info).textContent = v && v.data ? `Загружен${v.at ? " " + B.fmtStamp(v.at) : ""}, ${v.w}×${v.h}, ${Math.round(v.data.length * 0.75 / 1024)} КБ` : "Сейчас стоит стандартный фон из файлов сайта";
   }
   document.querySelector("#s-media").addEventListener("click", async e => {
     const up = e.target.dataset.up, rs = e.target.dataset.reset;
@@ -1494,14 +1547,14 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
       e.target.disabled = true; e.target.textContent = "Загружаем...";
       try {
         const r = await compress(f, MEDIA[up].max);
-        await store.saveMedia(up, { ...r, at: store.serverTime(), by: me });
-        toast("Постер обновлен у всех зрителей"); $(MEDIA[up].file).value = "";
+        await store.saveMedia(MEDIA[up].key, { ...r, at: store.serverTime(), by: me });
+        toast("Фон обновлен у всех зрителей"); $(MEDIA[up].file).value = "";
       } catch (err) { console.error(err); toast(errText(err), true); }
       e.target.disabled = false; e.target.textContent = "Загрузить";
     }
     if (rs) {
-      if (!confirm("Вернуть стандартный постер?")) return;
-      try { await store.saveMedia(rs, null); toast("Возвращен стандартный постер"); } catch (err) { toast(errText(err), true); }
+      if (!confirm("Вернуть стандартный фон?")) return;
+      try { await store.saveMedia(MEDIA[rs].key, null); toast("Возвращен стандартный фон"); } catch (err) { toast(errText(err), true); }
     }
   });
 
@@ -1669,7 +1722,7 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
     const stream = $("streamIn").value.trim();
     if (stream && !/^https?:\/\//i.test(stream)) { toast("Ссылка на трансляцию должна начинаться с https://", true); return; }
     update("meta", {
-      title: $("titleIn").value.trim() || "BAQ LIGA CS2", subtitle: $("subtitleIn").value.trim(),
+      title: $("titleIn").value.trim() || "Media Esports League KZ", subtitle: $("subtitleIn").value.trim(),
       dates: $("datesIn").value.trim(), place: $("placeIn").value.trim(),
       partnersTitle: $("partnersTitleIn").value.trim(), partners: $("partnersIn").value.trim(), stream, mapPool: $("poolIn").value.trim(),
       fee: Math.max(0, Math.round(+$("feeIn").value || 0)), prizes, rules: $("rulesIn").value.trim(),
@@ -1729,7 +1782,7 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
       $("loginView").hidden = !!user;
       $("panel").hidden = !user;
       $("logout").hidden = !user || store.mode === "demo";
-      if (user) { me = user.email || ""; $("who").textContent = user.email || ""; if (!subscribed) { subscribed = true; store.subscribe(render); store.watchMedia("desktop", v => showMedia("desktop", v)); store.watchMedia("mobile", v => showMedia("mobile", v)); B.TEAM_IDS.forEach(t => store.watchMedia("logo_" + t, v => { B.logos[t] = v && v.data ? v.data : null; if (built) showLogo(t); if (comp) renderMatches(); })); } }
+      if (user) { me = user.email || ""; $("who").textContent = user.email || ""; if (!subscribed) { subscribed = true; store.subscribe(render); store.watchMedia("bg_desktop", v => showMedia("desktop", v)); store.watchMedia("bg_mobile", v => showMedia("mobile", v)); B.TEAM_IDS.forEach(t => store.watchMedia("logo_" + t, v => { B.logos[t] = v && v.data ? v.data : null; if (built) showLogo(t); if (comp) renderMatches(); })); } }
     });
   }
   start();

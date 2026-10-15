@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="author" content="Ернар Досетов">
-<meta name="description" content="BAQ LIGA CS2: турнирная сетка, счет матчей, расписание и составы команд в реальном времени">
+<meta name="description" content="Media Esports League KZ: киберспортивные турниры среди СМИ РК. Сетка, счет матчей, расписание и составы команд в реальном времени">
 <meta name="theme-color" content="#12161b">
 <script>(function(){try{var t=localStorage.getItem('baq-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <meta property="og:type" content="website">
-<meta property="og:title" content="BAQ LIGA CS2">
-<meta property="og:description" content="Турнир по Counter-Strike 2 среди СМИ РК, 16-17 октября. Сетка и счет в реальном времени">
+<meta property="og:title" content="Media Esports League KZ">
+<meta property="og:description" content="CS2. Сезон 1. Турнир среди СМИ РК, 16-17 октября. Сетка и счет в реальном времени">
 <meta property="og:url" content="https://vanr45.github.io/baq-liga-cs2/">
 <meta property="og:image" content="https://vanr45.github.io/baq-liga-cs2/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<title>BAQ LIGA CS2</title>
+<title>Media Esports League KZ</title>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon-48.png" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -583,7 +583,7 @@ html { scroll-padding-top: 76px; }
 body:not(.admin) { background: transparent; }
 html { background: #06111f; }
 .page-bg { position: fixed; inset: 0; z-index: -1; background: #06111f; overflow: hidden; pointer-events: none; }
-.page-bg::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: max(calc(100vw * 0.4), 70vh); transform: translateY(-50%); background: url(bg.jpg) center / cover no-repeat;
+.page-bg::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: max(calc(100vw * 0.4), 70vh); transform: translateY(-50%); background: var(--bg-d, url(bg.jpg)) center / cover no-repeat;
   -webkit-mask-image: linear-gradient(transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(transparent, #000 12%, #000 88%, transparent); }
 .page-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6,17,31,0) 0%, rgba(6,17,31,.25) 22%, rgba(6,17,31,.5) 50%, rgba(6,17,31,.25) 78%, rgba(6,17,31,0) 100%); }
 body:not(.admin) .wrap { max-width: 980px; }
@@ -766,13 +766,66 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
   .pl-row .pl-name { grid-column: 1 / -1; }
 }
 
+/* ---------- Новое название, мобильный первый экран без постера ---------- */
+.brand-crown { width: 26px; height: auto; fill: #e8b84e; filter: drop-shadow(0 0 6px rgba(232,184,78,.35)); }
+.h-baq { font-size: clamp(40px, 6.6vw, 100px); letter-spacing: .005em; }
+.h-cs { font-size: clamp(42px, 7vw, 106px); margin-top: .02em; }
+.h-sub { letter-spacing: .2em; }
+@media (max-width: 760px) {
+  .page-bg::before { background-image: var(--bg-m, var(--bg-d, url(bg.jpg))); background-position: 50% 50%; opacity: .75; }
+  .hero4 { display: flex; min-height: calc(100svh - 55px); color: #ece6d8; }
+  .hero4-in { padding-top: 22px; padding-bottom: 28px; }
+  .hero4-in > .crown, .hero4-in > .h-sub, .hero4-in > .h-info, .hero4-in > .h-total, .hero4-in > .orgs { display: flex; }
+  .hero4-in > .crown { display: block; width: 44px; }
+  .hero4-in > .h-title { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+  .hero4-in > .h-sub { display: block; font-size: 12px; letter-spacing: .14em; margin: 12px 0 18px; }
+  .h-baq { font-size: clamp(34px, 11vw, 52px); }
+  .h-cs { font-size: clamp(36px, 11.5vw, 56px); }
+  .orgs { margin-bottom: 20px; gap: 6px; padding: 6px; }
+  .orgs li { width: calc(33.33% - 4px); height: 40px; padding: 0 6px; }
+  .orgs img { height: 22px; max-width: 100%; }
+  .orgs li:nth-child(1) img { height: 20px; } .orgs li:nth-child(5) img { height: 26px; }
+  .h-info { grid-template-columns: 1fr; width: 100%; }
+  .hi { flex-direction: row; flex-wrap: wrap; justify-content: space-between; padding: 12px 16px; gap: 4px 10px; text-align: left; }
+  .hi + .hi { border-left: 0; border-top: 1px solid rgba(232,184,78,.3); }
+  .hi svg { display: none; }
+  .hi span { flex: 1 0 auto; }
+  .hi small { width: 100%; text-align: right; }
+  .h-total { font-size: 14px; padding: 9px 16px; }
+  .hero4 .livebar { color: #ece6d8; margin-top: 16px; }
+  .hero4 .btn.ghost { color: #ece6d8; background: rgba(6,17,31,.6); }
+}
+body:not(.admin) .site-top-in { max-width: 1240px; }
+.brand-logo, .theme-btn, .lnav a { white-space: nowrap; }
+.h-baq, .h-cs { text-transform: uppercase; }
+.h-baq { font-size: clamp(36px, 5.6vw, 88px); }
+.h-cs { font-size: clamp(38px, 6.2vw, 94px); }
+@media (max-width: 1100px) and (min-width: 761px) { .lnav a { padding: 8px 8px; font-size: 13px; } }
+@media (max-width: 760px) { .h-baq { font-size: clamp(30px, 9.4vw, 46px); } .h-cs { font-size: clamp(32px, 10vw, 50px); } }
+@media (max-width: 760px) {
+  .hero4-in > .h-info { display: grid; grid-template-columns: 1fr; }
+  .hero4-in > .h-total { display: block; }
+  .hi b { font-size: 17px; }
+}
+
+/* ---------- Новые фоны и эмблема ---------- */
+.page-bg::before { height: max(calc(100vw * 0.4286), 70vh); }
+.brand-logo img { width: 34px; height: 34px; border-radius: 0; }
+.hero-mark { width: 92px; height: auto; filter: drop-shadow(0 0 22px rgba(232,184,78,.28)); margin-bottom: 4px; }
+.hero4-in > .hero-mark { animation-delay: 0s; }
+@media (max-width: 760px) {
+  .page-bg::before { background-image: var(--bg-m, url(bg-m.jpg)); background-position: 50% 50%; opacity: 1; height: 100%; top: 0; transform: none; }
+  .hero-mark { width: 64px; }
+  .brand-logo img { width: 30px; height: 30px; }
+}
+
 </style>
 </head>
 <body>
 <a class="skip" href="#live">К счету матчей</a>
 <header class="site-top">
   <div class="wrap site-top-in">
-    <a class="brand-mini brand-logo" href="#top"><img src="icon-192.png" width="32" height="32" alt="">BAQ LIGA</a>
+    <a class="brand-mini brand-logo" href="#top"><img src="logo-mark.png" width="34" height="34" alt="">Media Esports KZ</a>
     <nav class="lnav" aria-label="Разделы">
       <a href="#live">Эфир</a><a href="#group">Группа</a><a href="#playoff">Плей-офф</a><a href="#schedule">Расписание</a><a href="#teams">Команды</a><a href="#rules">Регламент</a>
     </nav>
@@ -782,7 +835,6 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
 
 <div class="page-bg" aria-hidden="true"></div>
 <section class="hero4" id="top">
-  <figure class="hero-m"><img id="heroImgM" src="poster-mobile.jpg" width="1024" height="1536" alt="Афиша BAQ LIGA CS2: турнир среди СМИ РК, 16-17 октября, 5 команд, общий призовой фонд 125 000 тенге" fetchpriority="high" decoding="async"></figure>
   <div class="wrap hero4-in">
     <ul class="orgs" aria-label="СМИ турнира">
       <li><img src="logos/khabar.png" width="234" height="96" alt="Хабар"></li>
@@ -791,9 +843,9 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
       <li><img src="logos/kazmedia.png" width="441" height="96" alt="Kazmedia"></li>
       <li><img src="logos/qazcontent.png" width="138" height="96" alt="Qazcontent"></li>
     </ul>
-    <svg class="crown" viewBox="0 0 120 80" aria-hidden="true"><path d="M8 70 L14 22 L38 44 L60 8 L82 44 L106 22 L112 70 Z" /><rect x="8" y="70" width="104" height="8" rx="2"/></svg>
-    <h1 class="h-title" id="title"><span class="h-baq">BAQ LIGA</span><span class="h-cs">CS<b>2</b></span><span class="sr-only">: турнир по Counter-Strike 2 среди СМИ РК</span></h1>
-    <p class="h-sub">Турнир среди СМИ РК</p>
+    <img class="hero-mark" src="logo-mark.png" width="256" height="256" alt="">
+    <h1 class="h-title" id="title"><span class="h-baq">Media Esports</span><span class="h-cs">League <b>KZ</b></span></h1>
+    <p class="h-sub" id="hSub">CS2. Сезон 1. Турнир среди СМИ РК</p>
     <div class="h-info">
       <div class="hi"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Даты проведения</span><b id="hDates">16-17 октября</b><small id="hPlace"></small></div>
       <div class="hi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 14v4M8 21h8"/></svg><span>Взнос</span><b id="hFee">25 000 ₸</b><small>с команды</small></div>
@@ -913,8 +965,8 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
 
   const DEFAULT_STATE = {
     meta: {
-      title: "BAQ LIGA CS2",
-      subtitle: "Турнир по Counter-Strike 2 среди СМИ РК",
+      title: "Media Esports League KZ",
+      subtitle: "CS2. Сезон 1. Турнир среди СМИ РК",
       info: "",
       dates: "16-17 октября",
       place: "",
@@ -1361,7 +1413,7 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
     }
     if (comp.champion) {
       const second = comp.res.P5.loser, third = comp.res.P4.loser;
-      el.innerHTML = `<div class="champion"><p>Чемпион ${esc(state.meta.title)}</p><strong>${nm(comp.champion)}</strong>
+      el.innerHTML = `<div class="champion"><p>Чемпион ${esc(state.meta.subtitle || state.meta.title)}</p><strong>${nm(comp.champion)}</strong>
         <div class="podium"><span><b>2 место</b>${nm(second)}</span><span><b>3 место</b>${nm(third)}</span></div></div>`;
     } else if (comp.live.length) el.innerHTML = comp.live.map(r => focusMatch(r)).join("");
     else if (comp.next) el.innerHTML = focusMatch(comp.next, "Следующий матч");
@@ -1450,7 +1502,8 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
   }
 
   function renderHero() {
-    document.title = state.meta.title || "BAQ LIGA CS2";
+    document.title = state.meta.title || "Media Esports League KZ";
+    if (state.meta.subtitle) $("hSub").textContent = state.meta.subtitle;
     const pi = B.prizeInfo(state);
     $("hDates").textContent = state.meta.dates || "Уточняются";
     $("hPlace").textContent = state.meta.place || "";
@@ -1478,25 +1531,21 @@ body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px,
     lb.innerHTML = html; lb.hidden = !html;
   }
 
-  /* ---------- Постеры из админки ---------- */
-  const media = { desktop: null, mobile: null }, watching = {};
-  let storeRef = null;
-  function applyMedia() {
-    const d = media.desktop, m = media.mobile;
-    const dSrc = d ? d.data : "poster-desktop.jpg", mSrc = m ? m.data : "poster-mobile.jpg";
-    const hm = $("heroImgM");
-    if (hm.getAttribute("src") !== mSrc) { hm.src = mSrc; if (m && m.w) { hm.width = m.w; hm.height = m.h; } }
-  }
-  function want(key) {
-    if (watching[key] || !storeRef || !storeRef.watchMedia) return;
-    watching[key] = true;
-    storeRef.watchMedia(key, v => { media[key] = v && v.data ? v : null; applyMedia(); });
-  }
+  /* ---------- Фоны из админки ---------- */
   const mq = matchMedia("(max-width: 760px)");
-  mq.addEventListener?.("change", () => { if (mq.matches) want("mobile"); });
+  const watching = {};
+  function want(key, store) {
+    if (watching[key]) return;
+    watching[key] = true;
+    store.watchMedia(key, val => {
+      const bg = document.querySelector(".page-bg");
+      const prop = key === "bg_mobile" ? "--bg-m" : "--bg-d";
+      if (val && val.data) bg.style.setProperty(prop, `url("${val.data}")`); else bg.style.removeProperty(prop);
+    });
+  }
   function startMedia(store) {
-    storeRef = store;
-    if (mq.matches) want("mobile");
+    want(mq.matches ? "bg_mobile" : "bg_desktop", store);
+    mq.addEventListener?.("change", () => want(mq.matches ? "bg_mobile" : "bg_desktop", store));
   }
 
   function render(s) {
