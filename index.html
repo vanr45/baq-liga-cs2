@@ -698,6 +698,74 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
   .brand-logo img { width: 28px; height: 28px; }
 }
 
+/* ---------- Без полупрозрачной подложки, логотипы команд, значки ---------- */
+.content::before { display: none; }
+body:not(.admin) { --panel: rgba(14, 19, 26, .9); --panel-2: rgba(28, 35, 45, .92); }
+body:not(.admin) .block > h2, body:not(.admin) .block > .lead, body:not(.admin) .blabel, body:not(.admin) .scroll-hint { text-shadow: 0 2px 12px rgba(0,0,0,.85), 0 0 2px rgba(0,0,0,.6); }
+body:not(.admin) .block > .lead { color: #c9d0d9; }
+:root[data-theme="light"] .page-bg::after { background: rgba(238,241,244,.82); }
+:root[data-theme="light"] body:not(.admin) .block > h2, :root[data-theme="light"] body:not(.admin) .block > .lead, :root[data-theme="light"] body:not(.admin) .blabel { text-shadow: none; }
+:root[data-theme="light"] body:not(.admin) .block > .lead { color: var(--muted); }
+:root[data-theme="light"] body:not(.admin) { --panel: rgba(255,255,255,.95); --panel-2: rgba(232,236,241,.95); }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .page-bg::after { background: rgba(238,241,244,.82); }
+  :root:not([data-theme="dark"]) body:not(.admin) .block > h2, :root:not([data-theme="dark"]) body:not(.admin) .block > .lead, :root:not([data-theme="dark"]) body:not(.admin) .blabel { text-shadow: none; }
+  :root:not([data-theme="dark"]) body:not(.admin) .block > .lead { color: var(--muted); }
+  :root:not([data-theme="dark"]) body:not(.admin) { --panel: rgba(255,255,255,.95); --panel-2: rgba(232,236,241,.95); }
+}
+
+.tlogo { display: inline-block; flex: none; vertical-align: middle; filter: drop-shadow(0 1px 2px rgba(0,0,0,.35)); }
+.tn-l, .ft-l { display: inline-flex; align-items: center; gap: 8px; }
+.ft-l { gap: 12px; }
+.team .name { display: flex; align-items: center; gap: 7px; }
+.team .name .tlogo { margin-top: -1px; }
+.tc-h { display: flex; align-items: center; gap: 10px; }
+.tc-h span { min-width: 0; overflow-wrap: anywhere; }
+.gm .tlogo, .steams .tlogo { margin: 0 2px; }
+.dr-row .tlogo { margin: 0 4px; vertical-align: -6px; }
+.pb { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; margin-left: 6px; vertical-align: -3px; font-style: normal; }
+.pb svg { width: 12px; height: 12px; }
+.pb.cap { background: #e8b84e; }
+.pb.cap svg { fill: #12161b; }
+.pb.snp { background: #2f6fa9; }
+.pb.snp svg { fill: none; stroke: #fff; stroke-width: 2.2; stroke-linecap: round; }
+.legend-pb { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.legend-pb .pb { margin: 0 4px 0 12px; }
+.legend-pb .pb:first-child { margin-left: 0; }
+.tl-prev { margin-bottom: 10px; }
+
+.team-card li .pn { display: inline-flex; align-items: center; white-space: nowrap; flex: none; }
+body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.gm > span { display: inline-flex; align-items: center; gap: 6px; justify-content: flex-start; min-width: 0; }
+.gm > span:first-child { justify-content: flex-end; }
+
+/* ---------- Состав: значки, редактор, логотипы ---------- */
+.team-card li .pn { display: inline-flex; align-items: center; white-space: nowrap; color: var(--bone); font-size: 14px; }
+.team-card li > span:last-child { min-width: 0; }
+.tlogo-img { object-fit: contain; border-radius: 6px; filter: none; }
+.team-ed .logo-ed { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 14px; }
+.team-ed .tl-prev { margin: 0; width: 56px; flex: none; }
+.team-ed .logo-ed .note { margin: 0 0 8px; }
+.team-ed input[type=file] { font: 13px var(--text); color: var(--muted); max-width: 100%; }
+.team-ed .logo-ed .row-actions { margin-top: 8px; }
+.pl-list { display: grid; gap: 6px; margin-bottom: 12px; }
+.pl-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) auto auto 34px; gap: 6px; align-items: center; }
+.pl-row input { padding: 8px 10px; min-height: 38px; font-size: 14px; }
+.pb-tog { display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--ink); color: var(--muted); font: 13px var(--text); cursor: pointer; opacity: .65; }
+.pb-tog .pb { margin: 0; }
+.pb-tog.on { opacity: 1; color: var(--bone); border-color: var(--sand); background: var(--panel-2); }
+.pb-tog.snp.on { border-color: var(--ct); }
+.pl-del { width: 34px; height: 38px; border-radius: 8px; border: 1px solid var(--line-2); background: transparent; color: var(--muted); font-size: 18px; cursor: pointer; }
+.pl-del:hover { color: var(--danger-fg); border-color: var(--danger-line); }
+#teamsEdit.grid2 { grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr)); }
+@media (max-width: 760px) {
+  .pl-row { grid-template-columns: minmax(0,1fr) 34px; }
+  .pl-row .pl-role { grid-column: 1 / 2; }
+  .pl-row .pb-tog span { display: none; }
+  .pl-row { grid-template-columns: minmax(0,1fr) auto auto 34px; }
+  .pl-row .pl-name { grid-column: 1 / -1; }
+}
+
 </style>
 </head>
 <body>
@@ -782,6 +850,7 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
 
   <section class="block" id="teams">
     <h2>Команды</h2>
+    <p class="lead legend-pb" id="legendPb"></p>
     <div class="teams" id="teams-list"></div>
   </section>
 
@@ -884,13 +953,40 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
 
   function parseRoster(text) {
     return String(text || "").split("\n").map(s => s.trim()).filter(Boolean).map(line => {
-      let captain = false;
-      if (line.startsWith("*")) { captain = true; line = line.slice(1).trim(); }
+      let captain = false, sniper = false;
+      for (let k = 0; k < 2; k++) {
+        if (line.startsWith("*")) { captain = true; line = line.slice(1).trim(); }
+        if (line.startsWith("+")) { sniper = true; line = line.slice(1).trim(); }
+      }
       const m = line.match(/^(.*?)\s*\((.*)\)\s*$/);
-      return m ? { name: m[1], role: m[2], captain } : { name: line, role: "", captain };
+      return m ? { name: m[1], role: m[2], captain, sniper } : { name: line, role: "", captain, sniper };
     });
   }
   const mapPool = state => String(state.meta.mapPool || "").split("\n").map(s => s.trim()).filter(Boolean);
+
+  /* ---------- Автологотипы команд ---------- */
+  const TEAM_COLORS = { t1: ["#c0392b", "#ff8a7a"], t2: ["#1f5fa8", "#7fb4ee"], t3: ["#0e8a7a", "#6fe0cf"], t4: ["#6a3fb5", "#b79cf0"], t5: ["#c27a12", "#f5c26b"] };
+  function initials(name) {
+    const s = String(name || "").trim();
+    if (!s) return "?";
+    const words = s.split(/[\s\-_]+/).filter(Boolean);
+    if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
+    const w = words[0];
+    const caps = w.match(/\p{Lu}/gu) || [];
+    if (caps.length >= 2 && w !== w.toUpperCase()) return (caps[0] + caps[caps.length - 1]).toUpperCase();
+    return w.slice(0, 2).toUpperCase();
+  }
+  const logos = {};
+  const ICON_CAP = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18 L5 7 L10 12 L12 5 L14 12 L19 7 L21 18 Z"/></svg>';
+  const ICON_SNP = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/></svg>';
+  function teamLogo(state, tid, size, forceGen) {
+    if (!tid) return "";
+    if (!forceGen && logos[tid]) return `<img class="tlogo tlogo-img" src="${logos[tid]}" width="${size}" height="${size}" alt="">`;
+    const [c1, c2] = TEAM_COLORS[tid] || ["#3a4554", "#8c96a3"];
+    const ini = esc(initials(state.teams[tid]?.name));
+    const fs = ini.length > 1 ? 15 : 19;
+    return `<svg class="tlogo" width="${size}" height="${Math.round(size * 1.15)}" viewBox="0 0 40 46" aria-hidden="true"><path d="M20 1.5 L37.5 7.5 V22 C37.5 33.5 30 40.5 20 44.5 C10 40.5 2.5 33.5 2.5 22 V7.5 Z" fill="${c1}" stroke="${c2}" stroke-width="1.6"/><path d="M20 4.5 L34.5 9.5 V18 H5.5 V9.5 Z" fill="#fff" opacity=".12"/><text x="20" y="27" text-anchor="middle" dominant-baseline="middle" font-family="Unbounded, Arial Black, sans-serif" font-weight="800" font-size="${fs}" fill="#fff" letter-spacing="-.5">${ini}</text></svg>`;
+  }
 
   /* ---------- Время ---------- */
   function parseLocal(s) {
@@ -1124,7 +1220,7 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
     let sc = "";
     if (r.ff) sc = r.winner === tid ? "W" : "-";
     else if (r.status === "live" || r.status === "done") sc = score;
-    return `<div class="team ${cls}"><span class="seed">${r.stage === "playoff" && comp.groupDone ? (comp.table.find(x => x.team === tid)?.pos || "") : ""}</span><span class="name">${esc(state.teams[tid]?.name || tid)}</span><span class="score">${sc}</span></div>`;
+    return `<div class="team ${cls}"><span class="seed">${r.stage === "playoff" && comp.groupDone ? (comp.table.find(x => x.team === tid)?.pos || "") : ""}</span><span class="name">${teamLogo(state, tid, 20)}${esc(state.teams[tid]?.name || tid)}</span><span class="score">${sc}</span></div>`;
   }
   function cardFooter(r) {
     if (r.status === "pending") return "";
@@ -1204,7 +1300,7 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
   window.BAQ = {
     ROOT, MATCHES, GROUP, PLAYOFF, TEAM_IDS, restSlot, DEFAULT_SLOTS, FF_ROUNDS, fmtStamp, DEFAULT_STATE, emptyMatch, clone, withDefaults, esc, parseRoster, mapPool,
     parseLocal, fmtTime, countdown, compute, sourceLabel, mapsSummary,
-    isConfigured, createStore, renderBracket, drawLines, money, pickLabel, prizeInfo, safeUrl
+    isConfigured, createStore, renderBracket, drawLines, money, pickLabel, prizeInfo, safeUrl, teamLogo, initials, logos, ICON_CAP, ICON_SNP
   };
 })();
 
@@ -1215,6 +1311,8 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
   const $ = id => document.getElementById(id);
   let state, comp;
   const nm = t => t ? esc(state.teams[t]?.name || t) : "?";
+  const lg = (t, s) => B.teamLogo(state, t, s);
+  const nml = (t, s) => t ? `<span class="tn-l">${lg(t, s || 18)}${nm(t)}</span>` : "?";
 
   function focusMatch(r, title) {
     const head = [];
@@ -1231,9 +1329,9 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
     }).join("")}</div>` : "";
     return `<div class="focus-card ${r.side}">
       <div class="focus-head">${head.join("")}</div>
-      <div class="focus-team">${r.ta ? nm(r.ta) : esc(B.sourceLabel(r.a))}</div>
+      <div class="focus-team">${r.ta ? `<span class="ft-l">${lg(r.ta, 34)}${nm(r.ta)}</span>` : esc(B.sourceLabel(r.a))}</div>
       <div class="focus-score">${r.status === "upcoming" || r.status === "pending" || (r.status === "live" && !r.touched) ? '<span class="vs">vs</span>' : r.stage === "group" && !r.ff ? `${r.maps[0].a}<span>:</span>${r.maps[0].b}` : `${r.sa}<span>:</span>${r.sb}`}</div>
-      <div class="focus-team right">${r.tb ? nm(r.tb) : esc(B.sourceLabel(r.b))}</div>
+      <div class="focus-team right">${r.tb ? `<span class="ft-l">${nm(r.tb)}${lg(r.tb, 34)}</span>` : esc(B.sourceLabel(r.b))}</div>
       ${mapRow}
       ${r.status !== "done" && B.safeUrl(r.link) ? `<div class="focus-link"><a class="btn ghost small" href="${esc(B.safeUrl(r.link))}" target="_blank" rel="noopener">Открыть матч на CyberShoke</a></div>` : ""}
     </div>`;
@@ -1247,7 +1345,7 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
         <p class="draw-text">Жеребьевка определит, кто с кем играет в каждом туре группы. Результат появится здесь сразу, обновлять страницу не нужно.</p></div>`;
     }
     const ms = comp.groupList.filter(r => r.tour === 1);
-    const rows = ms.map((r, i) => `<div class="dr-row" style="--i:${i}"><span>${nm(r.ta)}</span><b>vs</b><span>${nm(r.tb)}</span></div>`).join("");
+    const rows = ms.map((r, i) => `<div class="dr-row" style="--i:${i}"><span>${nm(r.ta)} ${lg(r.ta, 26)}</span><b>vs</b><span>${lg(r.tb, 26)} ${nm(r.tb)}</span></div>`).join("");
     return `<div class="focus-card draw ${animate ? "reveal" : ""}"><div class="focus-head"><span class="ft">Жеребьевка проведена</span><span>Зафиксировано ${esc(B.fmtStamp(d.doneAt))}</span></div>
       <div class="dr-list"><p class="dr-cap">Первый тур группы</p>${rows}<p class="dr-rest" style="--i:${ms.length}">Отдыхает: ${nm(comp.restTeam(1))}</p></div></div>`;
   }
@@ -1284,8 +1382,8 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
       const st = r.status === "live" ? '<span class="chip live"><i></i>Идет сейчас</span>'
         : r.status === "done" ? `<span class="chip done">${r.ff ? "Тех. победа" : "Завершен"}</span>`
         : r.status === "pending" ? '<span class="chip">Ждет соперников</span>' : '<span class="chip">Не начался</span>';
-      const ta = r.ta ? nm(r.ta) : `<span class="tbd">${esc(B.sourceLabel(r.a))}</span>`;
-      const tb = r.tb ? nm(r.tb) : `<span class="tbd">${esc(B.sourceLabel(r.b))}</span>`;
+      const ta = r.ta ? `${nm(r.ta)} ${lg(r.ta, 20)}` : `<span class="tbd">${esc(B.sourceLabel(r.a))}</span>`;
+      const tb = r.tb ? `${lg(r.tb, 20)} ${nm(r.tb)}` : `<span class="tbd">${esc(B.sourceLabel(r.b))}</span>`;
       const score = r.status === "live" || r.status === "done" ? (r.ff ? "тп" : `${r.sa}:${r.sb}`) : "vs";
       return `<div class="srow side-${r.side}">
         <span class="stime">${r.time ? esc(B.fmtTime(r.time)) : "Время уточняется"}</span>
@@ -1297,6 +1395,7 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
   }
 
   function renderTeams() {
+    $("legendPb").innerHTML = `<i class="pb cap">${B.ICON_CAP}</i>капитан <i class="pb snp">${B.ICON_SNP}</i>снайпер`;
     const pos = {};
     (comp.table || []).forEach(x => pos[x.team] = x.pos);
     const anyPlayed = comp.groupList.some(r => r.status === "done");
@@ -1304,17 +1403,19 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
     $("teams-list").innerHTML = order.map(t => {
       const p = comp.places[t];
       const badge = p === 1 ? '<span class="place p1">Чемпион</span>' : p ? `<span class="place p${p}">${p} место</span>` : '<span class="place alive">В борьбе</span>';
+      const CAP = `<i class="pb cap" title="Капитан">${B.ICON_CAP}</i>`;
+      const SNP = `<i class="pb snp" title="Снайпер">${B.ICON_SNP}</i>`;
       const players = B.parseRoster(state.teams[t].roster).map(x =>
-        `<li><span class="pn">${esc(x.name)}${x.captain ? ' <em title="Капитан">кап.</em>' : ""}</span><span>${esc(x.role)}</span></li>`).join("");
+        `<li><span class="pn">${esc(x.name)}${x.captain ? CAP : ""}${x.sniper ? SNP : ""}</span><span>${esc(x.role)}</span></li>`).join("");
       const gp = anyPlayed ? `${comp.groupDone ? "Группа" : "Сейчас в группе"}: ${pos[t]} место` : "Группа еще не началась";
-      return `<div class="team-card"><h3>${nm(t)}</h3><div class="th"><span class="seedno">${gp}</span>${badge}</div><ul>${players}</ul></div>`;
+      return `<div class="team-card"><h3 class="tc-h">${lg(t, 40)}<span>${nm(t)}</span></h3><div class="th"><span class="seedno">${gp}</span>${badge}</div><ul>${players}</ul></div>`;
     }).join("");
   }
 
   function renderGroup() {
     const t = comp.table;
     $("gtable").innerHTML = `<table><thead><tr><th>#</th><th class="tl">Команда</th><th title="Сыграно">И</th><th title="Победы">В</th><th title="Поражения">П</th><th title="Раунды">Раунды</th><th title="Разница раундов">+/-</th></tr></thead><tbody>
-      ${t.map(x => `<tr class="${x.pos <= 2 ? "up" : "low"}"><td class="pos">${x.pos}${x.tie && comp.groupDone ? "*" : ""}</td><td class="tl tn">${nm(x.team)}</td><td>${x.p}</td><td><b>${x.w}</b></td><td>${x.l}</td><td>${x.rf}:${x.ra}</td><td>${x.diff > 0 ? "+" : ""}${x.diff}</td></tr>`).join("")}
+      ${t.map(x => `<tr class="${x.pos <= 2 ? "up" : "low"}"><td class="pos">${x.pos}${x.tie && comp.groupDone ? "*" : ""}</td><td class="tl tn">${nml(x.team, 24)}</td><td>${x.p}</td><td><b>${x.w}</b></td><td>${x.l}</td><td>${x.rf}:${x.ra}</td><td>${x.diff > 0 ? "+" : ""}${x.diff}</td></tr>`).join("")}
     </tbody></table>
     <p class="gnote"><span class="sw sw-ub"></span>Места 1-2: верхняя сетка <span class="sw sw-lb"></span>Места 3-5: нижняя сетка</p>
     ${t.some(x => x.tie) && comp.groupDone ? '<p class="gnote">* Полное равенство показателей, порядок мест определяют организаторы.</p>' : ""}`;
@@ -1327,7 +1428,7 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
           const sc = r.status === "done" ? (r.ff ? "тп" : `${r.maps[0].a}:${r.maps[0].b}`) : "vs";
           const st = r.status === "live" ? '<span class="chip live"><i></i>Идет сейчас</span>' : r.status === "done" ? (r.maps[0].name && !r.ff ? `<span class="chip">${esc(r.maps[0].name)}</span>` : "") : (r.time ? `<span class="chip">${esc(B.fmtTime(r.time))}</span>` : "");
           if (!r.ta) return `<div class="gm st-pending"><span class="tbd">?</span><b>vs</b><span class="tbd">?</span><span class="gst"></span></div>`;
-          return `<div class="gm st-${r.status}"><span class="${r.winner === r.ta ? "w" : ""}">${nm(r.ta)}</span><b>${sc}</b><span class="${r.winner === r.tb ? "w" : ""}">${nm(r.tb)}</span><span class="gst">${st}</span></div>`;
+          return `<div class="gm st-${r.status}"><span class="${r.winner === r.ta ? "w" : ""}">${nm(r.ta)} ${lg(r.ta, 20)}</span><b>${sc}</b><span class="${r.winner === r.tb ? "w" : ""}">${lg(r.tb, 20)} ${nm(r.tb)}</span><span class="gst">${st}</span></div>`;
         }).join("")}</div>`;
     }
     $("tours").innerHTML = html;
@@ -1423,6 +1524,7 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
     });
     store.subscribe(render);
     startMedia(store);
+    B.TEAM_IDS.forEach(t => store.watchMedia("logo_" + t, val => { B.logos[t] = val && val.data ? val.data : null; if (state) render(state); }));
   }
 
   const redraw = () => comp && B.drawLines($("bracket"), comp);

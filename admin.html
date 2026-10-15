@@ -690,6 +690,74 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
   .brand-logo img { width: 28px; height: 28px; }
 }
 
+/* ---------- Без полупрозрачной подложки, логотипы команд, значки ---------- */
+.content::before { display: none; }
+body:not(.admin) { --panel: rgba(14, 19, 26, .9); --panel-2: rgba(28, 35, 45, .92); }
+body:not(.admin) .block > h2, body:not(.admin) .block > .lead, body:not(.admin) .blabel, body:not(.admin) .scroll-hint { text-shadow: 0 2px 12px rgba(0,0,0,.85), 0 0 2px rgba(0,0,0,.6); }
+body:not(.admin) .block > .lead { color: #c9d0d9; }
+:root[data-theme="light"] .page-bg::after { background: rgba(238,241,244,.82); }
+:root[data-theme="light"] body:not(.admin) .block > h2, :root[data-theme="light"] body:not(.admin) .block > .lead, :root[data-theme="light"] body:not(.admin) .blabel { text-shadow: none; }
+:root[data-theme="light"] body:not(.admin) .block > .lead { color: var(--muted); }
+:root[data-theme="light"] body:not(.admin) { --panel: rgba(255,255,255,.95); --panel-2: rgba(232,236,241,.95); }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .page-bg::after { background: rgba(238,241,244,.82); }
+  :root:not([data-theme="dark"]) body:not(.admin) .block > h2, :root:not([data-theme="dark"]) body:not(.admin) .block > .lead, :root:not([data-theme="dark"]) body:not(.admin) .blabel { text-shadow: none; }
+  :root:not([data-theme="dark"]) body:not(.admin) .block > .lead { color: var(--muted); }
+  :root:not([data-theme="dark"]) body:not(.admin) { --panel: rgba(255,255,255,.95); --panel-2: rgba(232,236,241,.95); }
+}
+
+.tlogo { display: inline-block; flex: none; vertical-align: middle; filter: drop-shadow(0 1px 2px rgba(0,0,0,.35)); }
+.tn-l, .ft-l { display: inline-flex; align-items: center; gap: 8px; }
+.ft-l { gap: 12px; }
+.team .name { display: flex; align-items: center; gap: 7px; }
+.team .name .tlogo { margin-top: -1px; }
+.tc-h { display: flex; align-items: center; gap: 10px; }
+.tc-h span { min-width: 0; overflow-wrap: anywhere; }
+.gm .tlogo, .steams .tlogo { margin: 0 2px; }
+.dr-row .tlogo { margin: 0 4px; vertical-align: -6px; }
+.pb { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; margin-left: 6px; vertical-align: -3px; font-style: normal; }
+.pb svg { width: 12px; height: 12px; }
+.pb.cap { background: #e8b84e; }
+.pb.cap svg { fill: #12161b; }
+.pb.snp { background: #2f6fa9; }
+.pb.snp svg { fill: none; stroke: #fff; stroke-width: 2.2; stroke-linecap: round; }
+.legend-pb { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.legend-pb .pb { margin: 0 4px 0 12px; }
+.legend-pb .pb:first-child { margin-left: 0; }
+.tl-prev { margin-bottom: 10px; }
+
+.team-card li .pn { display: inline-flex; align-items: center; white-space: nowrap; flex: none; }
+body:not(.admin) .teams { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.gm > span { display: inline-flex; align-items: center; gap: 6px; justify-content: flex-start; min-width: 0; }
+.gm > span:first-child { justify-content: flex-end; }
+
+/* ---------- Состав: значки, редактор, логотипы ---------- */
+.team-card li .pn { display: inline-flex; align-items: center; white-space: nowrap; color: var(--bone); font-size: 14px; }
+.team-card li > span:last-child { min-width: 0; }
+.tlogo-img { object-fit: contain; border-radius: 6px; filter: none; }
+.team-ed .logo-ed { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 14px; }
+.team-ed .tl-prev { margin: 0; width: 56px; flex: none; }
+.team-ed .logo-ed .note { margin: 0 0 8px; }
+.team-ed input[type=file] { font: 13px var(--text); color: var(--muted); max-width: 100%; }
+.team-ed .logo-ed .row-actions { margin-top: 8px; }
+.pl-list { display: grid; gap: 6px; margin-bottom: 12px; }
+.pl-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) auto auto 34px; gap: 6px; align-items: center; }
+.pl-row input { padding: 8px 10px; min-height: 38px; font-size: 14px; }
+.pb-tog { display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--ink); color: var(--muted); font: 13px var(--text); cursor: pointer; opacity: .65; }
+.pb-tog .pb { margin: 0; }
+.pb-tog.on { opacity: 1; color: var(--bone); border-color: var(--sand); background: var(--panel-2); }
+.pb-tog.snp.on { border-color: var(--ct); }
+.pl-del { width: 34px; height: 38px; border-radius: 8px; border: 1px solid var(--line-2); background: transparent; color: var(--muted); font-size: 18px; cursor: pointer; }
+.pl-del:hover { color: var(--danger-fg); border-color: var(--danger-line); }
+#teamsEdit.grid2 { grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr)); }
+@media (max-width: 760px) {
+  .pl-row { grid-template-columns: minmax(0,1fr) 34px; }
+  .pl-row .pl-role { grid-column: 1 / 2; }
+  .pl-row .pb-tog span { display: none; }
+  .pl-row { grid-template-columns: minmax(0,1fr) auto auto 34px; }
+  .pl-row .pl-name { grid-column: 1 / -1; }
+}
+
 </style>
 </head>
 <body class="admin">
@@ -765,7 +833,7 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
 
     <section class="block" id="s-teams">
       <h2>Команды, составы и взносы</h2>
-      <p class="lead">Один игрок на строку. Роль указывается в скобках, капитан отмечается звездочкой: *Фараби (Казахстан, режиссер).</p>
+      <p class="lead">Значками отмечайте капитана (один на команду) и снайпера. Логотип команды можно загрузить, а если его нет, он строится из названия автоматически. После правок нажмите «Сохранить команду».</p>
       <div class="grid2" id="teamsEdit"></div>
     </section>
 
@@ -883,13 +951,40 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
 
   function parseRoster(text) {
     return String(text || "").split("\n").map(s => s.trim()).filter(Boolean).map(line => {
-      let captain = false;
-      if (line.startsWith("*")) { captain = true; line = line.slice(1).trim(); }
+      let captain = false, sniper = false;
+      for (let k = 0; k < 2; k++) {
+        if (line.startsWith("*")) { captain = true; line = line.slice(1).trim(); }
+        if (line.startsWith("+")) { sniper = true; line = line.slice(1).trim(); }
+      }
       const m = line.match(/^(.*?)\s*\((.*)\)\s*$/);
-      return m ? { name: m[1], role: m[2], captain } : { name: line, role: "", captain };
+      return m ? { name: m[1], role: m[2], captain, sniper } : { name: line, role: "", captain, sniper };
     });
   }
   const mapPool = state => String(state.meta.mapPool || "").split("\n").map(s => s.trim()).filter(Boolean);
+
+  /* ---------- Автологотипы команд ---------- */
+  const TEAM_COLORS = { t1: ["#c0392b", "#ff8a7a"], t2: ["#1f5fa8", "#7fb4ee"], t3: ["#0e8a7a", "#6fe0cf"], t4: ["#6a3fb5", "#b79cf0"], t5: ["#c27a12", "#f5c26b"] };
+  function initials(name) {
+    const s = String(name || "").trim();
+    if (!s) return "?";
+    const words = s.split(/[\s\-_]+/).filter(Boolean);
+    if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
+    const w = words[0];
+    const caps = w.match(/\p{Lu}/gu) || [];
+    if (caps.length >= 2 && w !== w.toUpperCase()) return (caps[0] + caps[caps.length - 1]).toUpperCase();
+    return w.slice(0, 2).toUpperCase();
+  }
+  const logos = {};
+  const ICON_CAP = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18 L5 7 L10 12 L12 5 L14 12 L19 7 L21 18 Z"/></svg>';
+  const ICON_SNP = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/></svg>';
+  function teamLogo(state, tid, size, forceGen) {
+    if (!tid) return "";
+    if (!forceGen && logos[tid]) return `<img class="tlogo tlogo-img" src="${logos[tid]}" width="${size}" height="${size}" alt="">`;
+    const [c1, c2] = TEAM_COLORS[tid] || ["#3a4554", "#8c96a3"];
+    const ini = esc(initials(state.teams[tid]?.name));
+    const fs = ini.length > 1 ? 15 : 19;
+    return `<svg class="tlogo" width="${size}" height="${Math.round(size * 1.15)}" viewBox="0 0 40 46" aria-hidden="true"><path d="M20 1.5 L37.5 7.5 V22 C37.5 33.5 30 40.5 20 44.5 C10 40.5 2.5 33.5 2.5 22 V7.5 Z" fill="${c1}" stroke="${c2}" stroke-width="1.6"/><path d="M20 4.5 L34.5 9.5 V18 H5.5 V9.5 Z" fill="#fff" opacity=".12"/><text x="20" y="27" text-anchor="middle" dominant-baseline="middle" font-family="Unbounded, Arial Black, sans-serif" font-weight="800" font-size="${fs}" fill="#fff" letter-spacing="-.5">${ini}</text></svg>`;
+  }
 
   /* ---------- Время ---------- */
   function parseLocal(s) {
@@ -1123,7 +1218,7 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
     let sc = "";
     if (r.ff) sc = r.winner === tid ? "W" : "-";
     else if (r.status === "live" || r.status === "done") sc = score;
-    return `<div class="team ${cls}"><span class="seed">${r.stage === "playoff" && comp.groupDone ? (comp.table.find(x => x.team === tid)?.pos || "") : ""}</span><span class="name">${esc(state.teams[tid]?.name || tid)}</span><span class="score">${sc}</span></div>`;
+    return `<div class="team ${cls}"><span class="seed">${r.stage === "playoff" && comp.groupDone ? (comp.table.find(x => x.team === tid)?.pos || "") : ""}</span><span class="name">${teamLogo(state, tid, 20)}${esc(state.teams[tid]?.name || tid)}</span><span class="score">${sc}</span></div>`;
   }
   function cardFooter(r) {
     if (r.status === "pending") return "";
@@ -1203,7 +1298,7 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
   window.BAQ = {
     ROOT, MATCHES, GROUP, PLAYOFF, TEAM_IDS, restSlot, DEFAULT_SLOTS, FF_ROUNDS, fmtStamp, DEFAULT_STATE, emptyMatch, clone, withDefaults, esc, parseRoster, mapPool,
     parseLocal, fmtTime, countdown, compute, sourceLabel, mapsSummary,
-    isConfigured, createStore, renderBracket, drawLines, money, pickLabel, prizeInfo, safeUrl
+    isConfigured, createStore, renderBracket, drawLines, money, pickLabel, prizeInfo, safeUrl, teamLogo, initials, logos, ICON_CAP, ICON_SNP
   };
 })();
 
@@ -1457,14 +1552,35 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
   }
 
   /* ---------- Команды и настройки ---------- */
+  function playerRow(p) {
+    p = p || { name: "", role: "", captain: false, sniper: false };
+    return `<div class="pl-row">
+      <input type="text" class="pl-name" value="${esc(p.name)}" placeholder="Имя" aria-label="Имя игрока" maxlength="40">
+      <input type="text" class="pl-role" value="${esc(p.role)}" placeholder="Где работает, роль" aria-label="Роль" maxlength="60">
+      <button type="button" class="pb-tog cap ${p.captain ? "on" : ""}" aria-pressed="${p.captain}" title="Капитан"><i class="pb cap">${B.ICON_CAP}</i><span>Капитан</span></button>
+      <button type="button" class="pb-tog snp ${p.sniper ? "on" : ""}" aria-pressed="${p.sniper}" title="Снайпер"><i class="pb snp">${B.ICON_SNP}</i><span>Снайпер</span></button>
+      <button type="button" class="pl-del" aria-label="Удалить игрока">×</button>
+    </div>`;
+  }
+  function showLogo(t) {
+    const el = $("lp-" + t); if (!el) return;
+    const name = $("n-" + t) ? $("n-" + t).value : state.teams[t].name;
+    el.innerHTML = B.teamLogo({ teams: { [t]: { name } } }, t, 56);
+    $("lg-" + t).textContent = B.logos[t] ? "Загружен свой логотип" : "Логотип сгенерирован из названия";
+  }
   function buildStatic() {
     $("teamsEdit").innerHTML = B.TEAM_IDS.map(t => `
-      <div class="card">
-        <div class="field"><label class="f" for="n-${t}">Название команды</label><input type="text" id="n-${t}" maxlength="40" value="${esc(state.teams[t].name)}"></div>
-        <div class="field"><label class="f" for="r-${t}">Состав</label><textarea id="r-${t}">${esc(state.teams[t].roster)}</textarea></div>
-        <label class="paid"><input type="checkbox" data-paid="${t}" ${state.teams[t].paid ? "checked" : ""}>Взнос оплачен</label><br>
-        <button class="btn small" data-save-team="${t}">Сохранить команду</button>
+      <div class="card team-ed" data-team="${t}">
+        <div class="logo-ed"><div class="tl-prev" id="lp-${t}"></div><div><p class="note" id="lg-${t}"></p>
+          <input type="file" id="lf-${t}" accept="image/png,image/jpeg,image/webp,image/svg+xml" aria-label="Файл логотипа">
+          <div class="row-actions"><button class="btn small" type="button" data-logo-up="${t}">Загрузить логотип</button><button class="btn ghost small" type="button" data-logo-reset="${t}">Сгенерировать</button></div></div></div>
+        <div class="field"><label class="f" for="n-${t}">Название команды</label><input type="text" id="n-${t}" maxlength="40" value="${esc(state.teams[t].name)}" data-logo="${t}"></div>
+        <label class="f">Состав</label>
+        <div class="pl-list" id="pl-${t}">${B.parseRoster(state.teams[t].roster).map(playerRow).join("")}</div>
+        <label class="paid"><input type="checkbox" data-paid="${t}" ${state.teams[t].paid ? "checked" : ""}>Взнос оплачен</label>
+        <div class="row-actions"><button class="btn ghost small" type="button" data-add-player="${t}">Добавить игрока</button><button class="btn small" type="button" data-save-team="${t}">Сохранить команду</button></div>
       </div>`).join("");
+    B.TEAM_IDS.forEach(showLogo);
     $("titleIn").value = state.meta.title || "";
     $("subtitleIn").value = state.meta.subtitle || "";
     $("datesIn").value = state.meta.dates || "";
@@ -1481,11 +1597,58 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
     sumCheck();
     built = true;
   }
-  $("teamsEdit").addEventListener("click", e => {
-    const t = e.target.dataset.saveTeam; if (!t) return;
-    const name = $("n-" + t).value.trim();
-    if (!name) { toast("Укажите название команды", true); $("n-" + t).focus(); return; }
-    update("teams/" + t, { name, roster: $("r-" + t).value.trim() }, "Команда сохранена");
+  function serializeRoster(t) {
+    return [...$("pl-" + t).querySelectorAll(".pl-row")].map(r => {
+      const name = r.querySelector(".pl-name").value.trim().replace(/^[*+]+/, "");
+      if (!name) return "";
+      const role = r.querySelector(".pl-role").value.trim().replace(/[()]/g, "");
+      const cap = r.querySelector(".pb-tog.cap").classList.contains("on"), snp = r.querySelector(".pb-tog.snp").classList.contains("on");
+      return (cap ? "*" : "") + (snp ? "+" : "") + name + (role ? ` (${role})` : "");
+    }).filter(Boolean).join("\n");
+  }
+  async function compressLogo(file) {
+    const img = await loadImage(file);
+    const k = Math.min(1, 256 / Math.max(img.naturalWidth, img.naturalHeight));
+    const w = Math.max(1, Math.round(img.naturalWidth * k)), h = Math.max(1, Math.round(img.naturalHeight * k));
+    const cv = document.createElement("canvas"); cv.width = w; cv.height = h;
+    cv.getContext("2d").drawImage(img, 0, 0, w, h);
+    let data = cv.toDataURL("image/png");
+    if (data.length > 400000) data = cv.toDataURL("image/webp", 0.9);
+    return { data, w, h };
+  }
+  $("teamsEdit").addEventListener("click", async e => {
+    const btn = e.target.closest("button"); if (!btn) return;
+    const card = btn.closest(".team-ed"), t = card?.dataset.team;
+    if (btn.classList.contains("pb-tog")) {
+      const on = !btn.classList.contains("on");
+      if (btn.classList.contains("cap") && on) card.querySelectorAll(".pb-tog.cap.on").forEach(x => { x.classList.remove("on"); x.setAttribute("aria-pressed", "false"); });
+      btn.classList.toggle("on", on); btn.setAttribute("aria-pressed", String(on));
+      return;
+    }
+    if (btn.classList.contains("pl-del")) { btn.closest(".pl-row").remove(); return; }
+    if (btn.dataset.addPlayer) { $("pl-" + t).insertAdjacentHTML("beforeend", playerRow()); $("pl-" + t).lastElementChild.querySelector(".pl-name").focus(); return; }
+    if (btn.dataset.saveTeam) {
+      const name = $("n-" + t).value.trim();
+      if (!name) { toast("Укажите название команды", true); $("n-" + t).focus(); return; }
+      update("teams/" + t, { name, roster: serializeRoster(t) }, "Команда сохранена");
+      return;
+    }
+    if (btn.dataset.logoUp) {
+      const f = $("lf-" + t).files[0];
+      if (!f) { toast("Сначала выберите файл логотипа", true); return; }
+      btn.disabled = true;
+      try { const r = await compressLogo(f); await store.saveMedia("logo_" + t, { ...r, at: store.serverTime(), by: me }); toast("Логотип команды обновлен"); $("lf-" + t).value = ""; }
+      catch (err) { console.error(err); toast(errText(err), true); }
+      btn.disabled = false;
+      return;
+    }
+    if (btn.dataset.logoReset) {
+      if (!confirm("Убрать загруженный логотип и показывать сгенерированный из названия?")) return;
+      try { await store.saveMedia("logo_" + t, null); toast("Будет показан сгенерированный логотип"); } catch (err) { toast(errText(err), true); }
+    }
+  });
+  $("teamsEdit").addEventListener("input", e => {
+    const t = e.target.dataset.logo; if (t) showLogo(t);
   });
   $("teamsEdit").addEventListener("change", e => {
     const t = e.target.dataset.paid; if (!t) return;
@@ -1566,7 +1729,7 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
       $("loginView").hidden = !!user;
       $("panel").hidden = !user;
       $("logout").hidden = !user || store.mode === "demo";
-      if (user) { me = user.email || ""; $("who").textContent = user.email || ""; if (!subscribed) { subscribed = true; store.subscribe(render); store.watchMedia("desktop", v => showMedia("desktop", v)); store.watchMedia("mobile", v => showMedia("mobile", v)); } }
+      if (user) { me = user.email || ""; $("who").textContent = user.email || ""; if (!subscribed) { subscribed = true; store.subscribe(render); store.watchMedia("desktop", v => showMedia("desktop", v)); store.watchMedia("mobile", v => showMedia("mobile", v)); B.TEAM_IDS.forEach(t => store.watchMedia("logo_" + t, v => { B.logos[t] = v && v.data ? v.data : null; if (built) showLogo(t); if (comp) renderMatches(); })); } }
     });
   }
   start();
