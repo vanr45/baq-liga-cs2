@@ -819,6 +819,76 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
   .brand-logo img { width: 30px; height: 30px; }
 }
 
+/* ---------- Дневной режим с отдельными фонами ---------- */
+:root[data-theme="light"] .page-bg { background: #e9eef3; }
+:root[data-theme="light"] .page-bg::before { background-image: var(--bg-dd, url(bg-day.jpg)); height: max(calc(100vw * 0.451), 70vh); -webkit-mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent); }
+:root[data-theme="light"] .page-bg::after { background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.12) 30%, rgba(255,255,255,.22) 50%, rgba(255,255,255,.12) 70%, rgba(255,255,255,0) 100%); }
+:root[data-theme="light"] body:not(.admin) { --panel: rgba(255,255,255,.94); --panel-2: rgba(236,240,245,.95); }
+:root[data-theme="light"] .hero4 { color: #0f2742; background: none; }
+:root[data-theme="light"] .h-baq { color: #0f2742; text-shadow: 0 0 26px rgba(255,255,255,.9), 0 2px 0 rgba(255,255,255,.6); }
+:root[data-theme="light"] .h-cs { color: #0f2742; text-shadow: 0 0 26px rgba(255,255,255,.9); }
+:root[data-theme="light"] .h-cs b { color: #c8901f; text-shadow: 0 0 22px rgba(255,255,255,.9); }
+:root[data-theme="light"] .h-sub { color: #0f2742; text-shadow: 0 0 14px rgba(255,255,255,.95), 0 0 2px #fff; }
+:root[data-theme="light"] .hero-mark { filter: drop-shadow(0 0 14px rgba(255,255,255,.85)); }
+:root[data-theme="light"] .orgs { background: rgba(255,255,255,.55); border-color: rgba(15,39,66,.12); }
+:root[data-theme="light"] .orgs li { box-shadow: 0 4px 14px rgba(15,39,66,.12), inset 0 0 0 1px rgba(15,39,66,.06); }
+:root[data-theme="light"] .h-info { background: rgba(255,255,255,.82); border-color: rgba(200,144,31,.45); }
+:root[data-theme="light"] .hi + .hi { border-color: rgba(200,144,31,.35); }
+:root[data-theme="light"] .hi span { color: #566170; }
+:root[data-theme="light"] .hi small { color: #33415a; }
+:root[data-theme="light"] .hi b { color: #a8761c; }
+:root[data-theme="light"] .hi svg { stroke: #c8901f; }
+:root[data-theme="light"] .h-total { background: rgba(255,255,255,.85); color: #33415a; border-color: rgba(200,144,31,.6); }
+:root[data-theme="light"] .h-total b { color: #a8761c; }
+:root[data-theme="light"] .hero4 .livebar, :root[data-theme="light"] .hero4 .livebar .lb-m b { color: #0f2742; text-shadow: 0 0 10px rgba(255,255,255,.9); }
+:root[data-theme="light"] .hero4 .livebar .lb-x { color: #33415a; }
+:root[data-theme="light"] .hero4 .btn.ghost { background: rgba(255,255,255,.85); color: #0f2742; box-shadow: inset 0 0 0 1px rgba(15,39,66,.25); }
+:root[data-theme="light"] .hero4 .btn.ghost:hover { background: #fff; }
+:root[data-theme="light"] .hero4 .btn.ghost.ct { box-shadow: inset 0 0 0 1px #2f6fa9; }
+:root[data-theme="light"] body:not(.admin) .block > h2, :root[data-theme="light"] body:not(.admin) .block > .lead, :root[data-theme="light"] body:not(.admin) .blabel, :root[data-theme="light"] body:not(.admin) .scroll-hint, :root[data-theme="light"] body:not(.admin) .legend-pb { color: #0f2742; text-shadow: 0 0 12px rgba(255,255,255,.95), 0 0 3px #fff, 0 0 1px #fff; }
+:root[data-theme="light"] body:not(.admin) .block > .lead { color: #22324a; }
+:root[data-theme="light"] .edge { stroke: #5d6b7c; }
+@media (prefers-color-scheme: light) {
+:root:not([data-theme="dark"]) .page-bg { background: #e9eef3; }
+:root:not([data-theme="dark"]) .page-bg::before { background-image: var(--bg-dd, url(bg-day.jpg)); height: max(calc(100vw * 0.451), 70vh); -webkit-mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent); }
+:root:not([data-theme="dark"]) .page-bg::after { background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.12) 30%, rgba(255,255,255,.22) 50%, rgba(255,255,255,.12) 70%, rgba(255,255,255,0) 100%); }
+:root:not([data-theme="dark"]) body:not(.admin) { --panel: rgba(255,255,255,.94); --panel-2: rgba(236,240,245,.95); }
+:root:not([data-theme="dark"]) .hero4 { color: #0f2742; background: none; }
+:root:not([data-theme="dark"]) .h-baq { color: #0f2742; text-shadow: 0 0 26px rgba(255,255,255,.9), 0 2px 0 rgba(255,255,255,.6); }
+:root:not([data-theme="dark"]) .h-cs { color: #0f2742; text-shadow: 0 0 26px rgba(255,255,255,.9); }
+:root:not([data-theme="dark"]) .h-cs b { color: #c8901f; text-shadow: 0 0 22px rgba(255,255,255,.9); }
+:root:not([data-theme="dark"]) .h-sub { color: #0f2742; text-shadow: 0 0 14px rgba(255,255,255,.95), 0 0 2px #fff; }
+:root:not([data-theme="dark"]) .hero-mark { filter: drop-shadow(0 0 14px rgba(255,255,255,.85)); }
+:root:not([data-theme="dark"]) .orgs { background: rgba(255,255,255,.55); border-color: rgba(15,39,66,.12); }
+:root:not([data-theme="dark"]) .orgs li { box-shadow: 0 4px 14px rgba(15,39,66,.12), inset 0 0 0 1px rgba(15,39,66,.06); }
+:root:not([data-theme="dark"]) .h-info { background: rgba(255,255,255,.82); border-color: rgba(200,144,31,.45); }
+:root:not([data-theme="dark"]) .hi + .hi { border-color: rgba(200,144,31,.35); }
+:root:not([data-theme="dark"]) .hi span { color: #566170; }
+:root:not([data-theme="dark"]) .hi small { color: #33415a; }
+:root:not([data-theme="dark"]) .hi b { color: #a8761c; }
+:root:not([data-theme="dark"]) .hi svg { stroke: #c8901f; }
+:root:not([data-theme="dark"]) .h-total { background: rgba(255,255,255,.85); color: #33415a; border-color: rgba(200,144,31,.6); }
+:root:not([data-theme="dark"]) .h-total b { color: #a8761c; }
+:root:not([data-theme="dark"]) .hero4 .livebar, :root:not([data-theme="dark"]) .hero4 .livebar .lb-m b { color: #0f2742; text-shadow: 0 0 10px rgba(255,255,255,.9); }
+:root:not([data-theme="dark"]) .hero4 .livebar .lb-x { color: #33415a; }
+:root:not([data-theme="dark"]) .hero4 .btn.ghost { background: rgba(255,255,255,.85); color: #0f2742; box-shadow: inset 0 0 0 1px rgba(15,39,66,.25); }
+:root:not([data-theme="dark"]) .hero4 .btn.ghost:hover { background: #fff; }
+:root:not([data-theme="dark"]) .hero4 .btn.ghost.ct { box-shadow: inset 0 0 0 1px #2f6fa9; }
+:root:not([data-theme="dark"]) body:not(.admin) .block > h2, :root:not([data-theme="dark"]) body:not(.admin) .block > .lead, :root:not([data-theme="dark"]) body:not(.admin) .blabel, :root:not([data-theme="dark"]) body:not(.admin) .scroll-hint, :root:not([data-theme="dark"]) body:not(.admin) .legend-pb { color: #0f2742; text-shadow: 0 0 12px rgba(255,255,255,.95), 0 0 3px #fff, 0 0 1px #fff; }
+:root:not([data-theme="dark"]) body:not(.admin) .block > .lead { color: #22324a; }
+:root:not([data-theme="dark"]) .edge { stroke: #5d6b7c; }
+}
+@media (max-width: 760px) {
+:root[data-theme="light"] .page-bg::before { background-image: var(--bg-dm, url(bg-day-m.jpg)); height: 100%; top: 0; transform: none; -webkit-mask-image: none; mask-image: none; }
+:root[data-theme="light"] .hero4 { color: #0f2742; }
+:root[data-theme="light"] .hero4 .btn.ghost { color: #0f2742; background: rgba(255,255,255,.85); }
+}
+@media (max-width: 760px) and (prefers-color-scheme: light) {
+:root:not([data-theme="dark"]) .page-bg::before { background-image: var(--bg-dm, url(bg-day-m.jpg)); height: 100%; top: 0; transform: none; -webkit-mask-image: none; mask-image: none; }
+:root:not([data-theme="dark"]) .hero4 { color: #0f2742; }
+:root:not([data-theme="dark"]) .hero4 .btn.ghost { color: #0f2742; background: rgba(255,255,255,.85); }
+}
+
 </style>
 </head>
 <body>
@@ -1539,13 +1609,13 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
     watching[key] = true;
     store.watchMedia(key, val => {
       const bg = document.querySelector(".page-bg");
-      const prop = key === "bg_mobile" ? "--bg-m" : "--bg-d";
+      const prop = { bg_mobile: "--bg-m", bg_desktop: "--bg-d", bg_day_mobile: "--bg-dm", bg_day_desktop: "--bg-dd" }[key];
       if (val && val.data) bg.style.setProperty(prop, `url("${val.data}")`); else bg.style.removeProperty(prop);
     });
   }
   function startMedia(store) {
-    want(mq.matches ? "bg_mobile" : "bg_desktop", store);
-    mq.addEventListener?.("change", () => want(mq.matches ? "bg_mobile" : "bg_desktop", store));
+    const go = () => { const m = mq.matches; want(m ? "bg_mobile" : "bg_desktop", store); want(m ? "bg_day_mobile" : "bg_day_desktop", store); };
+    go(); mq.addEventListener?.("change", go);
   }
 
   function render(s) {

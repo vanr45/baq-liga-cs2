@@ -811,6 +811,76 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
   .brand-logo img { width: 30px; height: 30px; }
 }
 
+/* ---------- Дневной режим с отдельными фонами ---------- */
+:root[data-theme="light"] .page-bg { background: #e9eef3; }
+:root[data-theme="light"] .page-bg::before { background-image: var(--bg-dd, url(bg-day.jpg)); height: max(calc(100vw * 0.451), 70vh); -webkit-mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent); }
+:root[data-theme="light"] .page-bg::after { background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.12) 30%, rgba(255,255,255,.22) 50%, rgba(255,255,255,.12) 70%, rgba(255,255,255,0) 100%); }
+:root[data-theme="light"] body:not(.admin) { --panel: rgba(255,255,255,.94); --panel-2: rgba(236,240,245,.95); }
+:root[data-theme="light"] .hero4 { color: #0f2742; background: none; }
+:root[data-theme="light"] .h-baq { color: #0f2742; text-shadow: 0 0 26px rgba(255,255,255,.9), 0 2px 0 rgba(255,255,255,.6); }
+:root[data-theme="light"] .h-cs { color: #0f2742; text-shadow: 0 0 26px rgba(255,255,255,.9); }
+:root[data-theme="light"] .h-cs b { color: #c8901f; text-shadow: 0 0 22px rgba(255,255,255,.9); }
+:root[data-theme="light"] .h-sub { color: #0f2742; text-shadow: 0 0 14px rgba(255,255,255,.95), 0 0 2px #fff; }
+:root[data-theme="light"] .hero-mark { filter: drop-shadow(0 0 14px rgba(255,255,255,.85)); }
+:root[data-theme="light"] .orgs { background: rgba(255,255,255,.55); border-color: rgba(15,39,66,.12); }
+:root[data-theme="light"] .orgs li { box-shadow: 0 4px 14px rgba(15,39,66,.12), inset 0 0 0 1px rgba(15,39,66,.06); }
+:root[data-theme="light"] .h-info { background: rgba(255,255,255,.82); border-color: rgba(200,144,31,.45); }
+:root[data-theme="light"] .hi + .hi { border-color: rgba(200,144,31,.35); }
+:root[data-theme="light"] .hi span { color: #566170; }
+:root[data-theme="light"] .hi small { color: #33415a; }
+:root[data-theme="light"] .hi b { color: #a8761c; }
+:root[data-theme="light"] .hi svg { stroke: #c8901f; }
+:root[data-theme="light"] .h-total { background: rgba(255,255,255,.85); color: #33415a; border-color: rgba(200,144,31,.6); }
+:root[data-theme="light"] .h-total b { color: #a8761c; }
+:root[data-theme="light"] .hero4 .livebar, :root[data-theme="light"] .hero4 .livebar .lb-m b { color: #0f2742; text-shadow: 0 0 10px rgba(255,255,255,.9); }
+:root[data-theme="light"] .hero4 .livebar .lb-x { color: #33415a; }
+:root[data-theme="light"] .hero4 .btn.ghost { background: rgba(255,255,255,.85); color: #0f2742; box-shadow: inset 0 0 0 1px rgba(15,39,66,.25); }
+:root[data-theme="light"] .hero4 .btn.ghost:hover { background: #fff; }
+:root[data-theme="light"] .hero4 .btn.ghost.ct { box-shadow: inset 0 0 0 1px #2f6fa9; }
+:root[data-theme="light"] body:not(.admin) .block > h2, :root[data-theme="light"] body:not(.admin) .block > .lead, :root[data-theme="light"] body:not(.admin) .blabel, :root[data-theme="light"] body:not(.admin) .scroll-hint, :root[data-theme="light"] body:not(.admin) .legend-pb { color: #0f2742; text-shadow: 0 0 12px rgba(255,255,255,.95), 0 0 3px #fff, 0 0 1px #fff; }
+:root[data-theme="light"] body:not(.admin) .block > .lead { color: #22324a; }
+:root[data-theme="light"] .edge { stroke: #5d6b7c; }
+@media (prefers-color-scheme: light) {
+:root:not([data-theme="dark"]) .page-bg { background: #e9eef3; }
+:root:not([data-theme="dark"]) .page-bg::before { background-image: var(--bg-dd, url(bg-day.jpg)); height: max(calc(100vw * 0.451), 70vh); -webkit-mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent); }
+:root:not([data-theme="dark"]) .page-bg::after { background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.12) 30%, rgba(255,255,255,.22) 50%, rgba(255,255,255,.12) 70%, rgba(255,255,255,0) 100%); }
+:root:not([data-theme="dark"]) body:not(.admin) { --panel: rgba(255,255,255,.94); --panel-2: rgba(236,240,245,.95); }
+:root:not([data-theme="dark"]) .hero4 { color: #0f2742; background: none; }
+:root:not([data-theme="dark"]) .h-baq { color: #0f2742; text-shadow: 0 0 26px rgba(255,255,255,.9), 0 2px 0 rgba(255,255,255,.6); }
+:root:not([data-theme="dark"]) .h-cs { color: #0f2742; text-shadow: 0 0 26px rgba(255,255,255,.9); }
+:root:not([data-theme="dark"]) .h-cs b { color: #c8901f; text-shadow: 0 0 22px rgba(255,255,255,.9); }
+:root:not([data-theme="dark"]) .h-sub { color: #0f2742; text-shadow: 0 0 14px rgba(255,255,255,.95), 0 0 2px #fff; }
+:root:not([data-theme="dark"]) .hero-mark { filter: drop-shadow(0 0 14px rgba(255,255,255,.85)); }
+:root:not([data-theme="dark"]) .orgs { background: rgba(255,255,255,.55); border-color: rgba(15,39,66,.12); }
+:root:not([data-theme="dark"]) .orgs li { box-shadow: 0 4px 14px rgba(15,39,66,.12), inset 0 0 0 1px rgba(15,39,66,.06); }
+:root:not([data-theme="dark"]) .h-info { background: rgba(255,255,255,.82); border-color: rgba(200,144,31,.45); }
+:root:not([data-theme="dark"]) .hi + .hi { border-color: rgba(200,144,31,.35); }
+:root:not([data-theme="dark"]) .hi span { color: #566170; }
+:root:not([data-theme="dark"]) .hi small { color: #33415a; }
+:root:not([data-theme="dark"]) .hi b { color: #a8761c; }
+:root:not([data-theme="dark"]) .hi svg { stroke: #c8901f; }
+:root:not([data-theme="dark"]) .h-total { background: rgba(255,255,255,.85); color: #33415a; border-color: rgba(200,144,31,.6); }
+:root:not([data-theme="dark"]) .h-total b { color: #a8761c; }
+:root:not([data-theme="dark"]) .hero4 .livebar, :root:not([data-theme="dark"]) .hero4 .livebar .lb-m b { color: #0f2742; text-shadow: 0 0 10px rgba(255,255,255,.9); }
+:root:not([data-theme="dark"]) .hero4 .livebar .lb-x { color: #33415a; }
+:root:not([data-theme="dark"]) .hero4 .btn.ghost { background: rgba(255,255,255,.85); color: #0f2742; box-shadow: inset 0 0 0 1px rgba(15,39,66,.25); }
+:root:not([data-theme="dark"]) .hero4 .btn.ghost:hover { background: #fff; }
+:root:not([data-theme="dark"]) .hero4 .btn.ghost.ct { box-shadow: inset 0 0 0 1px #2f6fa9; }
+:root:not([data-theme="dark"]) body:not(.admin) .block > h2, :root:not([data-theme="dark"]) body:not(.admin) .block > .lead, :root:not([data-theme="dark"]) body:not(.admin) .blabel, :root:not([data-theme="dark"]) body:not(.admin) .scroll-hint, :root:not([data-theme="dark"]) body:not(.admin) .legend-pb { color: #0f2742; text-shadow: 0 0 12px rgba(255,255,255,.95), 0 0 3px #fff, 0 0 1px #fff; }
+:root:not([data-theme="dark"]) body:not(.admin) .block > .lead { color: #22324a; }
+:root:not([data-theme="dark"]) .edge { stroke: #5d6b7c; }
+}
+@media (max-width: 760px) {
+:root[data-theme="light"] .page-bg::before { background-image: var(--bg-dm, url(bg-day-m.jpg)); height: 100%; top: 0; transform: none; -webkit-mask-image: none; mask-image: none; }
+:root[data-theme="light"] .hero4 { color: #0f2742; }
+:root[data-theme="light"] .hero4 .btn.ghost { color: #0f2742; background: rgba(255,255,255,.85); }
+}
+@media (max-width: 760px) and (prefers-color-scheme: light) {
+:root:not([data-theme="dark"]) .page-bg::before { background-image: var(--bg-dm, url(bg-day-m.jpg)); height: 100%; top: 0; transform: none; -webkit-mask-image: none; mask-image: none; }
+:root:not([data-theme="dark"]) .hero4 { color: #0f2742; }
+:root:not([data-theme="dark"]) .hero4 .btn.ghost { color: #0f2742; background: rgba(255,255,255,.85); }
+}
+
 </style>
 </head>
 <body class="admin">
@@ -855,9 +925,15 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
     <section class="block" id="s-media">
       <h2>Фоны страницы</h2>
       <p class="lead">Фон без текста, на котором стоит весь сайт: горизонтальный для компьютера (лучше 21:9 или 16:9, от 2560 пикселей в ширину), вертикальный для телефона (9:16). Выберите файл и нажмите «Загрузить»: фон сменится у всех зрителей. «Вернуть стандартный» показывает нынешний фон с CT и T.</p>
+      <p class="note" style="margin:0 0 8px">Ночной режим</p>
       <div class="media-grid">
-        <div class="card media-card"><label class="f">Компьютер, горизонтальный</label><img id="mPrevD" src="bg.jpg" alt="Текущий фон для компьютера"><p class="note" id="mInfoD"></p><input type="file" id="mFileD" accept="image/png,image/jpeg,image/webp"><div class="row-actions"><button class="btn" type="button" data-up="desktop">Загрузить</button><button class="btn ghost" type="button" data-reset="desktop">Вернуть стандартный</button></div></div>
-        <div class="card media-card"><label class="f">Телефон, вертикальный</label><img id="mPrevM" src="bg-m.jpg" alt="Текущий фон для телефона"><p class="note" id="mInfoM"></p><input type="file" id="mFileM" accept="image/png,image/jpeg,image/webp"><div class="row-actions"><button class="btn" type="button" data-up="mobile">Загрузить</button><button class="btn ghost" type="button" data-reset="mobile">Вернуть стандартный</button></div></div>
+        <div class="card media-card"><label class="f">Компьютер, горизонтальный</label><img id="mPrevD" src="bg.jpg" alt="Ночной фон для компьютера"><p class="note" id="mInfoD"></p><input type="file" id="mFileD" accept="image/png,image/jpeg,image/webp"><div class="row-actions"><button class="btn" type="button" data-up="desktop">Загрузить</button><button class="btn ghost" type="button" data-reset="desktop">Вернуть стандартный</button></div></div>
+        <div class="card media-card"><label class="f">Телефон, вертикальный</label><img id="mPrevM" src="bg-m.jpg" alt="Ночной фон для телефона"><p class="note" id="mInfoM"></p><input type="file" id="mFileM" accept="image/png,image/jpeg,image/webp"><div class="row-actions"><button class="btn" type="button" data-up="mobile">Загрузить</button><button class="btn ghost" type="button" data-reset="mobile">Вернуть стандартный</button></div></div>
+      </div>
+      <p class="note" style="margin:18px 0 8px">Дневной режим</p>
+      <div class="media-grid">
+        <div class="card media-card"><label class="f">Компьютер, горизонтальный</label><img id="mPrevDD" src="bg-day.jpg" alt="Дневной фон для компьютера"><p class="note" id="mInfoDD"></p><input type="file" id="mFileDD" accept="image/png,image/jpeg,image/webp"><div class="row-actions"><button class="btn" type="button" data-up="dayDesktop">Загрузить</button><button class="btn ghost" type="button" data-reset="dayDesktop">Вернуть стандартный</button></div></div>
+        <div class="card media-card"><label class="f">Телефон, вертикальный</label><img id="mPrevDM" src="bg-day-m.jpg" alt="Дневной фон для телефона"><p class="note" id="mInfoDM"></p><input type="file" id="mFileDM" accept="image/png,image/jpeg,image/webp"><div class="row-actions"><button class="btn" type="button" data-up="dayMobile">Загрузить</button><button class="btn ghost" type="button" data-reset="dayMobile">Вернуть стандартный</button></div></div>
       </div>
     </section>
 
@@ -1515,7 +1591,8 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
   });
 
   /* ---------- Постеры ---------- */
-  const MEDIA = { desktop: { key: "bg_desktop", max: 3200, file: "mFileD", prev: "mPrevD", info: "mInfoD", def: "bg.jpg" }, mobile: { key: "bg_mobile", max: 1440, file: "mFileM", prev: "mPrevM", info: "mInfoM", def: "bg-m.jpg" } };
+  const MEDIA = { desktop: { key: "bg_desktop", max: 3200, file: "mFileD", prev: "mPrevD", info: "mInfoD", def: "bg.jpg" }, mobile: { key: "bg_mobile", max: 1440, file: "mFileM", prev: "mPrevM", info: "mInfoM", def: "bg-m.jpg" },
+    dayDesktop: { key: "bg_day_desktop", max: 3200, file: "mFileDD", prev: "mPrevDD", info: "mInfoDD", def: "bg-day.jpg" }, dayMobile: { key: "bg_day_mobile", max: 1440, file: "mFileDM", prev: "mPrevDM", info: "mInfoDM", def: "bg-day-m.jpg" } };
   function loadImage(file) {
     return new Promise((ok, fail) => {
       const url = URL.createObjectURL(file), img = new Image();
@@ -1782,7 +1859,7 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
       $("loginView").hidden = !!user;
       $("panel").hidden = !user;
       $("logout").hidden = !user || store.mode === "demo";
-      if (user) { me = user.email || ""; $("who").textContent = user.email || ""; if (!subscribed) { subscribed = true; store.subscribe(render); store.watchMedia("bg_desktop", v => showMedia("desktop", v)); store.watchMedia("bg_mobile", v => showMedia("mobile", v)); B.TEAM_IDS.forEach(t => store.watchMedia("logo_" + t, v => { B.logos[t] = v && v.data ? v.data : null; if (built) showLogo(t); if (comp) renderMatches(); })); } }
+      if (user) { me = user.email || ""; $("who").textContent = user.email || ""; if (!subscribed) { subscribed = true; store.subscribe(render); Object.keys(MEDIA).forEach(k => store.watchMedia(MEDIA[k].key, v => showMedia(k, v))); B.TEAM_IDS.forEach(t => store.watchMedia("logo_" + t, v => { B.logos[t] = v && v.data ? v.data : null; if (built) showLogo(t); if (comp) renderMatches(); })); } }
     });
   }
   start();
