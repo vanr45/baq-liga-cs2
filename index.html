@@ -6,6 +6,7 @@
 <meta name="author" content="Ернар Досетов">
 <meta name="description" content="BAQ LIGA CS2: турнирная сетка, счет матчей, расписание и составы команд в реальном времени">
 <meta name="theme-color" content="#12161b">
+<script>(function(){try{var t=localStorage.getItem('baq-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BAQ LIGA CS2">
 <meta property="og:description" content="Турнирная сетка и счет матчей в реальном времени">
@@ -33,11 +34,69 @@
   --ct-deep: #1c2c3d;
   --live: #ef4b4b;
   --ok: #6fbf8a;
+  --on-sand: #12161b;
+  --sand-hover: #e4bd77;
+  --banner-fg: #f0d39d;
+  --danger-fg: #ff8c8c;
+  --warn-bg: #3a1f20;
+  --danger-line: #6b2a2c;
+  --alive-fg: #a9cdee;
   --display: "Unbounded", "Arial Black", system-ui, sans-serif;
   --text: "Golos Text", "Segoe UI", system-ui, sans-serif;
   --r: 10px;
   color-scheme: dark;
 }
+:root[data-theme="light"] {
+  --ink: #eef1f4;
+  --panel: #ffffff;
+  --panel-2: #e6eaef;
+  --line: #d9dee5;
+  --line-2: #c2cad4;
+  --bone: #161b22;
+  --muted: #566170;
+  --dim: #7a8493;
+  --sand: #a8761c;
+  --sand-deep: #f5e8cc;
+  --ct: #2f6fa9;
+  --ct-deep: #dce8f4;
+  --live: #d63b3b;
+  --ok: #2f8f55;
+  --on-sand: #ffffff;
+  --sand-hover: #93660f;
+  --banner-fg: #6b4a0e;
+  --danger-fg: #b32626;
+  --warn-bg: #fbe4e4;
+  --danger-line: #e8b4b4;
+  --alive-fg: #235a8c;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --ink: #eef1f4;
+    --panel: #ffffff;
+    --panel-2: #e6eaef;
+    --line: #d9dee5;
+    --line-2: #c2cad4;
+    --bone: #161b22;
+    --muted: #566170;
+    --dim: #7a8493;
+    --sand: #a8761c;
+    --sand-deep: #f5e8cc;
+    --ct: #2f6fa9;
+    --ct-deep: #dce8f4;
+    --live: #d63b3b;
+    --ok: #2f8f55;
+    --on-sand: #ffffff;
+    --sand-hover: #93660f;
+    --banner-fg: #6b4a0e;
+    --danger-fg: #b32626;
+    --warn-bg: #fbe4e4;
+    --danger-line: #e8b4b4;
+    --alive-fg: #235a8c;
+    color-scheme: light;
+  }
+}
+
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html, body { margin: 0; }
@@ -80,16 +139,16 @@ a { color: var(--sand); }
 
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
-  font: 500 15px/1 var(--text); color: var(--ink); background: var(--sand);
+  font: 500 15px/1 var(--text); color: var(--on-sand); background: var(--sand);
   border: 0; border-radius: var(--r); padding: 13px 18px; cursor: pointer; text-decoration: none;
 }
-.btn:hover { background: #e4bd77; }
+.btn:hover { background: var(--sand-hover); }
 .btn.ghost { background: transparent; color: var(--bone); box-shadow: inset 0 0 0 1px var(--line-2); }
 .btn.ghost:hover { background: var(--panel-2); }
-.btn.danger { background: transparent; color: var(--live); box-shadow: inset 0 0 0 1px #5a2a2c; }
+.btn.danger { background: transparent; color: var(--live); box-shadow: inset 0 0 0 1px var(--danger-line); }
 .btn.small { padding: 8px 12px; font-size: 14px; }
 
-.banner { margin: 16px 0 0; padding: 12px 16px; border-radius: var(--r); background: var(--sand-deep); color: #f0d39d; font-size: 14px; }
+.banner { margin: 16px 0 0; padding: 12px 16px; border-radius: var(--r); background: var(--sand-deep); color: var(--banner-fg); font-size: 14px; }
 
 /* ---------- Фокус: эфир, следующий матч, чемпион ---------- */
 .focus { margin: 40px 0 0; display: grid; gap: 12px; }
@@ -121,10 +180,9 @@ section.block { margin: 64px 0 0; }
   row-gap: 16px;
   grid-template-areas:
     "lub lub lub lgf"
-    "m1  m2  m4  m8"
-    ".   m3  m4  m8"
-    "llb llb llb m8"
-    "m5  m6  m7  m8";
+    ".   p1  .   p5"
+    "llb llb llb ."
+    "p2  p3  p4  .";
   width: max-content;
 }
 .lines { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
@@ -141,7 +199,6 @@ section.block { margin: 64px 0 0; }
 .sw-gf { background: linear-gradient(90deg, var(--sand) 50%, var(--ct) 50%); }
 
 .match { position: relative; z-index: 1; background: var(--panel); border-radius: var(--r); box-shadow: inset 0 0 0 1px var(--line); align-self: center; }
-#card-M1, #card-M2 { align-self: start; }
 .match header { display: flex; justify-content: space-between; gap: 8px; padding: 9px 12px 7px; font-size: 12px; color: var(--muted); }
 .match header .round { color: var(--bone); font-weight: 500; }
 .match.side-ub header .round { color: var(--sand); }
@@ -153,14 +210,14 @@ section.block { margin: 64px 0 0; }
 .team .seed { font-size: 12px; color: var(--dim); font-variant-numeric: tabular-nums; }
 .team .name { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .team .score { font: 700 18px/1 var(--display); font-variant-numeric: tabular-nums; min-width: 18px; text-align: right; }
-.team.tbd .name { color: var(--dim); font-weight: 400; font-size: 13px; }
+.team.tbd .name { color: var(--dim); font-weight: 400; font-size: 13px; white-space: normal; line-height: 1.3; }
 .team.lose .name, .team.lose .score { color: var(--dim); }
 .match.side-ub .team.win .score, .match.side-gf .team.win .score { color: var(--sand); }
 .match.side-lb .team.win .score { color: var(--ct); }
 .match footer { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; padding: 8px 12px 10px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); }
 .match footer .maps { color: var(--muted); }
 .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
-.chip.live { color: #ff8c8c; font-weight: 500; }
+.chip.live { color: var(--danger-fg); font-weight: 500; }
 .chip.live i { width: 7px; height: 7px; border-radius: 50%; background: var(--live); animation: pulse 1.4s ease-in-out infinite; }
 .chip.done { color: var(--dim); }
 @keyframes pulse { 50% { opacity: .25; } }
@@ -173,9 +230,9 @@ section.block { margin: 64px 0 0; }
 .team-card .th { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; }
 .team-card .seedno { font-size: 12px; color: var(--dim); }
 .place { font-size: 12px; padding: 4px 9px; border-radius: 99px; white-space: nowrap; background: var(--panel-2); color: var(--muted); }
-.place.p1 { background: var(--sand); color: var(--ink); font-weight: 500; }
-.place.p2, .place.p3 { background: var(--sand-deep); color: #f0d39d; }
-.place.alive { background: var(--ct-deep); color: #a9cdee; }
+.place.p1 { background: var(--sand); color: var(--on-sand); font-weight: 500; }
+.place.p2, .place.p3 { background: var(--sand-deep); color: var(--banner-fg); }
+.place.alive { background: var(--ct-deep); color: var(--alive-fg); }
 .team-card ul { list-style: none; margin: 0; padding: 0; }
 .team-card li { display: flex; justify-content: space-between; gap: 10px; padding: 6px 0; border-top: 1px solid var(--line); font-size: 14px; }
 .team-card li span { color: var(--muted); font-size: 13px; text-align: right; }
@@ -190,7 +247,7 @@ section.block { margin: 64px 0 0; }
 .focus-maps { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 .fm { display: inline-flex; gap: 8px; align-items: baseline; font-size: 14px; color: var(--muted); background: var(--panel-2); padding: 6px 12px; border-radius: 99px; font-variant-numeric: tabular-nums; }
 .fm b { font-weight: 500; color: var(--bone); }
-.fm.cur { box-shadow: inset 0 0 0 1px var(--live); color: #ffb3b3; }
+.fm.cur { box-shadow: inset 0 0 0 1px var(--live); color: var(--danger-fg); }
 .podium { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px 40px; margin-top: 22px; font: 600 18px/1.3 var(--display); }
 .podium b { display: block; font: 400 13px/1.4 var(--text); color: var(--muted); }
 .schedule { display: grid; gap: 6px; }
@@ -219,20 +276,20 @@ input[type=text], input[type=email], input[type=password], input[type=url], inpu
 select:disabled, input:disabled { opacity: .45; }
 textarea { min-height: 150px; resize: vertical; }
 .field { margin: 0 0 14px; }
-.err { color: #ff8c8c; font-size: 13px; min-height: 18px; margin: 6px 0 0; }
+.err { color: var(--danger-fg); font-size: 13px; min-height: 18px; margin: 6px 0 0; }
 .linkbtn { background: none; border: 0; color: var(--muted); font: 13px var(--text); padding: 0; cursor: pointer; text-decoration: underline; }
 .anav { position: sticky; top: 0; z-index: 5; display: flex; gap: 6px; flex-wrap: wrap; padding: 10px 0; background: var(--ink); border-bottom: 1px solid var(--line); }
 .anav a { color: var(--bone); text-decoration: none; font-size: 14px; padding: 7px 12px; border-radius: 99px; background: var(--panel); }
 .anav a:hover { background: var(--panel-2); }
-.anav b { color: #ff8c8c; font-weight: 500; margin-left: 4px; }
+.anav b { color: var(--danger-fg); font-weight: 500; margin-left: 4px; }
 html { scroll-padding-top: 70px; }
-.warn { margin: 12px 0 0; padding: 10px 12px; border-radius: 8px; background: #3a1f20; color: #ffb3b3; font-size: 13px; }
+.warn { margin: 12px 0 0; padding: 10px 12px; border-radius: 8px; background: var(--warn-bg); color: var(--danger-fg); font-size: 13px; }
 .note { color: var(--muted); font-size: 13px; margin: 10px 0 0; }
 .admin-matches { display: grid; gap: 12px; }
 .am { background: var(--panel); border-radius: 12px; padding: 16px 18px; box-shadow: inset 4px 0 0 var(--sand); }
 .am.side-lb { box-shadow: inset 4px 0 0 var(--ct); }
 .am.side-gf { box-shadow: inset 4px 0 0 var(--bone); }
-.am.st-live { box-shadow: inset 4px 0 0 var(--live), inset 0 0 0 1px #6b2a2c; }
+.am.st-live { box-shadow: inset 4px 0 0 var(--live), inset 0 0 0 1px var(--danger-line); }
 .am.st-pending { opacity: .7; }
 .am-head { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 13px; color: var(--muted); margin-bottom: 10px; }
 .am-head b { color: var(--bone); font-weight: 500; margin-right: 6px; }
@@ -320,7 +377,7 @@ html { scroll-padding-top: 70px; }
 .paid { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); margin: 0 0 14px; cursor: pointer; }
 .paid input { width: 18px; height: 18px; accent-color: var(--sand); }
 .sumcheck { font-size: 13px; margin: -4px 0 14px; color: var(--muted); }
-.sumcheck.bad { color: #ff8c8c; }
+.sumcheck.bad { color: var(--danger-fg); }
 .prize-inputs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 @media (max-width: 760px) {
   .prize-grid { grid-template-columns: 1fr; }
@@ -340,13 +397,71 @@ html { scroll-padding-top: 70px; }
   body.has-live .poster figcaption { margin-top: 0; text-align: left; }
 }
 
+/* ---------- Тема, группа, подвал ---------- */
+body { transition: background-color .2s, color .2s; }
+.top-r { display: inline-flex; align-items: center; gap: 14px; }
+.theme-btn { font: 500 13px/1 var(--text); color: var(--bone); background: var(--panel); border: 1px solid var(--line-2); border-radius: 99px; padding: 8px 14px; cursor: pointer; }
+.theme-btn:hover { background: var(--panel-2); }
+.edge.lose { stroke-dasharray: 5 4; }
+.group-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 12px; align-items: start; }
+.gtable { background: var(--panel); border-radius: 12px; padding: 8px 16px 14px; overflow-x: auto; }
+.gtable table { width: 100%; border-collapse: collapse; font-size: 15px; font-variant-numeric: tabular-nums; }
+.gtable th { font-weight: 500; font-size: 12px; color: var(--muted); text-align: center; padding: 10px 6px; border-bottom: 1px solid var(--line); }
+.gtable td { text-align: center; padding: 11px 6px; border-bottom: 1px solid var(--line); }
+.gtable tr:last-child td { border-bottom: 0; }
+.gtable .tl { text-align: left; }
+.gtable .tn { font-weight: 500; }
+.gtable .pos { font: 700 15px/1 var(--display); width: 34px; }
+.gtable tr.up .pos { color: var(--sand); box-shadow: inset 3px 0 0 var(--sand); }
+.gtable tr.low .pos { color: var(--ct); box-shadow: inset 3px 0 0 var(--ct); }
+.gnote { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 10px 0 0; font-size: 13px; color: var(--muted); }
+.gnote .sw:not(:first-child) { margin-left: 10px; }
+.tours { display: grid; gap: 8px; }
+.tour { background: var(--panel); border-radius: 12px; padding: 12px 16px; }
+.tour-h { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+.tour-h b { color: var(--bone); font-weight: 600; }
+.gm { display: grid; grid-template-columns: minmax(0,1fr) 54px minmax(0,1fr) auto; gap: 10px; align-items: center; padding: 7px 0; border-top: 1px solid var(--line); font-size: 14px; }
+.gm:first-of-type { border-top: 0; }
+.gm > span:first-child { text-align: right; }
+.gm b { text-align: center; font: 700 14px/1 var(--display); color: var(--muted); font-variant-numeric: tabular-nums; }
+.gm .w { color: var(--sand); font-weight: 600; }
+.gm.st-live b { color: var(--live); }
+.gm .gst { min-width: 0; text-align: right; }
+.foot { flex-direction: column; }
+.foot-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+.consent { margin: 0; font-size: 13px; color: var(--muted); }
+.am-group-title { font: 600 16px/1.2 var(--display); margin: 24px 0 10px; }
+.am-rest { font-size: 13px; color: var(--muted); margin: -4px 0 10px; }
+@media (max-width: 860px) { .group-grid { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .gm { grid-template-columns: minmax(0,1fr) 46px minmax(0,1fr); } .gm .gst { grid-column: 1 / -1; text-align: center; } .gm .gst:empty { display: none; } }
+
+/* ---------- Жеребьевка ---------- */
+.focus-card.draw::before { background: linear-gradient(var(--sand) 50%, var(--ct) 50%); }
+.draw-text { grid-column: 1 / -1; margin: 0; font-size: 16px; color: var(--muted); }
+.dr-list { grid-column: 1 / -1; display: grid; gap: 8px; }
+.dr-cap { margin: 0; font-size: 14px; color: var(--muted); text-align: center; }
+.dr-row { display: grid; grid-template-columns: minmax(0,1fr) 60px minmax(0,1fr); align-items: center; gap: 12px; font: 700 clamp(18px, 2.6vw, 26px)/1.2 var(--display); }
+.dr-row span:first-child { text-align: right; }
+.dr-row b { text-align: center; font-size: 14px; color: var(--muted); }
+.dr-rest { margin: 0; text-align: center; color: var(--muted); font-size: 15px; }
+.gm .tbd { color: var(--dim); }
+@media (prefers-reduced-motion: no-preference) {
+  .focus-card.reveal .dr-row, .focus-card.reveal .dr-rest { opacity: 0; animation: drIn .5s ease-out forwards; animation-delay: calc(var(--i) * .9s + .3s); }
+  @keyframes drIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+}
+.draw-box .row-actions { margin-top: 12px; }
+.draw-status { font-size: 15px; margin: 0 0 12px; }
+.draw-slots { display: grid; gap: 6px; margin: 12px 0 0; padding: 0; list-style: none; }
+.draw-slots li { display: flex; gap: 12px; font-size: 15px; padding: 8px 0; border-top: 1px solid var(--line); }
+.draw-slots li b { font: 700 15px/1.2 var(--display); min-width: 22px; color: var(--sand); }
+
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="top">
     <span class="brand-mini">BAQ LIGA</span>
-    <span class="conn" id="conn"><i></i><span>Подключение</span></span>
+    <span class="top-r"><span class="conn" id="conn"><i></i><span>Подключение</span></span><button class="theme-btn" id="themeBtn" type="button">Дневной режим</button></span>
   </div>
 
   <header class="hero">
@@ -368,8 +483,14 @@ html { scroll-padding-top: 70px; }
   <div class="focus" id="focus"></div>
 
   <section class="block">
-    <h2>Сетка</h2>
-    <p class="lead">Проигравший в верхней сетке переходит в нижнюю. Вылет после второго поражения.</p>
+    <h2>Отборочная группа</h2>
+    <p class="lead" id="groupLead">Каждый с каждым, матчи bo1. Места 1-2 проходят в верхнюю сетку, места 3-5 в нижнюю.</p>
+    <div class="group-grid"><div class="gtable" id="gtable"></div><div class="tours" id="tours"></div></div>
+  </section>
+
+  <section class="block">
+    <h2>Плей-офф</h2>
+    <p class="lead">Участники определятся после группы. Проигравший финала верхней сетки переходит в финал нижней.</p>
     <p class="scroll-hint">Сетку можно листать вбок</p>
     <div class="bracket" id="bracket"><p class="loading">Загружаем сетку</p></div>
   </section>
@@ -395,13 +516,12 @@ html { scroll-padding-top: 70px; }
 
   <section class="block">
     <h2>Команды</h2>
-    <p class="lead" id="seedNote"></p>
     <div class="teams" id="teams"></div>
   </section>
 
   <footer class="foot">
-    <span id="footTitle">BAQ LIGA CS2</span>
-    <span><span id="updated"></span>. Страница обновляется сама, перезагружать не нужно</span>
+    <div class="foot-row"><span>© 2026 Ернар Досетов</span><span><span id="updated"></span>. Страница обновляется сама, перезагружать не нужно</span></div>
+    <p class="consent" id="consent">Участие в турнире является согласием с регламентом</p>
   </footer>
 </div>
 <script src="config.js"></script>
@@ -409,19 +529,27 @@ html { scroll-padding-top: 70px; }
 (function () {
   const ROOT = "baq";
 
-  const MATCHES = [
-    { id: "M1", bo: 3, side: "ub", round: "Отборочный матч", a: { seed: 4 }, b: { seed: 5 } },
-    { id: "M2", bo: 3, side: "ub", round: "Полуфинал верхней", a: { seed: 1 }, b: { win: "M1" } },
-    { id: "M3", bo: 3, side: "ub", round: "Полуфинал верхней", a: { seed: 2 }, b: { seed: 3 } },
-    { id: "M4", bo: 3, side: "ub", round: "Финал верхней", a: { win: "M2" }, b: { win: "M3" } },
-    { id: "M5", bo: 3, side: "lb", round: "Нижняя, раунд 1", a: { lose: "M1" }, b: { lose: "M2" } },
-    { id: "M6", bo: 3, side: "lb", round: "Нижняя, раунд 2", a: { win: "M5" }, b: { lose: "M3" } },
-    { id: "M7", bo: 3, side: "lb", round: "Финал нижней", a: { win: "M6" }, b: { lose: "M4" } },
-    { id: "M8", bo: 5, side: "gf", round: "Гранд-финал", a: { win: "M4" }, b: { win: "M7" } }
+  const GROUP = [
+    [2, 5, 1], [3, 4, 1],
+    [1, 5, 2], [2, 3, 2],
+    [1, 4, 3], [3, 5, 3],
+    [1, 3, 4], [2, 4, 4],
+    [1, 2, 5], [4, 5, 5]
+  ].map(([x, y, tour], i) => ({ id: "G" + (i + 1), bo: 1, stage: "group", side: "grp", tour, round: "Группа, тур " + tour, a: { slot: x }, b: { slot: y } }));
+  const PLAYOFF = [
+    { id: "P1", bo: 3, stage: "playoff", side: "ub", round: "Финал верхней", a: { place: 1 }, b: { place: 2 } },
+    { id: "P2", bo: 3, stage: "playoff", side: "lb", round: "Нижняя, раунд 1", a: { place: 4 }, b: { place: 5 } },
+    { id: "P3", bo: 3, stage: "playoff", side: "lb", round: "Нижняя, раунд 2", a: { place: 3 }, b: { win: "P2" } },
+    { id: "P4", bo: 3, stage: "playoff", side: "lb", round: "Финал нижней", a: { lose: "P1" }, b: { win: "P3" } },
+    { id: "P5", bo: 5, stage: "playoff", side: "gf", round: "Гранд-финал", a: { win: "P1" }, b: { win: "P4" } }
   ];
-  const EDGES = [["M1", "M2"], ["M2", "M4"], ["M3", "M4"], ["M5", "M6"], ["M6", "M7"], ["M4", "M8"], ["M7", "M8"]];
-  const PLACE_ON_LOSS = { M5: 5, M6: 4, M7: 3, M8: 2 };
+  const MATCHES = GROUP.concat(PLAYOFF);
+  const EDGES = [["P2", "P3"], ["P3", "P4"], ["P1", "P5"], ["P4", "P5"], ["P1", "P4", "lose"]];
+  const PLACE_ON_LOSS = { P2: 5, P3: 4, P4: 3, P5: 2 };
   const TEAM_IDS = ["t1", "t2", "t3", "t4", "t5"];
+  const FF_ROUNDS = 13;
+  const restSlot = tour => [1, 2, 3, 4, 5].find(s => !GROUP.some(g => g.tour === tour && (g.a.slot === s || g.b.slot === s)));
+  const DEFAULT_SLOTS = { s1: "t1", s2: "t2", s3: "t3", s4: "t4", s5: "t5" };
 
   function emptyMatch(bo) {
     const maps = {};
@@ -433,23 +561,23 @@ html { scroll-padding-top: 70px; }
     meta: {
       title: "BAQ LIGA CS2",
       subtitle: "Турнир по Counter-Strike 2 среди СМИ РК",
-      info: "16-17 октября. 5 команд, двойное выбывание, матчи bo3, гранд-финал bo5.",
+      info: "16-17 октября. Группа каждый с каждым, затем плей-офф с верхней и нижней сеткой.",
       poster: "poster.jpg",
       stream: "",
       mapPool: "Ancient\nAnubis\nDust2\nInferno\nMirage\nNuke\nTrain",
-      seedNote: "Посев по порядку регистрации команд",
+      consent: "Участие в турнире является согласием с регламентом",
       fee: 25000,
       prizes: { p1: 0, p2: 0, p3: 0 },
-      rules: "Взнос 25 000 ₸ с команды, весь сбор идет в призовой фонд.\nКомпьютеры в клубе каждый игрок оплачивает сам.\nКарты выбирают капитаны через пики и баны на CyberShoke.\nДвойное выбывание: проигравший в верхней сетке переходит в нижнюю, после второго поражения команда выбывает.\nВсе матчи bo3, гранд-финал bo5."
+      rules: "Взнос 25 000 ₸ с команды, весь сбор идет в призовой фонд.\nКомпьютеры в клубе каждый игрок оплачивает сам.\nКарты выбирают капитаны через пики и баны на CyberShoke.\nОтборочная группа: каждый с каждым, матчи bo1. Места 1-2 проходят в верхнюю сетку, места 3-5 в нижнюю.\nМеста в группе: победы, затем личная встреча, затем разница раундов, затем выигранные раунды. Техническая победа засчитывается со счетом 13:0.\nПлей-офф: матчи bo3, гранд-финал bo5. Проигравший финала верхней сетки переходит в финал нижней.\nУчастие в турнире является согласием с регламентом."
     },
     teams: {
       t1: { name: "RAGE", roster: "Фараби (Казахстан, режиссер)\nУлан (Казахстан, монтажер)\nБекнур (радиоведущий)\nРайымбек (Жибек жолы, ведущий)\nСактаган (КМО, осветитель)", paid: false },
       t2: { name: "Брат Локи", roster: "Мади (РТРК, юрист)\nСаят (КМО, ИБ)\nАрман (РТРК, юрист)\nЕрнар (Хабар, юрист)\nРуслан (РТРК, ИБ)\nЕркен (РТРК, IT)", paid: false },
       t3: { name: "OnAir", roster: "Расул (КМО, инженер)\nДанабек (КМО, инженер)\nБекжан (КМО, инженер)\nУмар (КМО, осветитель)\nСаламат (КМО, осветитель)", paid: false },
       t4: { name: "Qazcontent", roster: "Мадияр (инженер)\nАйдын (руководитель)\nНурасыл (монтажер)\nЖансерик (монтажер)\nАлтай (IT)\nДуман (IT)\nНурсултан (дизайнер)", paid: false },
-      t5: { name: "naPremierePro", roster: "Алихан (Алматы ТВ)\nАлишер (СЦК)\nАбылайхан (СЦК)\nЗаманбек (ПТРК)\nАйболат (Жибек жолы)" }
+      t5: { name: "naPremierePro", roster: "Алихан (Алматы ТВ)\nАлишер (СЦК)\nАбылайхан (СЦК)\nЗаманбек (ПТРК)\nАйболат (Жибек жолы)", paid: false }
     },
-    seeds: { s1: "t1", s2: "t2", s3: "t3", s4: "t4", s5: "t5", paid: false },
+    draw: { status: "none", at: "", doneAt: 0, by: "", slots: { s1: "t1", s2: "t2", s3: "t3", s4: "t4", s5: "t5" } },
     matches: Object.fromEntries(MATCHES.map(m => [m.id, emptyMatch(m.bo)]))
   };
 
@@ -488,6 +616,11 @@ html { scroll-padding-top: 70px; }
     if (!d) return s || "";
     return `${WD[d.getDay()]}, ${d.getDate()} ${MON[d.getMonth()]}, ${pad(d.getHours())}:${pad(d.getMinutes())}`;
   }
+  function fmtStamp(ms) {
+    if (!ms) return "";
+    const d = new Date(+ms);
+    return `${pad(d.getDate())}.${pad(d.getMonth() + 1)}.${d.getFullYear()}, ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  }
   function countdown(s) {
     const d = parseLocal(s);
     if (!d) return "";
@@ -500,17 +633,57 @@ html { scroll-padding-top: 70px; }
   }
 
   /* ---------- Расчет сетки ---------- */
+  function standingsOf(res) {
+    const row = {};
+    TEAM_IDS.forEach(t => row[t] = { team: t, p: 0, w: 0, l: 0, rf: 0, ra: 0 });
+    for (const g of GROUP) {
+      const r = res[g.id];
+      if (r.status !== "done") continue;
+      const A = row[r.ta], Bb = row[r.tb];
+      A.p++; Bb.p++;
+      let ra = 0, rb = 0;
+      if (r.ff) { ra = r.ff === "a" ? FF_ROUNDS : 0; rb = r.ff === "b" ? FF_ROUNDS : 0; }
+      else { const m = r.maps[0]; ra = m.a; rb = m.b; }
+      A.rf += ra; A.ra += rb; Bb.rf += rb; Bb.ra += ra;
+      if (r.winner === r.ta) { A.w++; Bb.l++; } else { Bb.w++; A.l++; }
+    }
+    const h2h = (t, group) => GROUP.filter(g => res[g.id].status === "done" && group.includes(res[g.id].ta) && group.includes(res[g.id].tb) && res[g.id].winner === t).length;
+    const list = Object.values(row);
+    list.forEach(x => x.diff = x.rf - x.ra);
+    const byWins = {};
+    list.forEach(x => (byWins[x.w] = byWins[x.w] || []).push(x.team));
+    list.forEach(x => x.h2h = byWins[x.w].length > 1 ? h2h(x.team, byWins[x.w]) : 0);
+    list.sort((x, y) => y.w - x.w || y.h2h - x.h2h || y.diff - x.diff || y.rf - x.rf);
+    list.forEach((x, i) => {
+      x.pos = i + 1;
+      const prev = list[i - 1], next = list[i + 1];
+      const same = o => o && o.w === x.w && o.h2h === x.h2h && o.diff === x.diff && o.rf === x.rf;
+      x.tie = same(prev) || same(next);
+    });
+    return list;
+  }
+
   function compute(state) {
     const res = {};
-    const seedOf = {};
-    for (let i = 1; i <= 5; i++) seedOf[state.seeds["s" + i]] = i;
+    let table = null, groupDone = false, placeTeam = {};
+    const dr = state.draw || {};
+    const rawSlots = dr.slots || {};
+    const vals = [1, 2, 3, 4, 5].map(i => rawSlots["s" + i]);
+    const validSlots = vals.every(v => TEAM_IDS.includes(v)) && new Set(vals).size === 5;
+    const slotTeam = dr.status === "scheduled" ? {} : (validSlots ? rawSlots : DEFAULT_SLOTS);
     const pick = src => {
-      if (src.seed) return state.seeds["s" + src.seed] || null;
+      if (src.slot) return slotTeam["s" + src.slot] || null;
+      if (src.place) return groupDone ? placeTeam[src.place] || null : null;
       const r = res[src.win || src.lose];
       if (!r || !r.winner) return null;
       return src.win ? r.winner : r.loser;
     };
     for (const m of MATCHES) {
+      if (m.id === "P1") {
+        table = standingsOf(res);
+        groupDone = GROUP.every(g => res[g.id].status === "done");
+        table.forEach(x => placeTeam[x.pos] = x.team);
+      }
       const d = state.matches[m.id] || {};
       const need = Math.ceil(m.bo / 2);
       const ta = pick(m.a), tb = pick(m.b);
@@ -538,23 +711,28 @@ html { scroll-padding-top: 70px; }
     }
     const places = {};
     for (const [id, p] of Object.entries(PLACE_ON_LOSS)) if (res[id].loser) places[res[id].loser] = p;
-    if (res.M8.winner) places[res.M8.winner] = 1;
+    if (res.P5.winner) places[res.P5.winner] = 1;
     const list = MATCHES.map(m => res[m.id]);
     const upcoming = list.filter(r => r.status === "upcoming");
     const timed = upcoming.filter(r => parseLocal(r.time)).sort((x, y) => parseLocal(x.time) - parseLocal(y.time));
     return {
-      res, list, places, seedOf,
+      res, list, places, table, groupDone,
+      groupList: GROUP.map(g => res[g.id]), playoffList: PLAYOFF.map(p => res[p.id]),
       live: list.filter(r => r.status === "live"),
       next: timed[0] || upcoming[0] || null,
-      champion: res.M8.winner,
-      started: list.some(r => r.status === "live" || r.status === "done" || r.touched || !!r.ff)
+      champion: res.P5.winner,
+      slotTeam, draw: { status: dr.status || "none", at: dr.at || "", doneAt: +dr.doneAt || 0, by: dr.by || "" },
+      restTeam: tour => slotTeam["s" + restSlot(tour)] || null,
+      groupStarted: GROUP.some(g => res[g.id].touched || res[g.id].ff || res[g.id].status === "live" || res[g.id].status === "done"),
+      playoffStarted: PLAYOFF.some(p => res[p.id].touched || res[p.id].ff || res[p.id].status === "live" || res[p.id].status === "done")
     };
   }
 
   function sourceLabel(src) {
-    if (src.seed) return "Посев " + src.seed;
-    const n = (src.win || src.lose).replace("M", "");
-    return (src.win ? "Победитель матча " : "Проигравший матча ") + n;
+    if (src.slot) return "Определится жеребьевкой";
+    if (src.place) return src.place + "-е место группы";
+    const GEN = { P1: "финала верхней", P2: "1-го раунда нижней", P3: "2-го раунда нижней", P4: "финала нижней" };
+    return (src.win ? "Победитель " : "Проигравший ") + (GEN[src.win || src.lose] || "");
   }
   function mapsSummary(r) {
     return r.maps.filter(x => x.done && (x.a || x.b)).map(x => `${x.name || "Карта " + x.n} ${x.a}:${x.b}`).join(", ");
@@ -600,6 +778,7 @@ html { scroll-padding-top: 70px; }
       onConnection: cb => db.ref(".info/connected").on("value", s => cb(!!s.val())),
       save: (p, v) => ref(p).set(v),
       update: (p, obj) => ref(p).update(obj),
+      serverTime: () => firebase.database.ServerValue.TIMESTAMP,
       onAuth: cb => auth.onAuthStateChanged(cb),
       login: (e, p) => auth.signInWithEmailAndPassword(e, p),
       logout: () => auth.signOut(),
@@ -624,6 +803,7 @@ html { scroll-padding-top: 70px; }
       onConnection: cb => cb(true),
       save: async (p, v) => { const s = read(); if (!p) { write(v); return; } setPath(s, p, v); write(s); },
       update: async (p, obj) => { const s = read(); for (const [k, v] of Object.entries(obj)) setPath(s, p ? p + "/" + k : k, v); write(s); },
+      serverTime: () => Date.now(),
       onAuth: cb => cb({ email: "демо-режим" }),
       login: async () => {}, logout: async () => {}, resetPassword: async () => {}
     };
@@ -640,7 +820,7 @@ html { scroll-padding-top: 70px; }
     let sc = "";
     if (r.ff) sc = r.winner === tid ? "W" : "-";
     else if (r.status === "live" || r.status === "done") sc = score;
-    return `<div class="team ${cls}"><span class="seed">${comp.seedOf[tid] || ""}</span><span class="name">${esc(state.teams[tid]?.name || tid)}</span><span class="score">${sc}</span></div>`;
+    return `<div class="team ${cls}"><span class="seed">${r.stage === "playoff" && comp.groupDone ? (comp.table.find(x => x.team === tid)?.pos || "") : ""}</span><span class="name">${esc(state.teams[tid]?.name || tid)}</span><span class="score">${sc}</span></div>`;
   }
   function cardFooter(r) {
     if (r.status === "pending") return "";
@@ -658,7 +838,7 @@ html { scroll-padding-top: 70px; }
   }
   function matchCard(r, state, comp) {
     return `<article class="match side-${r.side} st-${r.status}" id="card-${r.id}" style="grid-area:${r.id.toLowerCase()}">
-      <header><span class="round">${esc(r.round)}</span><span class="bo">Матч ${r.id.slice(1)}, bo${r.bo}</span></header>
+      <header><span class="round">${esc(r.round)}</span><span class="bo">bo${r.bo}</span></header>
       ${teamRow(r, "a", state, comp)}${teamRow(r, "b", state, comp)}${cardFooter(r)}
     </article>`;
   }
@@ -668,7 +848,7 @@ html { scroll-padding-top: 70px; }
       <div class="blabel l-ub"><span class="sw sw-ub"></span>Верхняя сетка</div>
       <div class="blabel l-lb"><span class="sw sw-lb"></span>Нижняя сетка</div>
       <div class="blabel l-gf"><span class="sw sw-gf"></span>Гранд-финал, bo5</div>
-      ${comp.list.map(r => matchCard(r, state, comp)).join("")}
+      ${comp.playoffList.map(r => matchCard(r, state, comp)).join("")}
     </div>`;
     drawLines(el, comp);
   }
@@ -678,20 +858,48 @@ html { scroll-padding-top: 70px; }
     const box = inner.getBoundingClientRect();
     svg.setAttribute("width", inner.scrollWidth);
     svg.setAttribute("height", inner.scrollHeight);
-    svg.innerHTML = EDGES.map(([from, to]) => {
+    svg.innerHTML = EDGES.map(([from, to, kind]) => {
       const a = el.querySelector("#card-" + from)?.getBoundingClientRect();
       const b = el.querySelector("#card-" + to)?.getBoundingClientRect();
       if (!a || !b) return "";
+      const on = comp.res[from].winner ? " on side-" + (kind ? "lb" : comp.res[from].side) : "";
+      if (kind === "lose") {
+        const x1 = a.left + a.width / 2 - box.left, y1 = a.bottom - box.top;
+        const x2 = b.left + b.width / 2 - box.left, y2 = b.top - box.top;
+        const my = y1 + (y2 - y1) / 2;
+        return `<path class="edge lose${on}" d="M${x1} ${y1} V${my} H${x2} V${y2}"/>`;
+      }
       const x1 = a.right - box.left, y1 = a.top + a.height / 2 - box.top;
       const x2 = b.left - box.left, y2 = b.top + b.height / 2 - box.top;
       const mx = x1 + (x2 - x1) / 2;
-      const on = comp.res[from].winner ? " on side-" + comp.res[from].side : "";
       return `<path class="edge${on}" d="M${x1} ${y1} H${mx} V${y2} H${x2}"/>`;
     }).join("");
   }
 
+  /* ---------- Дневной и ночной режим ---------- */
+  function initTheme() {
+    const btn = document.getElementById("themeBtn");
+    if (!btn) return;
+    const cur = () => document.documentElement.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+    const paint = () => {
+      const c = cur();
+      btn.textContent = c === "dark" ? "Дневной режим" : "Ночной режим";
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", c === "dark" ? "#12161b" : "#eef1f4");
+    };
+    btn.addEventListener("click", () => {
+      const n = cur() === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", n);
+      try { localStorage.setItem("baq-theme", n); } catch (e) {}
+      paint();
+    });
+    matchMedia("(prefers-color-scheme: light)").addEventListener?.("change", paint);
+    paint();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initTheme); else initTheme();
+
   window.BAQ = {
-    ROOT, MATCHES, TEAM_IDS, DEFAULT_STATE, emptyMatch, clone, withDefaults, esc, parseRoster, mapPool,
+    ROOT, MATCHES, GROUP, PLAYOFF, TEAM_IDS, restSlot, DEFAULT_SLOTS, FF_ROUNDS, fmtStamp, DEFAULT_STATE, emptyMatch, clone, withDefaults, esc, parseRoster, mapPool,
     parseLocal, fmtTime, countdown, compute, sourceLabel, mapsSummary,
     isConfigured, createStore, renderBracket, drawLines, money, pickLabel, prizeInfo, safeUrl
   };
@@ -709,7 +917,7 @@ html { scroll-padding-top: 70px; }
     const head = [];
     if (r.status === "live") head.push('<span class="chip live"><i></i>В эфире</span>');
     else head.push(`<span class="ft">${title}</span>`);
-    head.push(`<span>${esc(r.round)}, матч ${r.id.slice(1)}, bo${r.bo}</span>`);
+    head.push(`<span>${esc(r.round)}, bo${r.bo}</span>`);
     if (r.status === "upcoming" && r.time) head.push(`<span>${esc(B.fmtTime(r.time))}</span><span class="cd" data-time="${esc(r.time)}">${esc(B.countdown(r.time))}</span>`);
     const maps = r.maps.filter(x => x.done || x === r.curMap || x.name);
     const mapRow = maps.length ? `<div class="focus-maps">${maps.map(x => {
@@ -728,10 +936,30 @@ html { scroll-padding-top: 70px; }
     </div>`;
   }
 
+  let prevDraw = null;
+  function drawCard(animate) {
+    const d = comp.draw;
+    if (d.status === "scheduled") {
+      return `<div class="focus-card draw"><div class="focus-head"><span class="ft">Жеребьевка группы</span>${d.at ? `<span>${esc(B.fmtTime(d.at))}</span><span class="cd" data-time="${esc(d.at)}">${esc(B.countdown(d.at))}</span>` : "<span>время уточняется</span>"}</div>
+        <p class="draw-text">Жеребьевка определит, кто с кем играет в каждом туре группы. Результат появится здесь сразу, обновлять страницу не нужно.</p></div>`;
+    }
+    const ms = comp.groupList.filter(r => r.tour === 1);
+    const rows = ms.map((r, i) => `<div class="dr-row" style="--i:${i}"><span>${nm(r.ta)}</span><b>vs</b><span>${nm(r.tb)}</span></div>`).join("");
+    return `<div class="focus-card draw ${animate ? "reveal" : ""}"><div class="focus-head"><span class="ft">Жеребьевка проведена</span><span>Зафиксировано ${esc(B.fmtStamp(d.doneAt))}</span></div>
+      <div class="dr-list"><p class="dr-cap">Первый тур группы</p>${rows}<p class="dr-rest" style="--i:${ms.length}">Отдыхает: ${nm(comp.restTeam(1))}</p></div></div>`;
+  }
+
   function renderFocus() {
     const el = $("focus");
+    const d = comp.draw;
+    const justDrawn = prevDraw !== null && prevDraw !== "done" && d.status === "done";
+    prevDraw = d.status;
+    if (!comp.champion && !comp.live.length && !comp.groupStarted && (d.status === "scheduled" || d.status === "done")) {
+      el.innerHTML = drawCard(justDrawn) + (d.status === "done" && comp.next ? focusMatch(comp.next, "Следующий матч") : "");
+      return;
+    }
     if (comp.champion) {
-      const second = comp.res.M8.loser, third = comp.res.M7.loser;
+      const second = comp.res.P5.loser, third = comp.res.P4.loser;
       el.innerHTML = `<div class="champion"><p>Чемпион ${esc(state.meta.title)}</p><strong>${nm(comp.champion)}</strong>
         <div class="podium"><span><b>2 место</b>${nm(second)}</span><span><b>3 место</b>${nm(third)}</span></div></div>`;
     } else if (comp.live.length) el.innerHTML = comp.live.map(r => focusMatch(r)).join("");
@@ -758,7 +986,7 @@ html { scroll-padding-top: 70px; }
       const score = r.status === "live" || r.status === "done" ? (r.ff ? "тп" : `${r.sa}:${r.sb}`) : "vs";
       return `<div class="srow side-${r.side}">
         <span class="stime">${r.time ? esc(B.fmtTime(r.time)) : "Время уточняется"}</span>
-        <span class="sround">Матч ${r.id.slice(1)}, ${esc(r.round)}, bo${r.bo}</span>
+        <span class="sround">${esc(r.round)}, bo${r.bo}</span>
         <span class="steams"><span class="${r.winner && r.winner === r.ta ? "w" : ""}">${ta}</span><b>${score}</b><span class="${r.winner && r.winner === r.tb ? "w" : ""}">${tb}</span></span>
         <span class="sst">${st}</span>
       </div>`;
@@ -766,15 +994,45 @@ html { scroll-padding-top: 70px; }
   }
 
   function renderTeams() {
-    $("seedNote").textContent = (state.meta.seedNote ? state.meta.seedNote + ". " : "") + "Посев 1 сразу играет в полуфинале, посевы 4 и 5 начинают с отборочного матча.";
-    const order = B.TEAM_IDS.slice().sort((a, b) => (comp.seedOf[a] || 9) - (comp.seedOf[b] || 9));
+    const pos = {};
+    (comp.table || []).forEach(x => pos[x.team] = x.pos);
+    const anyPlayed = comp.groupList.some(r => r.status === "done");
+    const order = B.TEAM_IDS.slice().sort((a, b) => anyPlayed ? pos[a] - pos[b] : 0);
     $("teams").innerHTML = order.map(t => {
       const p = comp.places[t];
       const badge = p === 1 ? '<span class="place p1">Чемпион</span>' : p ? `<span class="place p${p}">${p} место</span>` : '<span class="place alive">В борьбе</span>';
       const players = B.parseRoster(state.teams[t].roster).map(x =>
         `<li><span class="pn">${esc(x.name)}${x.captain ? ' <em title="Капитан">кап.</em>' : ""}</span><span>${esc(x.role)}</span></li>`).join("");
-      return `<div class="team-card"><h3>${nm(t)}</h3><div class="th"><span class="seedno">Посев ${comp.seedOf[t] || "-"}</span>${badge}</div><ul>${players}</ul></div>`;
+      const gp = anyPlayed ? `${comp.groupDone ? "Группа" : "Сейчас в группе"}: ${pos[t]} место` : "Группа еще не началась";
+      return `<div class="team-card"><h3>${nm(t)}</h3><div class="th"><span class="seedno">${gp}</span>${badge}</div><ul>${players}</ul></div>`;
     }).join("");
+  }
+
+  function renderGroup() {
+    const t = comp.table;
+    $("gtable").innerHTML = `<table><thead><tr><th>#</th><th class="tl">Команда</th><th title="Сыграно">И</th><th title="Победы">В</th><th title="Поражения">П</th><th title="Раунды">Раунды</th><th title="Разница раундов">+/-</th></tr></thead><tbody>
+      ${t.map(x => `<tr class="${x.pos <= 2 ? "up" : "low"}"><td class="pos">${x.pos}${x.tie && comp.groupDone ? "*" : ""}</td><td class="tl tn">${nm(x.team)}</td><td>${x.p}</td><td><b>${x.w}</b></td><td>${x.l}</td><td>${x.rf}:${x.ra}</td><td>${x.diff > 0 ? "+" : ""}${x.diff}</td></tr>`).join("")}
+    </tbody></table>
+    <p class="gnote"><span class="sw sw-ub"></span>Места 1-2: верхняя сетка <span class="sw sw-lb"></span>Места 3-5: нижняя сетка</p>
+    ${t.some(x => x.tie) && comp.groupDone ? '<p class="gnote">* Полное равенство показателей, порядок мест определяют организаторы.</p>' : ""}`;
+    let html = "";
+    for (let tour = 1; tour <= 5; tour++) {
+      const ms = comp.groupList.filter(r => r.tour === tour);
+      const rt = comp.restTeam(tour);
+      html += `<div class="tour"><div class="tour-h"><b>Тур ${tour}</b><span>Отдыхает: ${rt ? nm(rt) : "по жеребьевке"}</span></div>
+        ${ms.map(r => {
+          const sc = r.status === "done" ? (r.ff ? "тп" : `${r.maps[0].a}:${r.maps[0].b}`) : r.status === "live" ? (r.curMap ? `${r.curMap.a}:${r.curMap.b}` : "0:0") : "vs";
+          const st = r.status === "live" ? '<span class="chip live"><i></i>В эфире</span>' : r.status === "done" ? (r.maps[0].name && !r.ff ? `<span class="chip">${esc(r.maps[0].name)}</span>` : "") : (r.time ? `<span class="chip">${esc(B.fmtTime(r.time))}</span>` : "");
+          if (!r.ta) return `<div class="gm st-pending"><span class="tbd">?</span><b>vs</b><span class="tbd">?</span><span class="gst"></span></div>`;
+          return `<div class="gm st-${r.status}"><span class="${r.winner === r.ta ? "w" : ""}">${nm(r.ta)}</span><b>${sc}</b><span class="${r.winner === r.tb ? "w" : ""}">${nm(r.tb)}</span><span class="gst">${st}</span></div>`;
+        }).join("")}</div>`;
+    }
+    $("tours").innerHTML = html;
+    const d = comp.draw;
+    let lead = "Каждый с каждым, матчи bo1. Места 1-2 проходят в верхнюю сетку, места 3-5 в нижнюю.";
+    if (d.status === "scheduled") lead += ` Пары определит жеребьевка${d.at ? ": " + B.fmtTime(d.at) : ""}.`;
+    if (d.status === "done") lead += ` Жеребьевка проведена ${B.fmtStamp(d.doneAt)}. Номера: ${[1, 2, 3, 4, 5].map(i => i + ". " + nm(comp.slotTeam["s" + i])).join(", ")}.`;
+    $("groupLead").textContent = lead.replace(/&amp;/g, "&");
   }
 
   function renderPrize() {
@@ -801,14 +1059,15 @@ html { scroll-padding-top: 70px; }
     if (okPoster && $("posterImg").getAttribute("src") !== ps) {
       $("posterImg").src = ps; $("posterLink").href = ps; $("posterDl").href = ps;
     }
-    $("footTitle").textContent = state.meta.title || "BAQ LIGA CS2";
+
   }
 
   function render(s) {
     state = s; comp = B.compute(s);
     renderHero(); renderFocus();
     B.renderBracket($("bracket"), comp, s);
-    renderSchedule(); renderTeams(); renderPrize();
+    renderGroup(); renderSchedule(); renderTeams(); renderPrize();
+    $("consent").textContent = state.meta.consent || "";
     const d = new Date();
     $("updated").textContent = "Обновлено в " + String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
     document.body.classList.add("ready");
