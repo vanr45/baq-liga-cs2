@@ -884,6 +884,12 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
 /* новые ночные фоны: пропорция 2.645 */
 .page-bg::before { height: max(calc(100vw * 0.378), 70vh); }
 
+.am-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.am-pair label span { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.am-pair select { padding: 8px 10px; font-size: 14px; min-height: 40px; }
+.am-rest.bad { color: var(--danger-fg); font-weight: 500; }
+.preset-card { margin-bottom: 14px; }
+
 </style>
 </head>
 <body class="admin">
@@ -922,6 +928,10 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
     <section class="block" id="s-matches">
       <h2>Матчи</h2>
       <p class="lead">После матча выберите карту, впишите итоговый счет раундов и отметьте «Сыграна». В плей-офф так же по каждой карте. Таблица, победитель и плей-офф посчитаются сами. Чтобы зрители видели, какой матч играется, поставьте статус «Идет сейчас».</p>
+      <div class="card preset-card">
+        <p style="margin:0 0 10px">Готовое расписание группы на 16 октября: пары всех 5 туров и время 20:20, 21:05, 21:50, 22:35, 23:20. После заполнения пары и время каждого матча можно поменять в его карточке.</p>
+        <button class="btn" id="presetBtn" type="button">Заполнить расписание 16 октября</button>
+      </div>
       <div class="admin-matches" id="matches"></div>
     </section>
 
@@ -989,6 +999,7 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
         <p class="sumcheck" id="sumCheck"></p>
         <div class="field"><label class="f" for="partnersTitleIn">Заголовок блока партнеров</label><input type="text" id="partnersTitleIn" maxlength="80"></div>
         <div class="field"><label class="f" for="partnersIn">Партнеры, по одному на строку (пусто - блок скрыт)</label><textarea id="partnersIn" style="min-height:120px"></textarea></div>
+        <div class="field"><label class="f" for="schedNoteIn">Строка над расписанием (сбор, регистрация)</label><input type="text" id="schedNoteIn" maxlength="200"></div>
         <div class="field"><label class="f" for="consentIn">Строка в подвале сайта</label><input type="text" id="consentIn" maxlength="200"></div>
         <div class="field"><label class="f" for="rulesIn">Регламент, один пункт на строку</label><textarea id="rulesIn" style="min-height:170px"></textarea></div>
         <button class="btn" id="saveMeta" type="button">Сохранить настройки</button>
@@ -1025,7 +1036,7 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
     { id: "P2", bo: 3, stage: "playoff", side: "lb", round: "Нижняя, раунд 1", a: { place: 4 }, b: { place: 5 } },
     { id: "P3", bo: 3, stage: "playoff", side: "lb", round: "Нижняя, раунд 2", a: { place: 3 }, b: { win: "P2" } },
     { id: "P4", bo: 3, stage: "playoff", side: "lb", round: "Финал нижней", a: { lose: "P1" }, b: { win: "P3" } },
-    { id: "P5", bo: 5, stage: "playoff", side: "gf", round: "Гранд-финал", a: { win: "P1" }, b: { win: "P4" } }
+    { id: "P5", bo: 3, stage: "playoff", side: "gf", round: "Гранд-финал", a: { win: "P1" }, b: { win: "P4" } }
   ];
   const MATCHES = GROUP.concat(PLAYOFF);
   const EDGES = [["P2", "P3"], ["P3", "P4"], ["P1", "P5"], ["P4", "P5"], ["P1", "P4", "lose"]];
@@ -1054,9 +1065,10 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
       stream: "",
       mapPool: "Ancient\nAnubis\nDust2\nInferno\nMirage\nNuke\nTrain",
       consent: "Участие в турнире является согласием с регламентом",
+      scheduleNote: "16 октября, 20:00-20:20: регистрация, жеребьевка, настройка компьютеров.",
       fee: 25000,
       prizes: { p1: 0, p2: 0, p3: 0 },
-      rules: "Взнос 25 000 ₸ с команды, весь сбор идет в призовой фонд.\nКомпьютеры в клубе каждый игрок оплачивает сам.\nКарты выбирают капитаны через пики и баны на CyberShoke.\nОтборочная группа: каждый с каждым, матчи bo1. Места 1-2 проходят в верхнюю сетку, места 3-5 в нижнюю.\nМеста в группе: победы, затем личная встреча, затем разница раундов, затем выигранные раунды. Техническая победа засчитывается со счетом 13:0.\nПлей-офф: матчи bo3, гранд-финал bo5. Проигравший финала верхней сетки переходит в финал нижней.\nУчастие в турнире является согласием с регламентом."
+      rules: "Взнос 25 000 ₸ с команды, весь сбор идет в призовой фонд.\nКомпьютеры в клубе каждый игрок оплачивает сам.\nКарты выбирают капитаны через пики и баны на CyberShoke.\nОтборочная группа: каждый с каждым, матчи bo1. Места 1-2 проходят в верхнюю сетку, места 3-5 в нижнюю.\nМеста в группе: победы, затем личная встреча, затем разница раундов, затем выигранные раунды. Техническая победа засчитывается со счетом 13:0.\nПлей-офф и гранд-финал: матчи bo3. Проигравший финала верхней сетки переходит в финал нижней.\nУчастие в турнире является согласием с регламентом."
     },
     teams: {
       t1: { name: "RAGE", roster: "Фараби (Казахстан, режиссер)\nУлан (Казахстан, монтажер)\nБекнур (радиоведущий)\nРайымбек (Жибек жолы, ведущий)\nСактаган (КМО, осветитель)", paid: false },
@@ -1201,7 +1213,8 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
       }
       const d = state.matches[m.id] || {};
       const need = Math.ceil(m.bo / 2);
-      const ta = pick(m.a), tb = pick(m.b);
+      const pr = m.stage === "group" && d.pair && TEAM_IDS.includes(d.pair.a) && TEAM_IDS.includes(d.pair.b) && d.pair.a !== d.pair.b ? d.pair : null;
+      const ta = pr ? pr.a : pick(m.a), tb = pr ? pr.b : pick(m.b);
       const maps = [];
       for (let i = 1; i <= m.bo; i++) {
         const x = (d.maps || {})["m" + i] || {};
@@ -1222,7 +1235,7 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
       const touched = maps.some(x => x.done);
       const status = winner ? "done" : (!ta || !tb) ? "pending" : (touched || d.status === "live") ? "live" : "upcoming";
       const curMap = null;
-      res[m.id] = { ...m, ta, tb, sa, sb, need, winner, loser, ff, status, maps, curMap, time: d.time || "", link: d.link || "", touched };
+      res[m.id] = { ...m, ta, tb, sa, sb, need, winner, loser, ff, status, maps, curMap, time: d.time || "", link: d.link || "", touched, manual: !!pr };
     }
     const places = {};
     for (const [id, p] of Object.entries(PLACE_ON_LOSS)) if (res[id].loser) places[res[id].loser] = p;
@@ -1237,7 +1250,18 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
       next: timed[0] || upcoming[0] || null,
       champion: res.P5.winner,
       slotTeam, draw: { status: dr.status || "none", at: dr.at || "", doneAt: +dr.doneAt || 0, by: dr.by || "" },
-      restTeam: tour => slotTeam["s" + restSlot(tour)] || null,
+      restTeam: tour => {
+        const ms = GROUP.filter(g => g.tour === tour).map(g => res[g.id]);
+        if (ms.some(r => !r.ta || !r.tb)) return slotTeam["s" + restSlot(tour)] || null;
+        const busy = new Set(ms.flatMap(r => [r.ta, r.tb]));
+        const free = TEAM_IDS.filter(t => !busy.has(t));
+        return free.length === 1 ? free[0] : null;
+      },
+      tourConflict: tour => {
+        const ms = GROUP.filter(g => g.tour === tour).map(g => res[g.id]).filter(r => r.ta && r.tb);
+        const all = ms.flatMap(r => [r.ta, r.tb]);
+        return new Set(all).size !== all.length;
+      },
       groupStarted: GROUP.some(g => res[g.id].touched || res[g.id].ff || res[g.id].status === "live" || res[g.id].status === "done"),
       playoffStarted: PLAYOFF.some(p => res[p.id].touched || res[p.id].ff || res[p.id].status === "live" || res[p.id].status === "done")
     };
@@ -1376,7 +1400,7 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
       <svg class="lines" aria-hidden="true"></svg>
       <div class="blabel l-ub"><span class="sw sw-ub"></span>Верхняя сетка</div>
       <div class="blabel l-lb"><span class="sw sw-lb"></span>Нижняя сетка</div>
-      <div class="blabel l-gf"><span class="sw sw-gf"></span>Гранд-финал, bo5</div>
+      <div class="blabel l-gf"><span class="sw sw-gf"></span>Гранд-финал, bo3</div>
       ${comp.playoffList.map(r => matchCard(r, state, comp)).join("")}
     </div>`;
     drawLines(el, comp);
@@ -1492,6 +1516,7 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
       <label class="chk"><input type="checkbox" data-k="done" ${x.done ? "checked" : ""} ${d}>Сыграна</label>
     </div>`;
   }
+  const pairOpts = sel => '<option value="">По жеребьевке</option>' + B.TEAM_IDS.map(t => `<option value="${t}" ${sel === t ? "selected" : ""}>${tn(t)}</option>`).join("");
   function matchCard(r) {
     const d = state.matches[r.id] || {};
     const pool = B.mapPool(state);
@@ -1510,6 +1535,10 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
       </div>
       ${open ? `<div class="am-maps">${r.maps.map(x => mapRow(r, x, pool)).join("")}</div>` : `<p class="am-sum">${r.status === "done" ? esc(r.ff ? "Техническая победа" : (B.mapsSummary(r) || "Карты не указаны")) : "Карты откроются, когда определятся оба соперника. Время можно указать заранее."}</p>`}
       ${r.status === "done" ? `<button class="btn ghost small am-toggle" data-toggle type="button">${open ? "Свернуть" : "Исправить карты"}</button>` : ""}
+      ${r.stage === "group" && r.status !== "done" && !r.touched ? `<div class="am-pair">
+        <label><span>Команда 1</span><select data-f="pairA">${pairOpts(d.pair?.a)}</select></label>
+        <label><span>Команда 2</span><select data-f="pairB">${pairOpts(d.pair?.b)}</select></label>
+      </div>` : ""}
       <div class="am-opts">
         <label><span>Начало</span><input type="datetime-local" data-f="time" value="${esc(d.time || "")}"></label>
         <label><span>Статус</span><select data-f="status" ${!ready || r.touched || r.status === "done" ? "disabled" : ""}>
@@ -1536,7 +1565,11 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
       h += B.PLAYOFF.map(m => `<div class="am" data-id="${m.id}"></div>`).join("");
       box.innerHTML = h;
     }
-    box.querySelectorAll("[data-rest]").forEach(el => { const rt = comp.restTeam(+el.dataset.rest); el.textContent = "Отдыхает: " + (rt ? state.teams[rt]?.name || "" : "определится жеребьевкой"); });
+    box.querySelectorAll("[data-rest]").forEach(el => {
+      const tour = +el.dataset.rest, rt = comp.restTeam(tour);
+      el.textContent = comp.tourConflict(tour) ? "Внимание: одна команда стоит в обоих матчах тура" : "Отдыхает: " + (rt ? state.teams[rt]?.name || "" : "определится жеребьевкой");
+      el.classList.toggle("bad", comp.tourConflict(tour));
+    });
     $("poNote").textContent = comp.groupDone ? "Участники определены по итогам группы." : "Участники появятся, когда будут сыграны все 10 матчей группы.";
     const act = document.activeElement;
     for (const r of comp.list) {
@@ -1561,6 +1594,15 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
   $("matches").addEventListener("change", e => {
     const t = e.target, id = matchOf(t); if (!id) return;
     const r = comp.res[id];
+    if (t.dataset.f === "pairA" || t.dataset.f === "pairB") {
+      const card = t.closest(".am");
+      const pa = card.querySelector('[data-f="pairA"]').value, pb = card.querySelector('[data-f="pairB"]').value;
+      if (!pa && !pb) { save(`matches/${id}/pair`, null, "Пара по жеребьевке"); return; }
+      if (!pa || !pb) { toast("Выберите обе команды", true); return; }
+      if (pa === pb) { toast("Команды в паре должны быть разными", true); return; }
+      save(`matches/${id}/pair`, { a: pa, b: pb }, "Пара сохранена");
+      return;
+    }
     if (t.dataset.f) {
       if (t.dataset.f === "link" && t.value.trim() && !/^https?:\/\//i.test(t.value.trim())) { toast("Ссылка должна начинаться с https://", true); return; }
       if (t.dataset.f === "forfeit" && t.value && !confirm(`Засчитать техническую победу команде ${t.value === "a" ? tn(r.ta) : tn(r.tb)}?`)) { t.value = r.ff; return; }
@@ -1591,6 +1633,22 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
         else toast(t.checked ? "Карта засчитана" : "Карта снова в игре");
       });
     }
+  });
+
+  /* ---------- Готовое расписание ---------- */
+  const PRESET = [
+    ["G1", "t1", "t5", "2026-10-16T20:20"], ["G2", "t2", "t4", "2026-10-16T20:20"],
+    ["G3", "t1", "t4", "2026-10-16T21:05"], ["G4", "t3", "t5", "2026-10-16T21:05"],
+    ["G5", "t1", "t3", "2026-10-16T21:50"], ["G6", "t2", "t5", "2026-10-16T21:50"],
+    ["G7", "t1", "t2", "2026-10-16T22:35"], ["G8", "t3", "t4", "2026-10-16T22:35"],
+    ["G9", "t2", "t3", "2026-10-16T23:20"], ["G10", "t4", "t5", "2026-10-16T23:20"]
+  ];
+  $("presetBtn").addEventListener("click", () => {
+    if (comp.groupStarted && !confirm("Группа уже начата. Все равно заменить пары и время матчей группы?")) return;
+    if (!comp.groupStarted && !confirm("Заполнить пары и время всех 10 матчей группы по расписанию 16 октября?")) return;
+    const upd = {};
+    PRESET.forEach(([id, a, b, time]) => { upd[id + "/pair"] = { a, b }; upd[id + "/time"] = time; });
+    update("matches", upd, "Расписание группы заполнено");
   });
 
   /* ---------- Постеры ---------- */
@@ -1724,6 +1782,7 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
     $("poolIn").value = state.meta.mapPool || "";
     $("posterIn").value = state.meta.poster || "";
     $("consentIn").value = state.meta.consent || "";
+    $("schedNoteIn").value = state.meta.scheduleNote || "";
     $("feeIn").value = state.meta.fee || 0;
     ["p1", "p2", "p3"].forEach(k => $(k + "In").value = (state.meta.prizes || {})[k] || "");
     $("rulesIn").value = state.meta.rules || "";
@@ -1806,7 +1865,7 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
       dates: $("datesIn").value.trim(), place: $("placeIn").value.trim(),
       partnersTitle: $("partnersTitleIn").value.trim(), partners: $("partnersIn").value.trim(), stream, mapPool: $("poolIn").value.trim(),
       fee: Math.max(0, Math.round(+$("feeIn").value || 0)), prizes, rules: $("rulesIn").value.trim(),
-      poster: $("posterIn").value.trim(), consent: $("consentIn").value.trim()
+      poster: $("posterIn").value.trim(), consent: $("consentIn").value.trim(), scheduleNote: $("schedNoteIn").value.trim()
     }, "Настройки сохранены");
   });
   $("resetMatches").addEventListener("click", () => {

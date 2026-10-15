@@ -892,6 +892,12 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
 /* новые ночные фоны: пропорция 2.645 */
 .page-bg::before { height: max(calc(100vw * 0.378), 70vh); }
 
+.am-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.am-pair label span { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.am-pair select { padding: 8px 10px; font-size: 14px; min-height: 40px; }
+.am-rest.bad { color: var(--danger-fg); font-weight: 500; }
+.preset-card { margin-bottom: 14px; }
+
 </style>
 </head>
 <body>
@@ -950,7 +956,7 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
     <div class="steps">
       <div class="step"><span class="sn">1</span><h3>Жеребьевка</h3><p>Определяет номера команд, от них зависят пары каждого тура группы и тур отдыха.</p></div>
       <div class="step"><span class="sn">2</span><h3>Отборочная группа</h3><p>Каждый с каждым, матчи bo1. В каждом туре одна команда отдыхает. Места 1-2 проходят в верхнюю сетку, места 3-5 в нижнюю.</p></div>
-      <div class="step"><span class="sn">3</span><h3>Плей-офф</h3><p>Матчи bo3, гранд-финал bo5. Проигравший финала верхней сетки получает второй шанс в финале нижней.</p></div>
+      <div class="step"><span class="sn">3</span><h3>Плей-офф</h3><p>Матчи bo3, гранд-финал тоже bo3. Проигравший финала верхней сетки получает второй шанс в финале нижней.</p></div>
     </div>
   </section>
 
@@ -969,6 +975,7 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
 
   <section class="block" id="schedule">
     <h2>Расписание</h2>
+    <p class="lead" id="schedNote"></p>
     <p class="lead">Время местное. Счет в плей-офф указан по картам.</p>
     <div class="schedule" id="schedule-list"></div>
   </section>
@@ -1020,7 +1027,7 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
     { id: "P2", bo: 3, stage: "playoff", side: "lb", round: "Нижняя, раунд 1", a: { place: 4 }, b: { place: 5 } },
     { id: "P3", bo: 3, stage: "playoff", side: "lb", round: "Нижняя, раунд 2", a: { place: 3 }, b: { win: "P2" } },
     { id: "P4", bo: 3, stage: "playoff", side: "lb", round: "Финал нижней", a: { lose: "P1" }, b: { win: "P3" } },
-    { id: "P5", bo: 5, stage: "playoff", side: "gf", round: "Гранд-финал", a: { win: "P1" }, b: { win: "P4" } }
+    { id: "P5", bo: 3, stage: "playoff", side: "gf", round: "Гранд-финал", a: { win: "P1" }, b: { win: "P4" } }
   ];
   const MATCHES = GROUP.concat(PLAYOFF);
   const EDGES = [["P2", "P3"], ["P3", "P4"], ["P1", "P5"], ["P4", "P5"], ["P1", "P4", "lose"]];
@@ -1049,9 +1056,10 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
       stream: "",
       mapPool: "Ancient\nAnubis\nDust2\nInferno\nMirage\nNuke\nTrain",
       consent: "Участие в турнире является согласием с регламентом",
+      scheduleNote: "16 октября, 20:00-20:20: регистрация, жеребьевка, настройка компьютеров.",
       fee: 25000,
       prizes: { p1: 0, p2: 0, p3: 0 },
-      rules: "Взнос 25 000 ₸ с команды, весь сбор идет в призовой фонд.\nКомпьютеры в клубе каждый игрок оплачивает сам.\nКарты выбирают капитаны через пики и баны на CyberShoke.\nОтборочная группа: каждый с каждым, матчи bo1. Места 1-2 проходят в верхнюю сетку, места 3-5 в нижнюю.\nМеста в группе: победы, затем личная встреча, затем разница раундов, затем выигранные раунды. Техническая победа засчитывается со счетом 13:0.\nПлей-офф: матчи bo3, гранд-финал bo5. Проигравший финала верхней сетки переходит в финал нижней.\nУчастие в турнире является согласием с регламентом."
+      rules: "Взнос 25 000 ₸ с команды, весь сбор идет в призовой фонд.\nКомпьютеры в клубе каждый игрок оплачивает сам.\nКарты выбирают капитаны через пики и баны на CyberShoke.\nОтборочная группа: каждый с каждым, матчи bo1. Места 1-2 проходят в верхнюю сетку, места 3-5 в нижнюю.\nМеста в группе: победы, затем личная встреча, затем разница раундов, затем выигранные раунды. Техническая победа засчитывается со счетом 13:0.\nПлей-офф и гранд-финал: матчи bo3. Проигравший финала верхней сетки переходит в финал нижней.\nУчастие в турнире является согласием с регламентом."
     },
     teams: {
       t1: { name: "RAGE", roster: "Фараби (Казахстан, режиссер)\nУлан (Казахстан, монтажер)\nБекнур (радиоведущий)\nРайымбек (Жибек жолы, ведущий)\nСактаган (КМО, осветитель)", paid: false },
@@ -1196,7 +1204,8 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
       }
       const d = state.matches[m.id] || {};
       const need = Math.ceil(m.bo / 2);
-      const ta = pick(m.a), tb = pick(m.b);
+      const pr = m.stage === "group" && d.pair && TEAM_IDS.includes(d.pair.a) && TEAM_IDS.includes(d.pair.b) && d.pair.a !== d.pair.b ? d.pair : null;
+      const ta = pr ? pr.a : pick(m.a), tb = pr ? pr.b : pick(m.b);
       const maps = [];
       for (let i = 1; i <= m.bo; i++) {
         const x = (d.maps || {})["m" + i] || {};
@@ -1217,7 +1226,7 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
       const touched = maps.some(x => x.done);
       const status = winner ? "done" : (!ta || !tb) ? "pending" : (touched || d.status === "live") ? "live" : "upcoming";
       const curMap = null;
-      res[m.id] = { ...m, ta, tb, sa, sb, need, winner, loser, ff, status, maps, curMap, time: d.time || "", link: d.link || "", touched };
+      res[m.id] = { ...m, ta, tb, sa, sb, need, winner, loser, ff, status, maps, curMap, time: d.time || "", link: d.link || "", touched, manual: !!pr };
     }
     const places = {};
     for (const [id, p] of Object.entries(PLACE_ON_LOSS)) if (res[id].loser) places[res[id].loser] = p;
@@ -1232,7 +1241,18 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
       next: timed[0] || upcoming[0] || null,
       champion: res.P5.winner,
       slotTeam, draw: { status: dr.status || "none", at: dr.at || "", doneAt: +dr.doneAt || 0, by: dr.by || "" },
-      restTeam: tour => slotTeam["s" + restSlot(tour)] || null,
+      restTeam: tour => {
+        const ms = GROUP.filter(g => g.tour === tour).map(g => res[g.id]);
+        if (ms.some(r => !r.ta || !r.tb)) return slotTeam["s" + restSlot(tour)] || null;
+        const busy = new Set(ms.flatMap(r => [r.ta, r.tb]));
+        const free = TEAM_IDS.filter(t => !busy.has(t));
+        return free.length === 1 ? free[0] : null;
+      },
+      tourConflict: tour => {
+        const ms = GROUP.filter(g => g.tour === tour).map(g => res[g.id]).filter(r => r.ta && r.tb);
+        const all = ms.flatMap(r => [r.ta, r.tb]);
+        return new Set(all).size !== all.length;
+      },
       groupStarted: GROUP.some(g => res[g.id].touched || res[g.id].ff || res[g.id].status === "live" || res[g.id].status === "done"),
       playoffStarted: PLAYOFF.some(p => res[p.id].touched || res[p.id].ff || res[p.id].status === "live" || res[p.id].status === "done")
     };
@@ -1371,7 +1391,7 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
       <svg class="lines" aria-hidden="true"></svg>
       <div class="blabel l-ub"><span class="sw sw-ub"></span>Верхняя сетка</div>
       <div class="blabel l-lb"><span class="sw sw-lb"></span>Нижняя сетка</div>
-      <div class="blabel l-gf"><span class="sw sw-gf"></span>Гранд-финал, bo5</div>
+      <div class="blabel l-gf"><span class="sw sw-gf"></span>Гранд-финал, bo3</div>
       ${comp.playoffList.map(r => matchCard(r, state, comp)).join("")}
     </div>`;
     drawLines(el, comp);
@@ -1560,7 +1580,7 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
     const d = comp.draw;
     let lead = "Каждый с каждым, матчи bo1. Места 1-2 проходят в верхнюю сетку, места 3-5 в нижнюю.";
     if (d.status === "scheduled") lead += ` Пары определит жеребьевка${d.at ? ": " + B.fmtTime(d.at) : ""}.`;
-    if (d.status === "done") lead += ` Жеребьевка проведена ${B.fmtStamp(d.doneAt)}. Номера: ${[1, 2, 3, 4, 5].map(i => i + ". " + nm(comp.slotTeam["s" + i])).join(", ")}.`;
+    if (d.status === "done" && !comp.groupList.some(r => r.manual)) lead += ` Жеребьевка проведена ${B.fmtStamp(d.doneAt)}. Номера: ${[1, 2, 3, 4, 5].map(i => i + ". " + nm(comp.slotTeam["s" + i])).join(", ")}.`;
     $("groupLead").textContent = lead.replace(/&amp;/g, "&");
   }
 
@@ -1627,6 +1647,7 @@ body:not(.admin) .site-top-in { max-width: 1240px; }
     B.renderBracket($("bracket"), comp, s);
     renderGroup(); renderSchedule(); renderTeams(); renderPrize();
     $("consent").textContent = state.meta.consent || "";
+    $("schedNote").textContent = state.meta.scheduleNote || ""; $("schedNote").hidden = !state.meta.scheduleNote;
     const d = new Date();
     $("updated").textContent = "Обновлено в " + String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
     document.body.classList.add("ready");
