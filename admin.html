@@ -94,6 +94,7 @@
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html, body { margin: 0; }
+html { background: var(--ink); }
 body {
   background: var(--ink);
   color: var(--bone);
@@ -305,7 +306,7 @@ html { scroll-padding-top: 70px; }
 .rs { display: inline-flex; align-items: center; gap: 4px; }
 .rs button { width: 36px; height: 38px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--panel-2); color: var(--bone); font-size: 18px; cursor: pointer; touch-action: manipulation; }
 .rs button:disabled { opacity: .3; cursor: default; }
-.rs input { width: 56px; min-width: 0; min-height: 38px; text-align: center; padding: 6px 4px; font: 700 16px/1 var(--display); -moz-appearance: textfield; }
+.rs input { width: 72px; min-width: 0; min-height: 38px; text-align: center; padding: 6px 4px; font: 700 16px/1 var(--display); -moz-appearance: textfield; }
 .rs input::-webkit-inner-spin-button { -webkit-appearance: none; }
 .colon { color: var(--dim); text-align: center; font-weight: 700; }
 .chk { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); cursor: pointer; }
@@ -449,6 +450,124 @@ body { transition: background-color .2s, color .2s; }
 .draw-slots li { display: flex; gap: 12px; font-size: 15px; padding: 8px 0; border-top: 1px solid var(--line); }
 .draw-slots li b { font: 700 15px/1.2 var(--display); min-width: 22px; color: var(--sand); }
 
+/* ---------- Лендинг ---------- */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.skip { position: absolute; left: -9999px; top: 8px; z-index: 50; background: var(--sand); color: var(--on-sand); padding: 8px 12px; border-radius: 8px; }
+.skip:focus { left: 8px; }
+.site-top { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--ink) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); padding-top: env(safe-area-inset-top, 0px); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 21; background: var(--ink); }
+.site-top-in { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 60px; }
+.lnav { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.lnav::-webkit-scrollbar { display: none; }
+.lnav a { color: var(--muted); text-decoration: none; font-size: 14px; padding: 8px 12px; border-radius: 99px; white-space: nowrap; }
+.lnav a:hover { color: var(--bone); background: var(--panel); }
+body { padding-top: 0; }
+html { scroll-padding-top: 76px; }
+
+.hero2 { position: relative; overflow: hidden; background: #0d1116; color: #ece6d8; min-height: 560px; display: flex; align-items: center; }
+.hero-art { position: absolute; inset: 0 0 0 28%; background: url(art-wide.jpg) 62% 30% / cover no-repeat; }
+.hero-art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #0d1116 0%, rgba(13,17,22,.9) 20%, rgba(13,17,22,.35) 55%, rgba(13,17,22,.05) 100%), linear-gradient(0deg, rgba(13,17,22,.9) 0%, rgba(13,17,22,0) 40%); }
+.hero-in { position: relative; width: 100%; padding-top: 64px; padding-bottom: 64px; }
+.hero-text { max-width: 800px; }
+.hero2 h1 { font: 800 clamp(56px, 8.4vw, 124px)/.86 var(--display); letter-spacing: -.035em; margin: 0; }
+.hero2 h1 span { display: block; }
+.hero-sub { font-size: clamp(18px, 2vw, 24px); font-weight: 500; margin: 24px 0 0; }
+.hero2 .split { margin: 26px 0; }
+.hero-when { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: baseline; margin: 0 0 26px; font-size: 18px; color: #c3cad3; }
+.hero-when b { font: 700 clamp(22px, 2.6vw, 30px)/1.1 var(--display); color: #ece6d8; letter-spacing: -.01em; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 10px; }
+.hero2 .btn { background: #d8ae62; color: #12161b; }
+.hero2 .btn:hover { background: #e4bd77; }
+.hero2 .btn.ghost { background: rgba(13,17,22,.5); color: #ece6d8; box-shadow: inset 0 0 0 1px rgba(236,230,216,.35); }
+.hero2 .btn.ghost:hover { background: rgba(13,17,22,.75); }
+.hero-poster-m { display: none; margin: 0; }
+
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 28px 0 0; }
+.fact { background: var(--panel); border-radius: 12px; padding: 18px 20px; }
+.fact span { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+.fact b { font: 700 22px/1.2 var(--display); letter-spacing: -.01em; }
+.fact b.g { color: var(--sand); }
+.fact b.sm { font: 600 16px/1.35 var(--text); }
+#live .focus { margin-top: 0; }
+#live .focus:empty::after { content: "Ближайшие события появятся здесь."; color: var(--muted); }
+.banner { margin-top: 20px; }
+
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.step { background: var(--panel); border-radius: 12px; padding: 20px; }
+.step .sn { font: 800 28px/1 var(--display); color: var(--sand); }
+.step:nth-child(3) .sn { color: var(--ct); }
+.step h3 { font: 700 18px/1.2 var(--display); margin: 14px 0 8px; }
+.step p { margin: 0; color: var(--muted); font-size: 15px; }
+
+.posters { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); gap: 12px; align-items: start; }
+.pcard { display: block; background: var(--panel); border-radius: 12px; overflow: hidden; text-decoration: none; color: var(--bone); }
+.pcard img { display: block; width: 100%; height: auto; }
+.pcard span { display: block; padding: 12px 16px; font-size: 14px; }
+.pcard span::after { content: "  Скачать"; color: var(--sand); font-weight: 500; }
+.pcard:hover { box-shadow: inset 0 0 0 1px var(--line-2); }
+
+.partners { display: flex; flex-wrap: wrap; gap: 10px; }
+.pt { font: 600 18px/1 var(--display); padding: 16px 22px; background: var(--panel); border-radius: 12px; letter-spacing: -.01em; }
+
+@media (max-width: 1000px) {
+  .lnav { display: none; }
+}
+@media (max-width: 760px) {
+  .site-top-in { min-height: 54px; }
+  .theme-btn { padding: 7px 10px; font-size: 12px; }
+  .conn span { display: none; }
+  .hero2 { display: block; background: var(--ink); color: var(--bone); min-height: 0; }
+  .hero-art { display: none; }
+  .hero-poster-m { display: block; padding: 16px 16px 0; }
+  body.has-live .hero-poster-m { display: none; }
+  .fact b { font-size: 18px; }
+  .hero-poster-m img { display: block; width: 100%; height: auto; border-radius: 12px; }
+  .hero-in { padding-top: 22px; padding-bottom: 8px; }
+  .hero2 h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .hero-sub { margin-top: 0; font-size: 18px; }
+  .hero2 .split { margin: 16px 0; }
+  .hero-when { color: var(--muted); margin-bottom: 18px; }
+  .hero-when b { color: var(--bone); }
+  .hero2 .btn.ghost { background: transparent; color: var(--bone); box-shadow: inset 0 0 0 1px var(--line-2); }
+  .hero-cta .btn { flex: 1 1 auto; justify-content: center; }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps { grid-template-columns: 1fr; }
+  .posters { grid-template-columns: 1fr; }
+  .pcard.v { max-width: 360px; }
+}
+
+.focus-score .vs { color: var(--muted); margin: 0; font-size: .6em; }
+
+/* ---------- Первый экран из постеров ---------- */
+.sr-only { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.hero3 { background: #06111f; }
+.hero-pic { display: block; }
+.hero-pic img { display: block; width: 100%; height: auto; max-height: 82vh; object-fit: cover; object-position: center top; }
+.hero-bar { background: var(--panel); border-bottom: 1px solid var(--line); }
+.hero-bar-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; padding-top: 14px; padding-bottom: 14px; }
+.hero-bar .hero-cta { margin-left: auto; }
+.livebar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; color: var(--bone); text-decoration: none; font-size: 15px; min-width: 0; }
+.livebar .lb-m b { font-weight: 600; }
+.lb-s { font: 700 17px/1 var(--display); font-variant-numeric: tabular-nums; margin: 0 4px; }
+.lb-x { color: var(--muted); font-size: 14px; }
+.livebar:hover .lb-m b { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 760px) {
+  .hero-pic img { max-height: none; }
+  body.has-live .hero-pic { display: none; }
+  .hero-bar-in { padding-top: 12px; padding-bottom: 12px; }
+  .hero-bar .hero-cta { margin-left: 0; width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
+  .hero-bar .hero-cta .btn { justify-content: center; }
+  .hero-bar .hero-cta .btn:first-child { grid-column: 1 / -1; }
+}
+
+/* ---------- Админка: постеры ---------- */
+.media-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 12px; }
+.media-card img { display: block; width: 100%; height: auto; border-radius: 8px; background: var(--ink); margin-bottom: 12px; }
+.media-card .note { margin: 0 0 12px; }
+.media-card input[type=file] { font: 14px var(--text); color: var(--muted); max-width: 100%; margin-bottom: 12px; }
+@media (max-width: 760px) { .media-grid { grid-template-columns: 1fr; } }
+
 </style>
 </head>
 <body class="admin">
@@ -480,14 +599,23 @@ body { transition: background-color .2s, color .2s; }
   <div id="panel" hidden>
     <h1>Админка</h1>
     <nav class="anav" aria-label="Разделы">
-      <a href="#s-matches">Матчи <b id="navLive"></b></a><a href="#s-draw">Жеребьевка</a><a href="#s-table">Таблица</a><a href="#s-teams">Команды и взносы</a><a href="#s-settings">Настройки</a><a href="#s-reset">Сброс</a>
+      <a href="#s-matches">Матчи <b id="navLive"></b></a><a href="#s-media">Постеры</a><a href="#s-draw">Жеребьевка</a><a href="#s-table">Таблица</a><a href="#s-teams">Команды и взносы</a><a href="#s-settings">Настройки</a><a href="#s-reset">Сброс</a>
     </nav>
     <div class="banner" id="demo" hidden>Демо-режим: данные сохраняются только в этом браузере. Откройте страницу зрителей в соседней вкладке, чтобы проверить обновление в реальном времени.</div>
 
     <section class="block" id="s-matches">
       <h2>Матчи</h2>
-      <p class="lead">Группа: 5 туров по 2 матча bo1, одна команда в туре отдыхает. Ведите счет раундов кнопками + и - или вводом числа. Когда карта закончилась, отметьте «Сыграна»: таблица, победитель и плей-офф посчитаются сами.</p>
+      <p class="lead">После матча выберите карту, впишите итоговый счет раундов и отметьте «Сыграна». В плей-офф так же по каждой карте. Таблица, победитель и плей-офф посчитаются сами. Чтобы зрители видели, какой матч играется, поставьте статус «Идет сейчас».</p>
       <div class="admin-matches" id="matches"></div>
+    </section>
+
+    <section class="block" id="s-media">
+      <h2>Постеры первого экрана</h2>
+      <p class="lead">Горизонтальный постер показывается на компьютере, вертикальный на телефоне. Выберите файл и нажмите «Загрузить»: картинка сожмется и сразу заменится у всех зрителей. «Вернуть стандартный» показывает постер из файлов сайта.</p>
+      <div class="media-grid">
+        <div class="card media-card"><label class="f">Компьютер, горизонтальный</label><img id="mPrevD" src="poster-desktop.jpg" alt="Текущий горизонтальный постер"><p class="note" id="mInfoD"></p><input type="file" id="mFileD" accept="image/png,image/jpeg,image/webp"><div class="row-actions"><button class="btn" type="button" data-up="desktop">Загрузить</button><button class="btn ghost" type="button" data-reset="desktop">Вернуть стандартный</button></div></div>
+        <div class="card media-card"><label class="f">Телефон, вертикальный</label><img id="mPrevM" src="poster-mobile.jpg" alt="Текущий вертикальный постер"><p class="note" id="mInfoM"></p><input type="file" id="mFileM" accept="image/png,image/jpeg,image/webp"><div class="row-actions"><button class="btn" type="button" data-up="mobile">Загрузить</button><button class="btn ghost" type="button" data-reset="mobile">Вернуть стандартный</button></div></div>
+      </div>
     </section>
 
     <section class="block" id="s-draw">
@@ -524,7 +652,8 @@ body { transition: background-color .2s, color .2s; }
       <div class="card" style="max-width:640px">
         <div class="field"><label class="f" for="titleIn">Название турнира</label><input type="text" id="titleIn" maxlength="40"></div>
         <div class="field"><label class="f" for="subtitleIn">Подзаголовок</label><input type="text" id="subtitleIn" maxlength="80"></div>
-        <div class="field"><label class="f" for="infoIn">Дата и место</label><input type="text" id="infoIn" maxlength="120" placeholder="18-19 октября, Астана, компьютерный клуб ..."></div>
+        <div class="field"><label class="f" for="datesIn">Даты</label><input type="text" id="datesIn" maxlength="60" placeholder="16-17 октября"></div>
+        <div class="field"><label class="f" for="placeIn">Место проведения</label><input type="text" id="placeIn" maxlength="120" placeholder="Астана, компьютерный клуб ..."></div>
         <div class="field"><label class="f" for="streamIn">Ссылка на трансляцию</label><input type="url" id="streamIn" placeholder="https://youtube.com/..."></div>
         <div class="field"><label class="f" for="posterIn">Афиша: имя файла в репозитории или ссылка на картинку, пусто - скрыть</label><input type="text" id="posterIn" placeholder="poster.jpg"></div>
         <div class="field"><label class="f" for="poolIn">Пул карт, одна на строку</label><textarea id="poolIn" style="min-height:120px"></textarea></div>
@@ -536,6 +665,8 @@ body { transition: background-color .2s, color .2s; }
           <input type="number" id="p3In" min="0" step="1000" placeholder="3 место" aria-label="Приз за 3 место" inputmode="numeric">
         </div>
         <p class="sumcheck" id="sumCheck"></p>
+        <div class="field"><label class="f" for="partnersTitleIn">Заголовок блока партнеров</label><input type="text" id="partnersTitleIn" maxlength="80"></div>
+        <div class="field"><label class="f" for="partnersIn">Партнеры, по одному на строку (пусто - блок скрыт)</label><textarea id="partnersIn" style="min-height:120px"></textarea></div>
         <div class="field"><label class="f" for="consentIn">Строка в подвале сайта</label><input type="text" id="consentIn" maxlength="200"></div>
         <div class="field"><label class="f" for="rulesIn">Регламент, один пункт на строку</label><textarea id="rulesIn" style="min-height:170px"></textarea></div>
         <button class="btn" id="saveMeta" type="button">Сохранить настройки</button>
@@ -592,8 +723,12 @@ body { transition: background-color .2s, color .2s; }
     meta: {
       title: "BAQ LIGA CS2",
       subtitle: "Турнир по Counter-Strike 2 среди СМИ РК",
-      info: "16-17 октября. Группа каждый с каждым, затем плей-офф с верхней и нижней сеткой.",
-      poster: "poster.jpg",
+      info: "",
+      dates: "16-17 октября",
+      place: "",
+      partnersTitle: "Турнир проходит при участии",
+      partners: "Хабар\nQazaqstan\nQazsport\nКазмедиа\nQazcontent",
+
       stream: "",
       mapPool: "Ancient\nAnubis\nDust2\nInferno\nMirage\nNuke\nTrain",
       consent: "Участие в турнире является согласием с регламентом",
@@ -735,9 +870,9 @@ body { transition: background-color .2s, color .2s; }
         else if (sa >= need) { winner = ta; loser = tb; }
         else if (sb >= need) { winner = tb; loser = ta; }
       }
-      const touched = maps.some(x => x.done || x.a || x.b);
+      const touched = maps.some(x => x.done);
       const status = winner ? "done" : (!ta || !tb) ? "pending" : (touched || d.status === "live") ? "live" : "upcoming";
-      const curMap = status === "live" ? (maps.find(x => !x.done && (x.a || x.b || x.name)) || null) : null;
+      const curMap = null;
       res[m.id] = { ...m, ta, tb, sa, sb, need, winner, loser, ff, status, maps, curMap, time: d.time || "", link: d.link || "", touched };
     }
     const places = {};
@@ -810,6 +945,8 @@ body { transition: background-color .2s, color .2s; }
       save: (p, v) => ref(p).set(v),
       update: (p, obj) => ref(p).update(obj),
       serverTime: () => firebase.database.ServerValue.TIMESTAMP,
+      watchMedia: (key, cb) => db.ref("baq_media/" + key).on("value", s => cb(s.val()), e => { console.error(e); cb(null); }),
+      saveMedia: (key, val) => db.ref("baq_media/" + key).set(val),
       onAuth: cb => auth.onAuthStateChanged(cb),
       login: (e, p) => auth.signInWithEmailAndPassword(e, p),
       logout: () => auth.signOut(),
@@ -819,6 +956,7 @@ body { transition: background-color .2s, color .2s; }
 
   function demoStore() {
     const KEY = "baq-liga-cs2-demo-v2";
+    const mediaSubs = {};
     const subs = new Set();
     const read = () => { try { return withDefaults(JSON.parse(localStorage.getItem(KEY) || "null")); } catch (e) { return withDefaults(null); } };
     const write = s => { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} subs.forEach(cb => cb(read())); };
@@ -835,6 +973,18 @@ body { transition: background-color .2s, color .2s; }
       save: async (p, v) => { const s = read(); if (!p) { write(v); return; } setPath(s, p, v); write(s); },
       update: async (p, obj) => { const s = read(); for (const [k, v] of Object.entries(obj)) setPath(s, p ? p + "/" + k : k, v); write(s); },
       serverTime: () => Date.now(),
+      watchMedia: (key, cb) => {
+        const K = "baq-liga-cs2-media-" + key;
+        const rd = () => { try { return JSON.parse(localStorage.getItem(K) || "null"); } catch (e) { return null; } };
+        window.addEventListener("storage", e => { if (e.key === K) cb(rd()); });
+        mediaSubs[key] = mediaSubs[key] || new Set(); mediaSubs[key].add(() => cb(rd()));
+        cb(rd());
+      },
+      saveMedia: async (key, val) => {
+        try { if (val) localStorage.setItem("baq-liga-cs2-media-" + key, JSON.stringify(val)); else localStorage.removeItem("baq-liga-cs2-media-" + key); }
+        catch (e) { throw new Error("в демо-режиме браузер не вместил картинку"); }
+        (mediaSubs[key] || []).forEach(f => f());
+      },
       onAuth: cb => cb({ email: "демо-режим" }),
       login: async () => {}, logout: async () => {}, resetPassword: async () => {}
     };
@@ -857,8 +1007,7 @@ body { transition: background-color .2s, color .2s; }
     if (r.status === "pending") return "";
     const parts = [];
     if (r.status === "live") {
-      parts.push(`<span class="chip live"><i></i>В эфире</span>`);
-      if (r.curMap) parts.push(`<span class="maps">${esc(r.curMap.name || "Карта " + r.curMap.n)} ${r.curMap.a}:${r.curMap.b}</span>`);
+      parts.push(`<span class="chip live"><i></i>Идет сейчас</span>`);
     } else if (r.status === "done") {
       parts.push(`<span class="chip done">${r.ff ? "Техническая победа" : "Завершен"}</span>`);
       const ms = mapsSummary(r);
@@ -943,6 +1092,7 @@ body { transition: background-color .2s, color .2s; }
   const $ = id => document.getElementById(id);
   let store, state, comp, built = false, me = "";
   const expanded = new Set();
+  const dirty = new Set();
 
   function toast(msg, bad) {
     const t = $("toast");
@@ -967,7 +1117,7 @@ body { transition: background-color .2s, color .2s; }
   }
   const label = id => comp.res[id].round;
   function chip(r) {
-    if (r.status === "live") return '<span class="chip live"><i></i>В эфире</span>';
+    if (r.status === "live") return '<span class="chip live"><i></i>Идет сейчас</span>';
     if (r.status === "done") return `<span class="chip done">${r.ff ? "Техническая победа" : "Завершен"}: ${tn(r.winner)}</span>`;
     if (r.status === "pending") return '<span class="chip">Ждет соперников</span>';
     return '<span class="chip">Не начался</span>';
@@ -987,9 +1137,9 @@ body { transition: background-color .2s, color .2s; }
         <option value="b" ${x.pick === "b" ? "selected" : ""}>Пик ${tn(r.tb) || "команды 2"}</option>
         <option value="d" ${x.pick === "d" ? "selected" : ""}>Десайдер</option>
       </select>
-      <span class="rs"><button data-r="a" data-d="-1" ${d} aria-label="Минус раунд">-</button><input type="number" inputmode="numeric" min="0" max="99" data-k="a" value="${x.a}" ${d} aria-label="Раунды ${tn(r.ta)}"><button data-r="a" data-d="1" ${d} aria-label="Плюс раунд">+</button></span>
+      <span class="rs"><input type="number" inputmode="numeric" min="0" max="99" data-k="a" value="${x.a || x.done ? x.a : ""}" placeholder="0" ${d} aria-label="Раунды ${tn(r.ta)}"></span>
       <span class="colon">:</span>
-      <span class="rs"><button data-r="b" data-d="-1" ${d} aria-label="Минус раунд">-</button><input type="number" inputmode="numeric" min="0" max="99" data-k="b" value="${x.b}" ${d} aria-label="Раунды ${tn(r.tb)}"><button data-r="b" data-d="1" ${d} aria-label="Плюс раунд">+</button></span>
+      <span class="rs"><input type="number" inputmode="numeric" min="0" max="99" data-k="b" value="${x.b || x.done ? x.b : ""}" placeholder="0" ${d} aria-label="Раунды ${tn(r.tb)}"></span>
       <label class="chk"><input type="checkbox" data-k="done" ${x.done ? "checked" : ""} ${d}>Сыграна</label>
     </div>`;
   }
@@ -1014,8 +1164,8 @@ body { transition: background-color .2s, color .2s; }
       <div class="am-opts">
         <label><span>Начало</span><input type="datetime-local" data-f="time" value="${esc(d.time || "")}"></label>
         <label><span>Статус</span><select data-f="status" ${!ready || r.touched || r.status === "done" ? "disabled" : ""}>
-          ${r.status === "done" ? "<option>Завершен</option>" : r.touched ? "<option>В эфире</option>" :
-            `<option value="upcoming" ${d.status !== "live" ? "selected" : ""}>Не начался</option><option value="live" ${d.status === "live" ? "selected" : ""}>В эфире</option>`}
+          ${r.status === "done" ? "<option>Завершен</option>" : r.touched ? "<option>Идет сейчас</option>" :
+            `<option value="upcoming" ${d.status !== "live" ? "selected" : ""}>Не начался</option><option value="live" ${d.status === "live" ? "selected" : ""}>Идет сейчас</option>`}
         </select></label>
         <label><span>Техническая победа</span><select data-f="forfeit" ${ready ? "" : "disabled"}>
           <option value="">Нет</option>
@@ -1043,22 +1193,21 @@ body { transition: background-color .2s, color .2s; }
     for (const r of comp.list) {
       const el = box.querySelector(`.am[data-id="${r.id}"]`);
       el.className = `am side-${r.side} st-${r.status}`;
-      if (act && el.contains(act) && /^(INPUT|SELECT)$/.test(act.tagName) && act.type !== "checkbox") { el.dataset.stale = "1"; continue; }
+      if (dirty.has(r.id) || (act && el.contains(act) && /^(INPUT|SELECT)$/.test(act.tagName) && act.type !== "checkbox")) { el.dataset.stale = "1"; continue; }
       el.innerHTML = matchCard(r); delete el.dataset.stale;
     }
-    $("navLive").textContent = comp.live.length ? `В эфире: ${comp.live.length}` : "";
+    $("navLive").textContent = comp.live.length ? `Идут: ${comp.live.length}` : "";
   }
 
   function matchOf(el) { return el.closest(".am")?.dataset.id; }
+  $("matches").addEventListener("input", e => {
+    if (e.target.dataset.k === "a" || e.target.dataset.k === "b") { const id = matchOf(e.target); if (id) dirty.add(id); }
+  });
   $("matches").addEventListener("focusout", () => setTimeout(() => { if (state) renderMatches(); }, 0));
   $("matches").addEventListener("click", e => {
     const tg = e.target.closest("button[data-toggle]");
     if (tg) { const id = matchOf(tg); expanded.has(id) ? expanded.delete(id) : expanded.add(id); renderMatches(); return; }
-    const b = e.target.closest("button[data-r]"); if (!b || b.disabled) return;
-    const id = matchOf(b), mk = b.closest(".mrow").dataset.map, side = b.dataset.r;
-    const x = comp.res[id].maps.find(m => m.key === mk);
-    const v = Math.max(0, Math.min(99, x[side] + (+b.dataset.d)));
-    save(`matches/${id}/maps/${mk}/${side}`, v);
+
   });
   $("matches").addEventListener("change", e => {
     const t = e.target, id = matchOf(t); if (!id) return;
@@ -1074,16 +1223,68 @@ body { transition: background-color .2s, color .2s; }
     if (t.dataset.k === "name") save(`matches/${id}/maps/${mk}/name`, t.value, "Карта выбрана");
     else if (t.dataset.k === "pick") save(`matches/${id}/maps/${mk}/pick`, t.value, "Пик сохранен");
     else if (t.dataset.k === "a" || t.dataset.k === "b") {
-      const v = Math.max(0, Math.min(99, parseInt(t.value, 10) || 0));
-      save(`matches/${id}/maps/${mk}/${t.dataset.k}`, v);
+      const row = t.closest(".mrow");
+      if (!row.querySelector('[data-k="done"]').checked) return;
+      const va = Math.max(0, Math.min(99, parseInt(row.querySelector('[data-k="a"]').value, 10) || 0));
+      const vb = Math.max(0, Math.min(99, parseInt(row.querySelector('[data-k="b"]').value, 10) || 0));
+      if (va === vb) { toast("Карта не может закончиться вничью. Проверьте счет раундов", true); return; }
+      update(`matches/${id}/maps/${mk}`, { a: va, b: vb }, "Счет карты исправлен").then(() => { dirty.delete(id); renderMatches(); });
     } else if (t.dataset.k === "done") {
-      if (t.checked && x.a === x.b) { t.checked = false; toast("Карта не может закончиться вничью. Проверьте счет раундов", true); return; }
+      const row = t.closest(".mrow");
+      const va = Math.max(0, Math.min(99, parseInt(row.querySelector('[data-k="a"]').value, 10) || 0));
+      const vb = Math.max(0, Math.min(99, parseInt(row.querySelector('[data-k="b"]').value, 10) || 0));
+      if (t.checked && va === vb) { t.checked = false; toast("Карта не может закончиться вничью. Проверьте счет раундов", true); return; }
       const before = r.status;
-      save(`matches/${id}/maps/${mk}/done`, t.checked).then(() => {
+      update(`matches/${id}/maps/${mk}`, { a: va, b: vb, done: t.checked, name: row.querySelector('[data-k="name"]').value }).then(() => {
+        dirty.delete(id); renderMatches();
         const after = B.compute(state).res[id];
         if (before !== "done" && after.status === "done") toast(`${after.round}: победил ${tn(after.winner)}`);
         else toast(t.checked ? "Карта засчитана" : "Карта снова в игре");
       });
+    }
+  });
+
+  /* ---------- Постеры ---------- */
+  const MEDIA = { desktop: { max: 2400, file: "mFileD", prev: "mPrevD", info: "mInfoD", def: "poster-desktop.jpg" }, mobile: { max: 1280, file: "mFileM", prev: "mPrevM", info: "mInfoM", def: "poster-mobile.jpg" } };
+  function loadImage(file) {
+    return new Promise((ok, fail) => {
+      const url = URL.createObjectURL(file), img = new Image();
+      img.onload = () => ok(img); img.onerror = () => fail(new Error("Не удалось открыть картинку"));
+      img.src = url;
+    });
+  }
+  async function compress(file, maxW) {
+    const img = await loadImage(file);
+    const k = Math.min(1, maxW / img.naturalWidth);
+    const w = Math.round(img.naturalWidth * k), h = Math.round(img.naturalHeight * k);
+    const cv = document.createElement("canvas"); cv.width = w; cv.height = h;
+    const cx = cv.getContext("2d"); cx.fillStyle = "#06111f"; cx.fillRect(0, 0, w, h); cx.drawImage(img, 0, 0, w, h);
+    let q = 0.86, data = cv.toDataURL("image/jpeg", q);
+    while (data.length > 1400000 && q > 0.5) { q -= 0.08; data = cv.toDataURL("image/jpeg", q); }
+    return { data, w, h };
+  }
+  function showMedia(key, v) {
+    const m = MEDIA[key];
+    $(m.prev).src = v && v.data ? v.data : m.def;
+    $(m.info).textContent = v && v.data ? `Загружен${v.at ? " " + B.fmtStamp(v.at) : ""}, ${v.w}×${v.h}, ${Math.round(v.data.length * 0.75 / 1024)} КБ` : "Сейчас показывается стандартный постер из файлов сайта";
+  }
+  document.querySelector("#s-media").addEventListener("click", async e => {
+    const up = e.target.dataset.up, rs = e.target.dataset.reset;
+    if (up) {
+      const f = $(MEDIA[up].file).files[0];
+      if (!f) { toast("Сначала выберите файл", true); return; }
+      if (f.size > 25 * 1024 * 1024) { toast("Файл больше 25 МБ, уменьшите его", true); return; }
+      e.target.disabled = true; e.target.textContent = "Загружаем...";
+      try {
+        const r = await compress(f, MEDIA[up].max);
+        await store.saveMedia(up, { ...r, at: store.serverTime(), by: me });
+        toast("Постер обновлен у всех зрителей"); $(MEDIA[up].file).value = "";
+      } catch (err) { console.error(err); toast(errText(err), true); }
+      e.target.disabled = false; e.target.textContent = "Загрузить";
+    }
+    if (rs) {
+      if (!confirm("Вернуть стандартный постер?")) return;
+      try { await store.saveMedia(rs, null); toast("Возвращен стандартный постер"); } catch (err) { toast(errText(err), true); }
     }
   });
 
@@ -1144,7 +1345,10 @@ body { transition: background-color .2s, color .2s; }
       </div>`).join("");
     $("titleIn").value = state.meta.title || "";
     $("subtitleIn").value = state.meta.subtitle || "";
-    $("infoIn").value = state.meta.info || "";
+    $("datesIn").value = state.meta.dates || "";
+    $("placeIn").value = state.meta.place || "";
+    $("partnersTitleIn").value = state.meta.partnersTitle || "";
+    $("partnersIn").value = state.meta.partners || "";
     $("streamIn").value = state.meta.stream || "";
     $("poolIn").value = state.meta.mapPool || "";
     $("posterIn").value = state.meta.poster || "";
@@ -1181,7 +1385,8 @@ body { transition: background-color .2s, color .2s; }
     if (stream && !/^https?:\/\//i.test(stream)) { toast("Ссылка на трансляцию должна начинаться с https://", true); return; }
     update("meta", {
       title: $("titleIn").value.trim() || "BAQ LIGA CS2", subtitle: $("subtitleIn").value.trim(),
-      info: $("infoIn").value.trim(), stream, mapPool: $("poolIn").value.trim(),
+      dates: $("datesIn").value.trim(), place: $("placeIn").value.trim(),
+      partnersTitle: $("partnersTitleIn").value.trim(), partners: $("partnersIn").value.trim(), stream, mapPool: $("poolIn").value.trim(),
       fee: Math.max(0, Math.round(+$("feeIn").value || 0)), prizes, rules: $("rulesIn").value.trim(),
       poster: $("posterIn").value.trim(), consent: $("consentIn").value.trim()
     }, "Настройки сохранены");
@@ -1239,7 +1444,7 @@ body { transition: background-color .2s, color .2s; }
       $("loginView").hidden = !!user;
       $("panel").hidden = !user;
       $("logout").hidden = !user || store.mode === "demo";
-      if (user) { me = user.email || ""; $("who").textContent = user.email || ""; if (!subscribed) { subscribed = true; store.subscribe(render); } }
+      if (user) { me = user.email || ""; $("who").textContent = user.email || ""; if (!subscribed) { subscribed = true; store.subscribe(render); store.watchMedia("desktop", v => showMedia("desktop", v)); store.watchMedia("mobile", v => showMedia("mobile", v)); } }
     });
   }
   start();
