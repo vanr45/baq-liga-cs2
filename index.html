@@ -16,7 +16,10 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <title>BAQ LIGA CS2</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='16' height='32' fill='%23d8ae62'/><rect x='16' width='16' height='32' fill='%236ea4d6'/></svg>">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-48.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Permanent+Marker&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -654,13 +657,54 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
   .hero4 .btn.ghost { color: var(--bone); background: var(--panel); }
 }
 
+/* ---------- Логотипы, подложка по центру, финальная сборка лендинга ---------- */
+.brand-logo { display: inline-flex; align-items: center; gap: 10px; color: var(--bone); }
+.brand-logo img { width: 32px; height: 32px; border-radius: 8px; display: block; }
+.orgs { list-style: none; margin: 0 0 30px; padding: 8px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; border-radius: 16px; background: rgba(6,17,31,.45); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.08); }
+.orgs li { height: 56px; width: 168px; padding: 0 14px; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: rgba(255,255,255,.93); box-shadow: 0 6px 18px rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.6); }
+.orgs img { display: block; height: 34px; width: auto; max-width: 150px; object-fit: contain; }
+.orgs li:nth-child(1) img { height: 30px; }
+.orgs li:nth-child(5) img { height: 38px; }
+.crown { width: 56px; }
+.h-baq { font-size: clamp(52px, 7.4vw, 116px); }
+.h-cs { font-size: clamp(60px, 8.4vw, 128px); }
+.hero4-in { padding-top: 28px; padding-bottom: 72px; }
+
+.content { position: relative; display: block; padding-bottom: 8px; }
+.content::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: min(1060px, 100%); transform: translateX(-50%); z-index: -1;
+  background: rgba(6, 17, 31, .62); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 180px), linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
+  -webkit-mask-composite: source-in; mask-image: linear-gradient(to bottom, transparent 0, #000 180px), linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%); mask-composite: intersect; }
+.content > .wrap { position: relative; padding-top: 8px; }
+
+/* дневной режим: бойцы по бокам тоже видны, светлая подложка только по центру */
+:root[data-theme="light"] .page-bg::after { background: linear-gradient(90deg, rgba(6,17,31,0) 0%, rgba(6,17,31,.25) 22%, rgba(6,17,31,.5) 50%, rgba(6,17,31,.25) 78%, rgba(6,17,31,0) 100%); }
+:root[data-theme="light"] .hero4 { background: none; }
+:root[data-theme="light"] .content::before { background: rgba(238, 241, 244, .9); }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .page-bg::after { background: linear-gradient(90deg, rgba(6,17,31,0) 0%, rgba(6,17,31,.25) 22%, rgba(6,17,31,.5) 50%, rgba(6,17,31,.25) 78%, rgba(6,17,31,0) 100%); }
+  :root:not([data-theme="dark"]) .hero4 { background: none; }
+  :root:not([data-theme="dark"]) .content::before { background: rgba(238, 241, 244, .9); }
+}
+:root[data-theme="light"] .site-top .brand-logo, :root[data-theme="light"] .site-top .lnav a { color: var(--bone); }
+
+@media (max-width: 1000px) {
+  .orgs li { width: 138px; padding: 0 10px; height: 48px; }
+  .orgs img { height: 28px; max-width: 120px; }
+}
+@media (max-width: 760px) {
+  .hero4-in > .orgs { display: none; }
+  .content::before { width: 100%; -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 60px); mask-image: linear-gradient(to bottom, transparent 0, #000 60px); -webkit-mask-composite: source-over; mask-composite: add; }
+  .brand-logo img { width: 28px; height: 28px; }
+}
+
 </style>
 </head>
 <body>
 <a class="skip" href="#live">К счету матчей</a>
 <header class="site-top">
   <div class="wrap site-top-in">
-    <a class="brand-mini" href="#top">BAQ LIGA</a>
+    <a class="brand-mini brand-logo" href="#top"><img src="icon-192.png" width="32" height="32" alt="">BAQ LIGA</a>
     <nav class="lnav" aria-label="Разделы">
       <a href="#live">Эфир</a><a href="#group">Группа</a><a href="#playoff">Плей-офф</a><a href="#schedule">Расписание</a><a href="#teams">Команды</a><a href="#rules">Регламент</a>
     </nav>
@@ -672,6 +716,13 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
 <section class="hero4" id="top">
   <figure class="hero-m"><img id="heroImgM" src="poster-mobile.jpg" width="1024" height="1536" alt="Афиша BAQ LIGA CS2: турнир среди СМИ РК, 16-17 октября, 5 команд, общий призовой фонд 125 000 тенге" fetchpriority="high" decoding="async"></figure>
   <div class="wrap hero4-in">
+    <ul class="orgs" aria-label="СМИ турнира">
+      <li><img src="logos/khabar.png" width="234" height="96" alt="Хабар"></li>
+      <li><img src="logos/qazaqstan.png" width="487" height="96" alt="Qazaqstan"></li>
+      <li><img src="logos/qazsport.png" width="366" height="96" alt="Qazsport"></li>
+      <li><img src="logos/kazmedia.png" width="441" height="96" alt="Kazmedia"></li>
+      <li><img src="logos/qazcontent.png" width="138" height="96" alt="Qazcontent"></li>
+    </ul>
     <svg class="crown" viewBox="0 0 120 80" aria-hidden="true"><path d="M8 70 L14 22 L38 44 L60 8 L82 44 L106 22 L112 70 Z" /><rect x="8" y="70" width="104" height="8" rx="2"/></svg>
     <h1 class="h-title" id="title"><span class="h-baq">BAQ LIGA</span><span class="h-cs">CS<b>2</b></span><span class="sr-only">: турнир по Counter-Strike 2 среди СМИ РК</span></h1>
     <p class="h-sub">Турнир среди СМИ РК</p>
@@ -691,6 +742,7 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
   </div>
 </section>
 
+<main class="content">
 <div class="wrap">
   <div class="banner" id="demo" hidden>Демо-режим: данные хранятся только в этом браузере. Чтобы счет видели все, подключите Firebase по инструкции в README.</div>
 
@@ -756,6 +808,7 @@ body:not(.admin) :is(.focus-card, .gtable, .tour, .match, .srow, .team-card, .pr
     <p class="consent" id="consent">Участие в турнире является согласием с регламентом</p>
   </footer>
 </div>
+</main>
 <script src="config.js"></script>
 <script>
 (function () {

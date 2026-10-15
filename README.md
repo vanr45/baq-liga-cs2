@@ -9,6 +9,8 @@
 - `bg.jpg` - фон страницы с CT и T, закреплен на всю страницу
 - `poster-mobile.jpg` - вертикальный постер, первый экран на телефоне и раздел «Афиши»
 - `poster-desktop.jpg` - горизонтальный постер для раздела «Афиши»
+- `logos/` - логотипы СМИ для первого экрана (Хабар, Qazaqstan, Qazsport, Kazmedia, Qazcontent)
+- `favicon.ico`, `favicon-48.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, `manifest.webmanifest` - значки сайта
 - `og.jpg` - картинка-превью при отправке ссылки в WhatsApp и Telegram
 
 Файлы открываются и двойным щелчком, без сервера.
