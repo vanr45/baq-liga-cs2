@@ -1,0 +1,1012 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="author" content="Ернар Досетов">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#12161b">
+<title>Админка BAQ LIGA CS2</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='16' height='32' fill='%23d8ae62'/><rect x='16' width='16' height='32' fill='%236ea4d6'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #12161b;
+  --panel: #1a2028;
+  --panel-2: #212933;
+  --line: #2c3541;
+  --line-2: #3a4554;
+  --bone: #ece6d8;
+  --muted: #8c96a3;
+  --dim: #5d6774;
+  --sand: #d8ae62;
+  --sand-deep: #3a2f1c;
+  --ct: #6ea4d6;
+  --ct-deep: #1c2c3d;
+  --live: #ef4b4b;
+  --ok: #6fbf8a;
+  --display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --text: "Golos Text", "Segoe UI", system-ui, sans-serif;
+  --r: 10px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; }
+body {
+  background: var(--ink);
+  color: var(--bone);
+  font: 16px/1.55 var(--text);
+  -webkit-font-smoothing: antialiased;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+a { color: var(--sand); }
+:focus-visible { outline: 2px solid var(--sand); outline-offset: 2px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- Шапка ---------- */
+.top { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; gap: 16px; }
+.brand-mini { font: 600 14px/1 var(--display); letter-spacing: .02em; color: var(--muted); text-decoration: none; }
+.conn { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.conn i { width: 8px; height: 8px; border-radius: 50%; background: var(--dim); }
+.conn.on i { background: var(--ok); }
+.conn.demo i { background: var(--sand); }
+
+.hero { padding: 28px 0 8px; display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 48px; align-items: end; }
+.hero-main { min-width: 0; }
+.hero h1 {
+  font: 800 clamp(48px, 9.5vw, 128px)/.86 var(--display);
+  letter-spacing: -.035em;
+  margin: 0;
+  text-wrap: balance;
+}
+.hero h1 span { display: block; }
+.hero h1 small { display: block; font-size: max(17px, .19em); line-height: 1.3; letter-spacing: 0; margin-top: 1.1em; color: var(--muted); font-weight: 500; }
+.split { display: flex; height: 6px; margin: 28px 0 20px; max-width: 420px; }
+.split span { flex: 1; }
+.split span:first-child { background: var(--sand); }
+.split span:last-child { background: var(--ct); }
+.hero-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+.subtitle { font-size: 18px; color: var(--muted); margin: 0; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font: 500 15px/1 var(--text); color: var(--ink); background: var(--sand);
+  border: 0; border-radius: var(--r); padding: 13px 18px; cursor: pointer; text-decoration: none;
+}
+.btn:hover { background: #e4bd77; }
+.btn.ghost { background: transparent; color: var(--bone); box-shadow: inset 0 0 0 1px var(--line-2); }
+.btn.ghost:hover { background: var(--panel-2); }
+.btn.danger { background: transparent; color: var(--live); box-shadow: inset 0 0 0 1px #5a2a2c; }
+.btn.small { padding: 8px 12px; font-size: 14px; }
+
+.banner { margin: 16px 0 0; padding: 12px 16px; border-radius: var(--r); background: var(--sand-deep); color: #f0d39d; font-size: 14px; }
+
+/* ---------- Фокус: эфир, следующий матч, чемпион ---------- */
+.focus { margin: 40px 0 0; display: grid; gap: 12px; }
+.focus-card { background: var(--panel); border-radius: 14px; padding: 22px 24px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; position: relative; overflow: hidden; }
+.focus-card::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--sand); }
+.focus-card.lb::before { background: var(--ct); }
+.focus-card.gf::before { background: linear-gradient(var(--sand) 50%, var(--ct) 50%); }
+.focus-head { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; font-size: 14px; color: var(--muted); }
+.focus-team { font: 700 clamp(20px, 3.2vw, 32px)/1.1 var(--display); letter-spacing: -.01em; }
+.focus-team.right { text-align: right; }
+.focus-score { font: 800 clamp(34px, 6vw, 60px)/1 var(--display); font-variant-numeric: tabular-nums; letter-spacing: -.02em; white-space: nowrap; }
+.focus-score span { color: var(--dim); margin: 0 .15em; }
+.champion { background: var(--panel); border-radius: 14px; padding: 28px 24px; text-align: center; }
+.champion p { margin: 0 0 6px; color: var(--muted); }
+.champion strong { font: 800 clamp(36px, 7vw, 76px)/1 var(--display); letter-spacing: -.03em; color: var(--sand); display: block; }
+
+/* ---------- Секции ---------- */
+section.block { margin: 64px 0 0; }
+.block h2 { font: 700 26px/1.2 var(--display); letter-spacing: -.01em; margin: 0 0 6px; }
+.block .lead { color: var(--muted); margin: 0 0 22px; font-size: 15px; }
+
+/* ---------- Сетка ---------- */
+.bracket { overflow-x: auto; padding: 4px 0 12px; scrollbar-color: var(--line-2) transparent; }
+.bracket-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 232px);
+  column-gap: 56px;
+  row-gap: 16px;
+  grid-template-areas:
+    "lub lub lub lgf"
+    "m1  m2  m4  m8"
+    ".   m3  m4  m8"
+    "llb llb llb m8"
+    "m5  m6  m7  m8";
+  width: max-content;
+}
+.lines { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
+.edge { fill: none; stroke: var(--line-2); stroke-width: 1.5; }
+.edge.on.side-ub { stroke: var(--sand); }
+.edge.on.side-lb { stroke: var(--ct); }
+.blabel { display: flex; align-items: center; gap: 10px; font: 600 14px/1 var(--display); color: var(--muted); padding: 8px 0 2px; }
+.l-ub { grid-area: lub; }
+.l-lb { grid-area: llb; padding-top: 24px; }
+.l-gf { grid-area: lgf; }
+.sw { width: 18px; height: 6px; display: inline-block; }
+.sw-ub { background: var(--sand); }
+.sw-lb { background: var(--ct); }
+.sw-gf { background: linear-gradient(90deg, var(--sand) 50%, var(--ct) 50%); }
+
+.match { position: relative; z-index: 1; background: var(--panel); border-radius: var(--r); box-shadow: inset 0 0 0 1px var(--line); align-self: center; }
+#card-M1, #card-M2 { align-self: start; }
+.match header { display: flex; justify-content: space-between; gap: 8px; padding: 9px 12px 7px; font-size: 12px; color: var(--muted); }
+.match header .round { color: var(--bone); font-weight: 500; }
+.match.side-ub header .round { color: var(--sand); }
+.match.side-lb header .round { color: var(--ct); }
+.match.side-gf { box-shadow: inset 0 0 0 1px var(--line-2); }
+.match.side-gf header .round { color: var(--bone); }
+.match.st-live { box-shadow: inset 0 0 0 1px var(--live); }
+.team { display: grid; grid-template-columns: 22px 1fr auto; align-items: center; gap: 8px; padding: 8px 12px; border-top: 1px solid var(--line); min-height: 40px; }
+.team .seed { font-size: 12px; color: var(--dim); font-variant-numeric: tabular-nums; }
+.team .name { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.team .score { font: 700 18px/1 var(--display); font-variant-numeric: tabular-nums; min-width: 18px; text-align: right; }
+.team.tbd .name { color: var(--dim); font-weight: 400; font-size: 13px; }
+.team.lose .name, .team.lose .score { color: var(--dim); }
+.match.side-ub .team.win .score, .match.side-gf .team.win .score { color: var(--sand); }
+.match.side-lb .team.win .score { color: var(--ct); }
+.match footer { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; padding: 8px 12px 10px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+.match footer .maps { color: var(--muted); }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.chip.live { color: #ff8c8c; font-weight: 500; }
+.chip.live i { width: 7px; height: 7px; border-radius: 50%; background: var(--live); animation: pulse 1.4s ease-in-out infinite; }
+.chip.done { color: var(--dim); }
+@keyframes pulse { 50% { opacity: .25; } }
+@media (prefers-reduced-motion: reduce) { .chip.live i { animation: none; } }
+
+/* ---------- Команды ---------- */
+.teams { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
+.team-card { background: var(--panel); border-radius: 12px; padding: 18px 18px 14px; }
+.team-card h3 { font: 700 18px/1.2 var(--display); margin: 0 0 8px; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.team-card .th { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; }
+.team-card .seedno { font-size: 12px; color: var(--dim); }
+.place { font-size: 12px; padding: 4px 9px; border-radius: 99px; white-space: nowrap; background: var(--panel-2); color: var(--muted); }
+.place.p1 { background: var(--sand); color: var(--ink); font-weight: 500; }
+.place.p2, .place.p3 { background: var(--sand-deep); color: #f0d39d; }
+.place.alive { background: var(--ct-deep); color: #a9cdee; }
+.team-card ul { list-style: none; margin: 0; padding: 0; }
+.team-card li { display: flex; justify-content: space-between; gap: 10px; padding: 6px 0; border-top: 1px solid var(--line); font-size: 14px; }
+.team-card li span { color: var(--muted); font-size: 13px; text-align: right; }
+
+.foot { margin: 72px 0 0; padding: 22px 0 36px; border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+/* ---------- Мелочи страницы зрителей ---------- */
+.loading { color: var(--dim); padding: 24px 0; }
+.scroll-hint { display: none; font-size: 13px; color: var(--dim); margin: -12px 0 12px; }
+.ft { color: var(--bone); font-weight: 500; }
+.cd { color: var(--sand); }
+.focus-maps { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.fm { display: inline-flex; gap: 8px; align-items: baseline; font-size: 14px; color: var(--muted); background: var(--panel-2); padding: 6px 12px; border-radius: 99px; font-variant-numeric: tabular-nums; }
+.fm b { font-weight: 500; color: var(--bone); }
+.fm.cur { box-shadow: inset 0 0 0 1px var(--live); color: #ffb3b3; }
+.podium { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px 40px; margin-top: 22px; font: 600 18px/1.3 var(--display); }
+.podium b { display: block; font: 400 13px/1.4 var(--text); color: var(--muted); }
+.schedule { display: grid; gap: 6px; }
+.srow { min-width: 0; display: grid; grid-template-columns: 150px 210px 1fr 130px; gap: 12px; align-items: center; background: var(--panel); border-radius: var(--r); padding: 12px 16px; box-shadow: inset 3px 0 0 var(--sand); font-size: 14px; }
+.srow.side-lb { box-shadow: inset 3px 0 0 var(--ct); }
+.srow.side-gf { box-shadow: inset 3px 0 0 var(--bone); }
+.stime { color: var(--bone); font-variant-numeric: tabular-nums; }
+.sround { color: var(--muted); font-size: 13px; }
+.steams { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; font-weight: 500; }
+.steams > span:first-child { text-align: right; }
+.steams b { font: 700 15px/1 var(--display); color: var(--muted); min-width: 40px; text-align: center; font-variant-numeric: tabular-nums; }
+.steams .w { color: var(--sand); }
+.steams .tbd, .steams span .tbd { color: var(--dim); font-weight: 400; font-size: 13px; }
+.sst { text-align: right; }
+.pn em { font-style: normal; font-size: 11px; color: var(--sand); margin-left: 4px; }
+
+/* ---------- Админка ---------- */
+.admin h1 { font: 800 clamp(30px, 5vw, 46px)/1 var(--display); letter-spacing: -.03em; margin: 8px 0 14px; }
+.card { background: var(--panel); border-radius: 12px; padding: 20px; }
+.login { max-width: 400px; margin: 48px auto; }
+label.f { display: block; font-size: 13px; color: var(--muted); margin: 0 0 6px; }
+input[type=text], input[type=email], input[type=password], input[type=url], input[type=number], input[type=datetime-local], textarea, select {
+  width: 100%; font: 15px/1.4 var(--text); color: var(--bone); background: var(--ink);
+  border: 1px solid var(--line-2); border-radius: 8px; padding: 10px 12px; min-height: 42px;
+}
+select:disabled, input:disabled { opacity: .45; }
+textarea { min-height: 150px; resize: vertical; }
+.field { margin: 0 0 14px; }
+.err { color: #ff8c8c; font-size: 13px; min-height: 18px; margin: 6px 0 0; }
+.linkbtn { background: none; border: 0; color: var(--muted); font: 13px var(--text); padding: 0; cursor: pointer; text-decoration: underline; }
+.anav { position: sticky; top: 0; z-index: 5; display: flex; gap: 6px; flex-wrap: wrap; padding: 10px 0; background: var(--ink); border-bottom: 1px solid var(--line); }
+.anav a { color: var(--bone); text-decoration: none; font-size: 14px; padding: 7px 12px; border-radius: 99px; background: var(--panel); }
+.anav a:hover { background: var(--panel-2); }
+.anav b { color: #ff8c8c; font-weight: 500; margin-left: 4px; }
+html { scroll-padding-top: 70px; }
+.warn { margin: 12px 0 0; padding: 10px 12px; border-radius: 8px; background: #3a1f20; color: #ffb3b3; font-size: 13px; }
+.note { color: var(--muted); font-size: 13px; margin: 10px 0 0; }
+.admin-matches { display: grid; gap: 12px; }
+.am { background: var(--panel); border-radius: 12px; padding: 16px 18px; box-shadow: inset 4px 0 0 var(--sand); }
+.am.side-lb { box-shadow: inset 4px 0 0 var(--ct); }
+.am.side-gf { box-shadow: inset 4px 0 0 var(--bone); }
+.am.st-live { box-shadow: inset 4px 0 0 var(--live), inset 0 0 0 1px #6b2a2c; }
+.am.st-pending { opacity: .7; }
+.am-head { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+.am-head b { color: var(--bone); font-weight: 500; margin-right: 6px; }
+.am-score { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); gap: 16px; align-items: center; margin-bottom: 12px; }
+.am-score .tn { font: 600 17px/1.2 var(--display); overflow-wrap: anywhere; }
+.am-score .tn.right { text-align: right; }
+.am-score .tn.tbd { font: 400 13px/1.3 var(--text); color: var(--dim); }
+.am-score .big { font: 800 30px/1 var(--display); font-variant-numeric: tabular-nums; }
+.am-score .big i { font-style: normal; color: var(--dim); margin: 0 4px; }
+.am-maps { display: grid; gap: 6px; }
+.am-sum { font-size: 13px; color: var(--muted); }
+.am-toggle { margin-top: 10px; }
+.am-row-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-top: 10px; }
+.mrow { display: grid; grid-template-columns: 64px minmax(130px, 1fr) auto 10px auto 108px; gap: 8px; align-items: center; padding: 6px 8px; border-radius: 8px; background: var(--ink); }
+.mrow.cur { box-shadow: inset 0 0 0 1px var(--live); }
+.mrow.done { background: transparent; box-shadow: inset 0 0 0 1px var(--line); }
+.mrow .mn { font-size: 12px; color: var(--muted); }
+.mrow select { min-height: 38px; padding: 6px 8px; font-size: 14px; }
+.rs { display: inline-flex; align-items: center; gap: 4px; }
+.rs button { width: 36px; height: 38px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--panel-2); color: var(--bone); font-size: 18px; cursor: pointer; touch-action: manipulation; }
+.rs button:disabled { opacity: .3; cursor: default; }
+.rs input { width: 56px; min-width: 0; min-height: 38px; text-align: center; padding: 6px 4px; font: 700 16px/1 var(--display); -moz-appearance: textfield; }
+.rs input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.colon { color: var(--dim); text-align: center; font-weight: 700; }
+.chk { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); cursor: pointer; }
+.chk input { width: 18px; height: 18px; accent-color: var(--sand); }
+.am-opts { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 10px; margin-top: 12px; }
+.am-opts .wide { grid-column: 1 / -1; }
+.am-opts label span { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.am-opts input, .am-opts select { padding: 8px 10px; font-size: 14px; min-height: 40px; }
+.seed-row { display: grid; grid-template-columns: 80px 1fr 200px; gap: 12px; align-items: center; margin-bottom: 8px; }
+.seed-row .sn { font: 600 14px/1 var(--display); }
+.seed-row .hint { font-size: 13px; color: var(--muted); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--bone); color: var(--ink); padding: 10px 16px; border-radius: 8px; font-size: 14px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 10; max-width: calc(100% - 32px); }
+.toast.show { opacity: 1; }
+.toast.bad { background: var(--live); color: #fff; }
+.row-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.btn:disabled { opacity: .4; cursor: default; }
+
+@media (max-width: 860px) {
+  .srow { grid-template-columns: 1fr auto; }
+  .srow .sround { order: 2; grid-column: 1 / -1; }
+  .srow .steams { order: 3; grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  .wrap { padding: 0 16px; }
+  .scroll-hint { display: block; }
+  .focus-card { grid-template-columns: 1fr; text-align: center; padding: 20px 16px; }
+  .focus-team.right { text-align: center; }
+  .focus-head { justify-content: center; }
+  .mrow { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+  .am { padding: 14px 12px; }
+  .am-score .tn { font-size: 13px; }
+  .am-score .big { font-size: 24px; }
+  .rs button { width: 34px; flex: none; }
+  .mrow .mn { grid-column: 1 / -1; }
+  .mrow select { grid-column: 1 / -1; }
+  .mrow .colon { display: none; }
+  .mrow .chk { grid-column: 1 / -1; }
+  .rs { justify-content: center; }
+  .rs input { flex: 1; width: auto; }
+  .am-opts { grid-template-columns: 1fr; }
+  .seed-row { grid-template-columns: 70px 1fr; }
+  .seed-row .hint { grid-column: 2; margin-top: -4px; }
+}
+
+/* ---------- Призовой фонд, регламент, пики ---------- */
+.prize-grid { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 12px; }
+.prize-card { background: var(--panel); border-radius: 12px; padding: 22px; }
+.pz-label { margin: 0 0 6px; color: var(--muted); font-size: 14px; }
+.prize-card strong { display: block; font: 800 clamp(32px, 5vw, 44px)/1 var(--display); letter-spacing: -.02em; color: var(--sand); font-variant-numeric: tabular-nums; }
+.pz-note { margin: 10px 0 14px; color: var(--muted); font-size: 14px; }
+.pz { display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid var(--line); font-size: 15px; }
+.pz b { font-weight: 600; font-variant-numeric: tabular-nums; }
+.pz-tbd { margin: 0; padding-top: 10px; border-top: 1px solid var(--line); color: var(--dim); font-size: 14px; }
+.rules { list-style: none; margin: 0; padding: 8px 22px; background: var(--panel); border-radius: 12px; }
+.rules li { padding: 11px 0 11px 22px; border-top: 1px solid var(--line); position: relative; font-size: 15px; }
+.rules li:first-child { border-top: 0; }
+.rules li::before { content: ""; position: absolute; left: 0; top: 19px; width: 10px; height: 4px; background: linear-gradient(90deg, var(--sand) 50%, var(--ct) 50%); }
+.fm small { font-size: 12px; color: var(--dim); }
+.focus-link { grid-column: 1 / -1; text-align: center; }
+.cs-link { font-size: 12px; color: var(--sand); }
+.mrow { grid-template-columns: 64px minmax(110px, 1fr) 128px auto 10px auto 108px !important; }
+.paid { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); margin: 0 0 14px; cursor: pointer; }
+.paid input { width: 18px; height: 18px; accent-color: var(--sand); }
+.sumcheck { font-size: 13px; margin: -4px 0 14px; color: var(--muted); }
+.sumcheck.bad { color: #ff8c8c; }
+.prize-inputs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+@media (max-width: 760px) {
+  .prize-grid { grid-template-columns: 1fr; }
+  .mrow { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; }
+  .mrow select[data-k="pick"] { grid-column: 1 / -1; }
+  .prize-inputs { grid-template-columns: 1fr; }
+}
+
+/* ---------- Афиша ---------- */
+.poster { margin: 0; }
+.poster img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 12px; background: var(--panel); }
+.poster figcaption { margin-top: 10px; font-size: 14px; text-align: center; }
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; gap: 28px; }
+  .poster { max-width: 420px; width: 100%; justify-self: center; }
+  body.has-live #posterLink { display: none; }
+  body.has-live .poster figcaption { margin-top: 0; text-align: left; }
+}
+
+</style>
+</head>
+<body class="admin">
+<div class="wrap">
+  <div class="top">
+    <span style="display:flex;gap:10px;flex-wrap:wrap">
+      <a class="btn ghost small" href="index.html" target="_blank" rel="noopener">Страница зрителей</a>
+      <button class="btn ghost small" id="copyLink" type="button">Скопировать ссылку</button>
+    </span>
+    <span style="display:flex;gap:14px;align-items:center">
+      <span class="conn" id="conn"><i></i><span>Подключение</span></span>
+      <button class="btn ghost small" id="logout" type="button" hidden>Выйти</button>
+    </span>
+  </div>
+
+  <div id="loginView" hidden>
+    <form class="card login" id="loginForm" novalidate>
+      <h1>Вход в админку</h1>
+      <p style="color:var(--muted);margin:0 0 20px;font-size:14px">BAQ LIGA CS2</p>
+      <div class="field"><label class="f" for="email">Email</label><input type="email" id="email" autocomplete="username" value="e.dossetov@gmail.com"></div>
+      <div class="field"><label class="f" for="pass">Пароль</label><input type="password" id="pass" autocomplete="current-password"></div>
+      <button class="btn" type="submit" style="width:100%;justify-content:center">Войти</button>
+      <p class="err" id="loginErr"></p>
+      <button class="linkbtn" type="button" id="forgot">Забыли пароль?</button>
+    </form>
+  </div>
+
+  <div id="panel" hidden>
+    <h1>Админка</h1>
+    <nav class="anav" aria-label="Разделы">
+      <a href="#s-matches">Матчи <b id="navLive"></b></a><a href="#s-seeds">Посев</a><a href="#s-teams">Команды и взносы</a><a href="#s-settings">Настройки</a><a href="#s-reset">Сброс</a>
+    </nav>
+    <div class="banner" id="demo" hidden>Демо-режим: данные сохраняются только в этом браузере. Откройте страницу зрителей в соседней вкладке, чтобы проверить обновление в реальном времени.</div>
+
+    <section class="block" id="s-matches">
+      <h2>Матчи</h2>
+      <p class="lead">Ведите счет раундов кнопками + и - или вводом числа. Когда карта закончилась, отметьте «Сыграна»: счет серии, победитель и переход по сетке посчитаются сами.</p>
+      <div class="admin-matches" id="matches"></div>
+    </section>
+
+    <section class="block" id="s-seeds">
+      <h2>Посев</h2>
+      <p class="lead">Посев 1 получает преимущество: сразу играет в полуфинале. Посевы 4 и 5 начинают с отборочного матча. При выборе команды на занятое место команды меняются местами.</p>
+      <div class="card" style="max-width:640px">
+        <p class="warn" id="seedLock" hidden>Турнир уже начался, посев заблокирован. Чтобы изменить его, сбросьте матчи.</p>
+        <div id="seeds"></div>
+        <p class="note" id="seedNoteNow"></p>
+        <div class="row-actions">
+          <button class="btn" id="draw" type="button">Провести жеребьевку</button>
+          <button class="btn ghost" id="seedDefault" type="button">По порядку команд</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="s-teams">
+      <h2>Команды, составы и взносы</h2>
+      <p class="lead">Один игрок на строку. Роль указывается в скобках, капитан отмечается звездочкой: *Фараби (Казахстан, режиссер).</p>
+      <div class="grid2" id="teamsEdit"></div>
+    </section>
+
+    <section class="block" id="s-settings">
+      <h2>Настройки</h2>
+      <div class="card" style="max-width:640px">
+        <div class="field"><label class="f" for="titleIn">Название турнира</label><input type="text" id="titleIn" maxlength="40"></div>
+        <div class="field"><label class="f" for="subtitleIn">Подзаголовок</label><input type="text" id="subtitleIn" maxlength="80"></div>
+        <div class="field"><label class="f" for="infoIn">Дата и место</label><input type="text" id="infoIn" maxlength="120" placeholder="18-19 октября, Астана, компьютерный клуб ..."></div>
+        <div class="field"><label class="f" for="streamIn">Ссылка на трансляцию</label><input type="url" id="streamIn" placeholder="https://youtube.com/..."></div>
+        <div class="field"><label class="f" for="posterIn">Афиша: имя файла в репозитории или ссылка на картинку, пусто - скрыть</label><input type="text" id="posterIn" placeholder="poster.jpg"></div>
+        <div class="field"><label class="f" for="poolIn">Пул карт, одна на строку</label><textarea id="poolIn" style="min-height:120px"></textarea></div>
+        <div class="field"><label class="f" for="feeIn">Взнос с команды, ₸</label><input type="number" id="feeIn" min="0" step="1000" inputmode="numeric"></div>
+        <label class="f">Призы по местам, ₸ (пустое поле не показывается)</label>
+        <div class="prize-inputs field">
+          <input type="number" id="p1In" min="0" step="1000" placeholder="1 место" aria-label="Приз за 1 место" inputmode="numeric">
+          <input type="number" id="p2In" min="0" step="1000" placeholder="2 место" aria-label="Приз за 2 место" inputmode="numeric">
+          <input type="number" id="p3In" min="0" step="1000" placeholder="3 место" aria-label="Приз за 3 место" inputmode="numeric">
+        </div>
+        <p class="sumcheck" id="sumCheck"></p>
+        <div class="field"><label class="f" for="rulesIn">Регламент, один пункт на строку</label><textarea id="rulesIn" style="min-height:170px"></textarea></div>
+        <button class="btn" id="saveMeta" type="button">Сохранить настройки</button>
+      </div>
+    </section>
+
+    <section class="block" id="s-reset">
+      <h2>Сброс</h2>
+      <p class="lead">Сброс матчей обнуляет счет, карты, время и технические победы. Полный сброс возвращает также посев, команды и настройки.</p>
+      <div class="row-actions">
+        <button class="btn danger" id="resetMatches" type="button">Сбросить матчи</button>
+        <button class="btn danger" id="resetAll" type="button">Полный сброс</button>
+      </div>
+    </section>
+
+    <footer class="foot"><span>BAQ LIGA CS2</span><span id="who"></span></footer>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="config.js"></script>
+<script>
+(function () {
+  const ROOT = "baq";
+
+  const MATCHES = [
+    { id: "M1", bo: 3, side: "ub", round: "Отборочный матч", a: { seed: 4 }, b: { seed: 5 } },
+    { id: "M2", bo: 3, side: "ub", round: "Полуфинал верхней", a: { seed: 1 }, b: { win: "M1" } },
+    { id: "M3", bo: 3, side: "ub", round: "Полуфинал верхней", a: { seed: 2 }, b: { seed: 3 } },
+    { id: "M4", bo: 3, side: "ub", round: "Финал верхней", a: { win: "M2" }, b: { win: "M3" } },
+    { id: "M5", bo: 3, side: "lb", round: "Нижняя, раунд 1", a: { lose: "M1" }, b: { lose: "M2" } },
+    { id: "M6", bo: 3, side: "lb", round: "Нижняя, раунд 2", a: { win: "M5" }, b: { lose: "M3" } },
+    { id: "M7", bo: 3, side: "lb", round: "Финал нижней", a: { win: "M6" }, b: { lose: "M4" } },
+    { id: "M8", bo: 5, side: "gf", round: "Гранд-финал", a: { win: "M4" }, b: { win: "M7" } }
+  ];
+  const EDGES = [["M1", "M2"], ["M2", "M4"], ["M3", "M4"], ["M5", "M6"], ["M6", "M7"], ["M4", "M8"], ["M7", "M8"]];
+  const PLACE_ON_LOSS = { M5: 5, M6: 4, M7: 3, M8: 2 };
+  const TEAM_IDS = ["t1", "t2", "t3", "t4", "t5"];
+
+  function emptyMatch(bo) {
+    const maps = {};
+    for (let i = 1; i <= bo; i++) maps["m" + i] = { name: "", a: 0, b: 0, done: false, pick: "" };
+    return { status: "upcoming", time: "", forfeit: "", link: "", maps };
+  }
+
+  const DEFAULT_STATE = {
+    meta: {
+      title: "BAQ LIGA CS2",
+      subtitle: "Турнир по Counter-Strike 2 среди СМИ РК",
+      info: "16-17 октября. 5 команд, двойное выбывание, матчи bo3, гранд-финал bo5.",
+      poster: "poster.jpg",
+      stream: "",
+      mapPool: "Ancient\nAnubis\nDust2\nInferno\nMirage\nNuke\nTrain",
+      seedNote: "Посев по порядку регистрации команд",
+      fee: 25000,
+      prizes: { p1: 0, p2: 0, p3: 0 },
+      rules: "Взнос 25 000 ₸ с команды, весь сбор идет в призовой фонд.\nКомпьютеры в клубе каждый игрок оплачивает сам.\nКарты выбирают капитаны через пики и баны на CyberShoke.\nДвойное выбывание: проигравший в верхней сетке переходит в нижнюю, после второго поражения команда выбывает.\nВсе матчи bo3, гранд-финал bo5."
+    },
+    teams: {
+      t1: { name: "RAGE", roster: "Фараби (Казахстан, режиссер)\nУлан (Казахстан, монтажер)\nБекнур (радиоведущий)\nРайымбек (Жибек жолы, ведущий)\nСактаган (КМО, осветитель)", paid: false },
+      t2: { name: "Брат Локи", roster: "Мади (РТРК, юрист)\nСаят (КМО, ИБ)\nАрман (РТРК, юрист)\nЕрнар (Хабар, юрист)\nРуслан (РТРК, ИБ)\nЕркен (РТРК, IT)", paid: false },
+      t3: { name: "OnAir", roster: "Расул (КМО, инженер)\nДанабек (КМО, инженер)\nБекжан (КМО, инженер)\nУмар (КМО, осветитель)\nСаламат (КМО, осветитель)", paid: false },
+      t4: { name: "Qazcontent", roster: "Мадияр (инженер)\nАйдын (руководитель)\nНурасыл (монтажер)\nЖансерик (монтажер)\nАлтай (IT)\nДуман (IT)\nНурсултан (дизайнер)", paid: false },
+      t5: { name: "naPremierePro", roster: "Алихан (Алматы ТВ)\nАлишер (СЦК)\nАбылайхан (СЦК)\nЗаманбек (ПТРК)\nАйболат (Жибек жолы)" }
+    },
+    seeds: { s1: "t1", s2: "t2", s3: "t3", s4: "t4", s5: "t5", paid: false },
+    matches: Object.fromEntries(MATCHES.map(m => [m.id, emptyMatch(m.bo)]))
+  };
+
+  const clone = o => JSON.parse(JSON.stringify(o));
+  function merge(base, extra) {
+    if (!extra || typeof extra !== "object") return base;
+    for (const k of Object.keys(extra)) {
+      if (base[k] && typeof base[k] === "object" && extra[k] && typeof extra[k] === "object") merge(base[k], extra[k]);
+      else if (extra[k] !== undefined && extra[k] !== null) base[k] = extra[k];
+    }
+    return base;
+  }
+  const withDefaults = remote => merge(clone(DEFAULT_STATE), remote || {});
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  function parseRoster(text) {
+    return String(text || "").split("\n").map(s => s.trim()).filter(Boolean).map(line => {
+      let captain = false;
+      if (line.startsWith("*")) { captain = true; line = line.slice(1).trim(); }
+      const m = line.match(/^(.*?)\s*\((.*)\)\s*$/);
+      return m ? { name: m[1], role: m[2], captain } : { name: line, role: "", captain };
+    });
+  }
+  const mapPool = state => String(state.meta.mapPool || "").split("\n").map(s => s.trim()).filter(Boolean);
+
+  /* ---------- Время ---------- */
+  function parseLocal(s) {
+    const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(s || "");
+    return m ? new Date(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]) : null;
+  }
+  const WD = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];
+  const MON = ["янв", "фев", "мар", "апр", "мая", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"];
+  const pad = n => String(n).padStart(2, "0");
+  function fmtTime(s) {
+    const d = parseLocal(s);
+    if (!d) return s || "";
+    return `${WD[d.getDay()]}, ${d.getDate()} ${MON[d.getMonth()]}, ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  }
+  function countdown(s) {
+    const d = parseLocal(s);
+    if (!d) return "";
+    const min = Math.round((d - Date.now()) / 60000);
+    if (min <= 0) return "скоро начало";
+    const days = Math.floor(min / 1440);
+    if (days >= 1) return "через " + days + " дн.";
+    const h = Math.floor(min / 60);
+    return "через " + (h ? h + " ч " : "") + (min % 60) + " мин";
+  }
+
+  /* ---------- Расчет сетки ---------- */
+  function compute(state) {
+    const res = {};
+    const seedOf = {};
+    for (let i = 1; i <= 5; i++) seedOf[state.seeds["s" + i]] = i;
+    const pick = src => {
+      if (src.seed) return state.seeds["s" + src.seed] || null;
+      const r = res[src.win || src.lose];
+      if (!r || !r.winner) return null;
+      return src.win ? r.winner : r.loser;
+    };
+    for (const m of MATCHES) {
+      const d = state.matches[m.id] || {};
+      const need = Math.ceil(m.bo / 2);
+      const ta = pick(m.a), tb = pick(m.b);
+      const maps = [];
+      for (let i = 1; i <= m.bo; i++) {
+        const x = (d.maps || {})["m" + i] || {};
+        maps.push({ key: "m" + i, n: i, name: x.name || "", a: Math.max(0, +x.a || 0), b: Math.max(0, +x.b || 0), done: !!x.done, pick: x.pick || "" });
+      }
+      let sa = 0, sb = 0;
+      for (const x of maps) {
+        if (!x.done || x.a === x.b || sa >= need || sb >= need) continue;
+        x.a > x.b ? sa++ : sb++;
+      }
+      let winner = null, loser = null;
+      const ff = d.forfeit === "a" || d.forfeit === "b" ? d.forfeit : "";
+      if (ta && tb) {
+        if (ff) { winner = ff === "a" ? ta : tb; loser = ff === "a" ? tb : ta; }
+        else if (sa >= need) { winner = ta; loser = tb; }
+        else if (sb >= need) { winner = tb; loser = ta; }
+      }
+      const touched = maps.some(x => x.done || x.a || x.b);
+      const status = winner ? "done" : (!ta || !tb) ? "pending" : (touched || d.status === "live") ? "live" : "upcoming";
+      const curMap = status === "live" ? (maps.find(x => !x.done && (x.a || x.b || x.name)) || null) : null;
+      res[m.id] = { ...m, ta, tb, sa, sb, need, winner, loser, ff, status, maps, curMap, time: d.time || "", link: d.link || "", touched };
+    }
+    const places = {};
+    for (const [id, p] of Object.entries(PLACE_ON_LOSS)) if (res[id].loser) places[res[id].loser] = p;
+    if (res.M8.winner) places[res.M8.winner] = 1;
+    const list = MATCHES.map(m => res[m.id]);
+    const upcoming = list.filter(r => r.status === "upcoming");
+    const timed = upcoming.filter(r => parseLocal(r.time)).sort((x, y) => parseLocal(x.time) - parseLocal(y.time));
+    return {
+      res, list, places, seedOf,
+      live: list.filter(r => r.status === "live"),
+      next: timed[0] || upcoming[0] || null,
+      champion: res.M8.winner,
+      started: list.some(r => r.status === "live" || r.status === "done" || r.touched || !!r.ff)
+    };
+  }
+
+  function sourceLabel(src) {
+    if (src.seed) return "Посев " + src.seed;
+    const n = (src.win || src.lose).replace("M", "");
+    return (src.win ? "Победитель матча " : "Проигравший матча ") + n;
+  }
+  function mapsSummary(r) {
+    return r.maps.filter(x => x.done && (x.a || x.b)).map(x => `${x.name || "Карта " + x.n} ${x.a}:${x.b}`).join(", ");
+  }
+
+  const money = n => (Math.round(+n || 0)).toLocaleString("ru-RU").replace(/\u00a0/g, " ") + " ₸";
+  function pickLabel(x, r, state) {
+    if (x.pick === "d") return "десайдер";
+    const t = x.pick === "a" ? r.ta : x.pick === "b" ? r.tb : null;
+    return t ? "пик " + (state.teams[t]?.name || "") : "";
+  }
+  function prizeInfo(state) {
+    const fee = +state.meta.fee || 0;
+    const paid = TEAM_IDS.filter(t => state.teams[t]?.paid).length;
+    const p = state.meta.prizes || {};
+    const places = [1, 2, 3].map(i => ({ place: i, sum: +p["p" + i] || 0 })).filter(x => x.sum > 0);
+    return { fee, pool: fee * TEAM_IDS.length, paid, collected: fee * paid, places };
+  }
+  const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : "";
+
+  /* ---------- Хранилище ---------- */
+  const cfg = window.BAQ_FIREBASE_CONFIG || {};
+  const isConfigured = !!(cfg.apiKey && !String(cfg.apiKey).startsWith("ВСТАВЬТЕ"));
+
+  function loadScript(src) {
+    return new Promise((ok, fail) => {
+      const s = document.createElement("script");
+      s.src = src; s.onload = ok; s.onerror = () => fail(new Error("Не удалось загрузить " + src));
+      document.head.appendChild(s);
+    });
+  }
+
+  async function firebaseStore() {
+    const base = "https://www.gstatic.com/firebasejs/10.12.2/";
+    await loadScript(base + "firebase-app-compat.js");
+    await Promise.all([loadScript(base + "firebase-database-compat.js"), loadScript(base + "firebase-auth-compat.js")]);
+    firebase.initializeApp(cfg);
+    const db = firebase.database(), auth = firebase.auth();
+    const ref = p => db.ref(p ? ROOT + "/" + p : ROOT);
+    return {
+      mode: "firebase",
+      subscribe: cb => ref().on("value", s => cb(withDefaults(s.val())), e => console.error(e)),
+      onConnection: cb => db.ref(".info/connected").on("value", s => cb(!!s.val())),
+      save: (p, v) => ref(p).set(v),
+      update: (p, obj) => ref(p).update(obj),
+      onAuth: cb => auth.onAuthStateChanged(cb),
+      login: (e, p) => auth.signInWithEmailAndPassword(e, p),
+      logout: () => auth.signOut(),
+      resetPassword: e => auth.sendPasswordResetEmail(e)
+    };
+  }
+
+  function demoStore() {
+    const KEY = "baq-liga-cs2-demo-v2";
+    const subs = new Set();
+    const read = () => { try { return withDefaults(JSON.parse(localStorage.getItem(KEY) || "null")); } catch (e) { return withDefaults(null); } };
+    const write = s => { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} subs.forEach(cb => cb(read())); };
+    const setPath = (s, path, value) => {
+      const parts = path.split("/"); let o = s;
+      parts.slice(0, -1).forEach(p => { o[p] = o[p] || {}; o = o[p]; });
+      o[parts[parts.length - 1]] = value;
+    };
+    window.addEventListener("storage", e => { if (e.key === KEY) subs.forEach(cb => cb(read())); });
+    return {
+      mode: "demo",
+      subscribe: cb => { subs.add(cb); cb(read()); },
+      onConnection: cb => cb(true),
+      save: async (p, v) => { const s = read(); if (!p) { write(v); return; } setPath(s, p, v); write(s); },
+      update: async (p, obj) => { const s = read(); for (const [k, v] of Object.entries(obj)) setPath(s, p ? p + "/" + k : k, v); write(s); },
+      onAuth: cb => cb({ email: "демо-режим" }),
+      login: async () => {}, logout: async () => {}, resetPassword: async () => {}
+    };
+  }
+  const createStore = () => isConfigured ? firebaseStore() : Promise.resolve(demoStore());
+
+  /* ---------- Сетка ---------- */
+  function teamRow(r, side, state, comp) {
+    const tid = side === "a" ? r.ta : r.tb;
+    const score = side === "a" ? r.sa : r.sb;
+    const src = side === "a" ? r.a : r.b;
+    if (!tid) return `<div class="team tbd"><span class="seed"></span><span class="name">${esc(sourceLabel(src))}</span><span class="score"></span></div>`;
+    const cls = r.winner ? (r.winner === tid ? "win" : "lose") : "";
+    let sc = "";
+    if (r.ff) sc = r.winner === tid ? "W" : "-";
+    else if (r.status === "live" || r.status === "done") sc = score;
+    return `<div class="team ${cls}"><span class="seed">${comp.seedOf[tid] || ""}</span><span class="name">${esc(state.teams[tid]?.name || tid)}</span><span class="score">${sc}</span></div>`;
+  }
+  function cardFooter(r) {
+    if (r.status === "pending") return "";
+    const parts = [];
+    if (r.status === "live") {
+      parts.push(`<span class="chip live"><i></i>В эфире</span>`);
+      if (r.curMap) parts.push(`<span class="maps">${esc(r.curMap.name || "Карта " + r.curMap.n)} ${r.curMap.a}:${r.curMap.b}</span>`);
+    } else if (r.status === "done") {
+      parts.push(`<span class="chip done">${r.ff ? "Техническая победа" : "Завершен"}</span>`);
+      const ms = mapsSummary(r);
+      if (ms && !r.ff) parts.push(`<span class="maps">${esc(ms)}</span>`);
+    } else if (r.time) parts.push(`<span class="chip">${esc(fmtTime(r.time))}</span>`);
+    if (r.status !== "done" && safeUrl(r.link)) parts.push(`<a class="cs-link" href="${esc(safeUrl(r.link))}" target="_blank" rel="noopener">CyberShoke</a>`);
+    return parts.length ? `<footer>${parts.join("")}</footer>` : "";
+  }
+  function matchCard(r, state, comp) {
+    return `<article class="match side-${r.side} st-${r.status}" id="card-${r.id}" style="grid-area:${r.id.toLowerCase()}">
+      <header><span class="round">${esc(r.round)}</span><span class="bo">Матч ${r.id.slice(1)}, bo${r.bo}</span></header>
+      ${teamRow(r, "a", state, comp)}${teamRow(r, "b", state, comp)}${cardFooter(r)}
+    </article>`;
+  }
+  function renderBracket(el, comp, state) {
+    el.innerHTML = `<div class="bracket-inner">
+      <svg class="lines" aria-hidden="true"></svg>
+      <div class="blabel l-ub"><span class="sw sw-ub"></span>Верхняя сетка</div>
+      <div class="blabel l-lb"><span class="sw sw-lb"></span>Нижняя сетка</div>
+      <div class="blabel l-gf"><span class="sw sw-gf"></span>Гранд-финал, bo5</div>
+      ${comp.list.map(r => matchCard(r, state, comp)).join("")}
+    </div>`;
+    drawLines(el, comp);
+  }
+  function drawLines(el, comp) {
+    const inner = el.querySelector(".bracket-inner"), svg = el.querySelector("svg.lines");
+    if (!inner || !svg) return;
+    const box = inner.getBoundingClientRect();
+    svg.setAttribute("width", inner.scrollWidth);
+    svg.setAttribute("height", inner.scrollHeight);
+    svg.innerHTML = EDGES.map(([from, to]) => {
+      const a = el.querySelector("#card-" + from)?.getBoundingClientRect();
+      const b = el.querySelector("#card-" + to)?.getBoundingClientRect();
+      if (!a || !b) return "";
+      const x1 = a.right - box.left, y1 = a.top + a.height / 2 - box.top;
+      const x2 = b.left - box.left, y2 = b.top + b.height / 2 - box.top;
+      const mx = x1 + (x2 - x1) / 2;
+      const on = comp.res[from].winner ? " on side-" + comp.res[from].side : "";
+      return `<path class="edge${on}" d="M${x1} ${y1} H${mx} V${y2} H${x2}"/>`;
+    }).join("");
+  }
+
+  window.BAQ = {
+    ROOT, MATCHES, TEAM_IDS, DEFAULT_STATE, emptyMatch, clone, withDefaults, esc, parseRoster, mapPool,
+    parseLocal, fmtTime, countdown, compute, sourceLabel, mapsSummary,
+    isConfigured, createStore, renderBracket, drawLines, money, pickLabel, prizeInfo, safeUrl
+  };
+})();
+
+</script>
+<script>
+(function () {
+  const B = window.BAQ, esc = B.esc;
+  const $ = id => document.getElementById(id);
+  let store, state, comp, built = false;
+  const expanded = new Set();
+
+  function toast(msg, bad) {
+    const t = $("toast");
+    t.textContent = msg; t.className = "toast show" + (bad ? " bad" : "");
+    clearTimeout(t._h); t._h = setTimeout(() => t.className = "toast", 2200);
+  }
+  function errText(e) {
+    const s = (e && (e.code || e.message)) || "";
+    return /permission/i.test(s) ? "Нет прав на запись. Проверьте UID админа в правилах базы" : "Не сохранилось: " + s;
+  }
+  async function save(path, value, msg) {
+    try { await store.save(path, value); if (msg) toast(msg); } catch (e) { console.error(e); toast(errText(e), true); }
+  }
+  async function update(path, obj, msg) {
+    try { await store.update(path, obj); if (msg) toast(msg); } catch (e) { console.error(e); toast(errText(e), true); }
+  }
+  const tn = t => t ? esc(state.teams[t]?.name || t) : "";
+
+  /* ---------- Матчи ---------- */
+  function dependents(id) {
+    return B.MATCHES.filter(m => m.a.win === id || m.a.lose === id || m.b.win === id || m.b.lose === id).map(m => m.id);
+  }
+  function chip(r) {
+    if (r.status === "live") return '<span class="chip live"><i></i>В эфире</span>';
+    if (r.status === "done") return `<span class="chip done">${r.ff ? "Техническая победа" : "Завершен"}: ${tn(r.winner)}</span>`;
+    if (r.status === "pending") return '<span class="chip">Ждет соперников</span>';
+    return '<span class="chip">Не начался</span>';
+  }
+  function mapRow(r, x, pool) {
+    const ready = !!(r.ta && r.tb) && !r.ff;
+    const off = !ready || (r.status === "done" && !x.done);
+    const opts = ['<option value="">Выберите карту</option>']
+      .concat(pool.concat(x.name && !pool.includes(x.name) ? [x.name] : []).map(p => `<option ${p === x.name ? "selected" : ""}>${esc(p)}</option>`)).join("");
+    const d = off ? "disabled" : "";
+    return `<div class="mrow ${x.done ? "done" : ""} ${r.curMap === x ? "cur" : ""}" data-map="${x.key}">
+      <span class="mn">Карта ${x.n}</span>
+      <select data-k="name" ${d} aria-label="Карта ${x.n}">${opts}</select>
+      <select data-k="pick" ${d} aria-label="Кто выбрал карту ${x.n}">
+        <option value="">Кто выбрал</option>
+        <option value="a" ${x.pick === "a" ? "selected" : ""}>Пик ${tn(r.ta) || "команды 1"}</option>
+        <option value="b" ${x.pick === "b" ? "selected" : ""}>Пик ${tn(r.tb) || "команды 2"}</option>
+        <option value="d" ${x.pick === "d" ? "selected" : ""}>Десайдер</option>
+      </select>
+      <span class="rs"><button data-r="a" data-d="-1" ${d} aria-label="Минус раунд">-</button><input type="number" inputmode="numeric" min="0" max="99" data-k="a" value="${x.a}" ${d} aria-label="Раунды ${tn(r.ta)}"><button data-r="a" data-d="1" ${d} aria-label="Плюс раунд">+</button></span>
+      <span class="colon">:</span>
+      <span class="rs"><button data-r="b" data-d="-1" ${d} aria-label="Минус раунд">-</button><input type="number" inputmode="numeric" min="0" max="99" data-k="b" value="${x.b}" ${d} aria-label="Раунды ${tn(r.tb)}"><button data-r="b" data-d="1" ${d} aria-label="Плюс раунд">+</button></span>
+      <label class="chk"><input type="checkbox" data-k="done" ${x.done ? "checked" : ""} ${d}>Сыграна</label>
+    </div>`;
+  }
+  function matchCard(r) {
+    const d = state.matches[r.id] || {};
+    const pool = B.mapPool(state);
+    const ready = !!(r.ta && r.tb);
+    const open = (r.status === "live" || r.status === "upcoming") || (r.status === "done" && expanded.has(r.id));
+    const deps = dependents(r.id).filter(id => comp.res[id].touched || comp.res[id].ff);
+    const warn = r.status === "done" && deps.length
+      ? `<p class="warn">Матчи ${deps.map(x => x.slice(1)).join(", ")} уже начаты. Если изменить этот результат, в них сменятся участники.</p>` : "";
+    return `<div class="am-in">
+      <div class="am-head"><span><b>Матч ${r.id.slice(1)}, bo${r.bo}</b> ${esc(r.round)}</span>${chip(r)}</div>
+      <div class="am-score">
+        <span class="tn ${r.ta ? "" : "tbd"}">${r.ta ? tn(r.ta) : esc(B.sourceLabel(r.a))}</span>
+        <span class="big">${r.sa}<i>:</i>${r.sb}</span>
+        <span class="tn right ${r.tb ? "" : "tbd"}">${r.tb ? tn(r.tb) : esc(B.sourceLabel(r.b))}</span>
+      </div>
+      ${open ? `<div class="am-maps">${r.maps.map(x => mapRow(r, x, pool)).join("")}</div>` : `<p class="am-sum">${r.status === "done" ? esc(r.ff ? "Техническая победа" : (B.mapsSummary(r) || "Карты не указаны")) : "Карты откроются, когда определятся оба соперника. Время можно указать заранее."}</p>`}
+      ${r.status === "done" ? `<button class="btn ghost small am-toggle" data-toggle type="button">${open ? "Свернуть" : "Исправить карты"}</button>` : ""}
+      <div class="am-opts">
+        <label><span>Начало</span><input type="datetime-local" data-f="time" value="${esc(d.time || "")}"></label>
+        <label><span>Статус</span><select data-f="status" ${!ready || r.touched || r.status === "done" ? "disabled" : ""}>
+          ${r.status === "done" ? "<option>Завершен</option>" : r.touched ? "<option>В эфире</option>" :
+            `<option value="upcoming" ${d.status !== "live" ? "selected" : ""}>Не начался</option><option value="live" ${d.status === "live" ? "selected" : ""}>В эфире</option>`}
+        </select></label>
+        <label><span>Техническая победа</span><select data-f="forfeit" ${ready ? "" : "disabled"}>
+          <option value="">Нет</option>
+          ${ready ? `<option value="a" ${r.ff === "a" ? "selected" : ""}>${tn(r.ta)}</option><option value="b" ${r.ff === "b" ? "selected" : ""}>${tn(r.tb)}</option>` : ""}
+        </select></label>
+        <label class="wide"><span>Ссылка на матч в CyberShoke (необязательно)</span><input type="url" data-f="link" placeholder="https://cybershoke.net/..." value="${esc(d.link || "")}"></label>
+      </div>${warn}
+    </div>`;
+  }
+  function renderMatches() {
+    const box = $("matches");
+    if (!box.children.length) box.innerHTML = B.MATCHES.map(m => `<div class="am" data-id="${m.id}"></div>`).join("");
+    const act = document.activeElement;
+    for (const r of comp.list) {
+      const el = box.querySelector(`.am[data-id="${r.id}"]`);
+      el.className = `am side-${r.side} st-${r.status}`;
+      if (act && el.contains(act) && /^(INPUT|SELECT)$/.test(act.tagName) && act.type !== "checkbox") { el.dataset.stale = "1"; continue; }
+      el.innerHTML = matchCard(r); delete el.dataset.stale;
+    }
+    $("navLive").textContent = comp.live.length ? `В эфире: ${comp.live.length}` : "";
+  }
+
+  function matchOf(el) { return el.closest(".am")?.dataset.id; }
+  $("matches").addEventListener("focusout", () => setTimeout(() => { if (state) renderMatches(); }, 0));
+  $("matches").addEventListener("click", e => {
+    const tg = e.target.closest("button[data-toggle]");
+    if (tg) { const id = matchOf(tg); expanded.has(id) ? expanded.delete(id) : expanded.add(id); renderMatches(); return; }
+    const b = e.target.closest("button[data-r]"); if (!b || b.disabled) return;
+    const id = matchOf(b), mk = b.closest(".mrow").dataset.map, side = b.dataset.r;
+    const x = comp.res[id].maps.find(m => m.key === mk);
+    const v = Math.max(0, Math.min(99, x[side] + (+b.dataset.d)));
+    save(`matches/${id}/maps/${mk}/${side}`, v);
+  });
+  $("matches").addEventListener("change", e => {
+    const t = e.target, id = matchOf(t); if (!id) return;
+    const r = comp.res[id];
+    if (t.dataset.f) {
+      if (t.dataset.f === "link" && t.value.trim() && !/^https?:\/\//i.test(t.value.trim())) { toast("Ссылка должна начинаться с https://", true); return; }
+      if (t.dataset.f === "forfeit" && t.value && !confirm(`Засчитать техническую победу команде ${t.value === "a" ? tn(r.ta) : tn(r.tb)}?`)) { t.value = r.ff; return; }
+      save(`matches/${id}/${t.dataset.f}`, t.value, t.dataset.f === "time" ? "Время сохранено" : "Сохранено");
+      return;
+    }
+    const mk = t.closest(".mrow")?.dataset.map; if (!mk) return;
+    const x = r.maps.find(m => m.key === mk);
+    if (t.dataset.k === "name") save(`matches/${id}/maps/${mk}/name`, t.value, "Карта выбрана");
+    else if (t.dataset.k === "pick") save(`matches/${id}/maps/${mk}/pick`, t.value, "Пик сохранен");
+    else if (t.dataset.k === "a" || t.dataset.k === "b") {
+      const v = Math.max(0, Math.min(99, parseInt(t.value, 10) || 0));
+      save(`matches/${id}/maps/${mk}/${t.dataset.k}`, v);
+    } else if (t.dataset.k === "done") {
+      if (t.checked && x.a === x.b) { t.checked = false; toast("Карта не может закончиться вничью. Проверьте счет раундов", true); return; }
+      const before = r.status;
+      save(`matches/${id}/maps/${mk}/done`, t.checked).then(() => {
+        const after = B.compute(state).res[id];
+        if (before !== "done" && after.status === "done") toast(`Матч ${id.slice(1)} завершен. Победитель: ${tn(after.winner)}`);
+        else toast(t.checked ? "Карта засчитана" : "Карта снова в игре");
+      });
+    }
+  });
+
+  /* ---------- Посев ---------- */
+  const SEED_HINT = { s1: "сразу в полуфинале верхней", s2: "полуфинал верхней", s3: "полуфинал верхней", s4: "отборочный матч", s5: "отборочный матч" };
+  function renderSeeds() {
+    const lock = comp.started;
+    $("seedLock").hidden = !lock;
+    $("seedNoteNow").textContent = state.meta.seedNote || "";
+    $("seeds").innerHTML = [1, 2, 3, 4, 5].map(i => {
+      const k = "s" + i;
+      return `<div class="seed-row"><span class="sn">Посев ${i}</span>
+        <select data-seed="${k}" ${lock ? "disabled" : ""} aria-label="Посев ${i}">
+          ${B.TEAM_IDS.map(t => `<option value="${t}" ${state.seeds[k] === t ? "selected" : ""}>${tn(t)}</option>`).join("")}
+        </select><span class="hint">${SEED_HINT[k]}</span></div>`;
+    }).join("");
+    $("draw").disabled = lock; $("seedDefault").disabled = lock;
+  }
+  const stamp = () => { const d = new Date(), p = n => String(n).padStart(2, "0"); return `${p(d.getDate())}.${p(d.getMonth() + 1)}.${d.getFullYear()} в ${p(d.getHours())}:${p(d.getMinutes())}`; };
+  function saveSeeds(seeds, note, msg) { update("", { seeds, "meta/seedNote": note }, msg); }
+  $("seeds").addEventListener("change", e => {
+    const k = e.target.dataset.seed; if (!k) return;
+    const seeds = { ...state.seeds };
+    const other = Object.keys(seeds).find(s => seeds[s] === e.target.value);
+    seeds[other] = seeds[k]; seeds[k] = e.target.value;
+    saveSeeds(seeds, "Посев определен организаторами", "Посев обновлен");
+  });
+  $("draw").addEventListener("click", () => {
+    if (!confirm("Провести жеребьевку? Текущий посев будет заменен случайным.")) return;
+    const ids = B.TEAM_IDS.slice();
+    for (let i = ids.length - 1; i > 0; i--) {
+      const r = new Uint32Array(1); crypto.getRandomValues(r);
+      const j = r[0] % (i + 1); [ids[i], ids[j]] = [ids[j], ids[i]];
+    }
+    const seeds = {}; ids.forEach((t, i) => seeds["s" + (i + 1)] = t);
+    saveSeeds(seeds, "Посев определен жеребьевкой " + stamp(), "Жеребьевка проведена");
+  });
+  $("seedDefault").addEventListener("click", () => saveSeeds(B.clone(B.DEFAULT_STATE.seeds), B.DEFAULT_STATE.meta.seedNote, "Посев по порядку команд"));
+
+  /* ---------- Команды и настройки ---------- */
+  function buildStatic() {
+    $("teamsEdit").innerHTML = B.TEAM_IDS.map(t => `
+      <div class="card">
+        <div class="field"><label class="f" for="n-${t}">Название команды</label><input type="text" id="n-${t}" maxlength="40" value="${esc(state.teams[t].name)}"></div>
+        <div class="field"><label class="f" for="r-${t}">Состав</label><textarea id="r-${t}">${esc(state.teams[t].roster)}</textarea></div>
+        <label class="paid"><input type="checkbox" data-paid="${t}" ${state.teams[t].paid ? "checked" : ""}>Взнос оплачен</label><br>
+        <button class="btn small" data-save-team="${t}">Сохранить команду</button>
+      </div>`).join("");
+    $("titleIn").value = state.meta.title || "";
+    $("subtitleIn").value = state.meta.subtitle || "";
+    $("infoIn").value = state.meta.info || "";
+    $("streamIn").value = state.meta.stream || "";
+    $("poolIn").value = state.meta.mapPool || "";
+    $("posterIn").value = state.meta.poster || "";
+    $("feeIn").value = state.meta.fee || 0;
+    ["p1", "p2", "p3"].forEach(k => $(k + "In").value = (state.meta.prizes || {})[k] || "");
+    $("rulesIn").value = state.meta.rules || "";
+    sumCheck();
+    built = true;
+  }
+  $("teamsEdit").addEventListener("click", e => {
+    const t = e.target.dataset.saveTeam; if (!t) return;
+    const name = $("n-" + t).value.trim();
+    if (!name) { toast("Укажите название команды", true); $("n-" + t).focus(); return; }
+    update("teams/" + t, { name, roster: $("r-" + t).value.trim() }, "Команда сохранена");
+  });
+  $("teamsEdit").addEventListener("change", e => {
+    const t = e.target.dataset.paid; if (!t) return;
+    save(`teams/${t}/paid`, e.target.checked, e.target.checked ? "Взнос отмечен" : "Отметка о взносе снята");
+  });
+  function sumCheck() {
+    const pool = (+$("feeIn").value || 0) * B.TEAM_IDS.length;
+    const sum = ["p1", "p2", "p3"].reduce((s, k) => s + (+$(k + "In").value || 0), 0);
+    const el = $("sumCheck");
+    el.className = "sumcheck" + (sum > pool ? " bad" : "");
+    el.textContent = `Фонд ${B.money(pool)}. Распределено ${B.money(sum)}` + (sum > pool ? ", это больше фонда" : sum < pool && sum > 0 ? `, остаток ${B.money(pool - sum)}` : "");
+  }
+  ["feeIn", "p1In", "p2In", "p3In"].forEach(id => $(id).addEventListener("input", sumCheck));
+  $("saveMeta").addEventListener("click", () => {
+    const pool = (+$("feeIn").value || 0) * B.TEAM_IDS.length;
+    const prizes = {}; ["p1", "p2", "p3"].forEach(k => prizes[k] = Math.max(0, Math.round(+$(k + "In").value || 0)));
+    if (prizes.p1 + prizes.p2 + prizes.p3 > pool) { toast("Сумма призов больше призового фонда", true); return; }
+    const stream = $("streamIn").value.trim();
+    if (stream && !/^https?:\/\//i.test(stream)) { toast("Ссылка на трансляцию должна начинаться с https://", true); return; }
+    update("meta", {
+      title: $("titleIn").value.trim() || "BAQ LIGA CS2", subtitle: $("subtitleIn").value.trim(),
+      info: $("infoIn").value.trim(), stream, mapPool: $("poolIn").value.trim(),
+      fee: Math.max(0, Math.round(+$("feeIn").value || 0)), prizes, rules: $("rulesIn").value.trim(),
+      poster: $("posterIn").value.trim()
+    }, "Настройки сохранены");
+  });
+  $("resetMatches").addEventListener("click", () => {
+    if (confirm("Обнулить все матчи: счет, карты, время и технические победы?")) save("matches", B.clone(B.DEFAULT_STATE.matches), "Матчи сброшены");
+  });
+  $("resetAll").addEventListener("click", () => {
+    if (confirm("Вернуть все к исходному виду: матчи, посев, команды и настройки?")) save("", B.clone(B.DEFAULT_STATE), "Все данные сброшены").then(() => { built = false; render(state); });
+  });
+  $("copyLink").addEventListener("click", async () => {
+    const url = location.href.replace(/admin\.html.*$/, "");
+    try { await navigator.clipboard.writeText(url); toast("Ссылка для зрителей скопирована"); }
+    catch (e) { prompt("Скопируйте ссылку:", url); }
+  });
+
+  function render(s) {
+    state = s; comp = B.compute(s);
+    if (!built) buildStatic();
+    renderMatches(); renderSeeds();
+  }
+
+  /* ---------- Вход ---------- */
+  $("loginForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const email = $("email").value.trim(), pass = $("pass").value;
+    if (!email || !pass) { $("loginErr").textContent = "Введите email и пароль"; return; }
+    $("loginErr").textContent = "";
+    try { await store.login(email, pass); }
+    catch (err) {
+      const c = err.code || "";
+      $("loginErr").textContent = /invalid|wrong|not-found/.test(c) ? "Неверный email или пароль"
+        : /unauthorized-domain/.test(c) ? "Этот адрес сайта не добавлен в Authorized domains в Firebase"
+        : /too-many/.test(c) ? "Слишком много попыток. Подождите несколько минут" : "Не удалось войти: " + c;
+    }
+  });
+  $("forgot").addEventListener("click", async () => {
+    const email = $("email").value.trim();
+    if (!email) { $("loginErr").textContent = "Введите email, на него придет ссылка для смены пароля"; return; }
+    try { await store.resetPassword(email); $("loginErr").textContent = "Письмо для смены пароля отправлено на " + email; }
+    catch (err) { $("loginErr").textContent = "Не удалось отправить письмо: " + (err.code || err.message); }
+  });
+  ["email", "pass"].forEach(id => $(id).addEventListener("input", () => $("loginErr").textContent = ""));
+  $("logout").addEventListener("click", () => store.logout());
+
+  async function start() {
+    try { store = await B.createStore(); }
+    catch (e) { $("loginView").hidden = false; $("loginErr").textContent = "Нет связи с Firebase. Проверьте интернет и config.js"; return; }
+    if (store.mode === "demo") {
+      $("demo").hidden = false;
+      $("conn").className = "conn demo"; $("conn").lastElementChild.textContent = "Демо";
+    } else store.onConnection(ok => { $("conn").className = "conn" + (ok ? " on" : ""); $("conn").lastElementChild.textContent = ok ? "Онлайн" : "Нет связи"; });
+    let subscribed = false;
+    store.onAuth(user => {
+      $("loginView").hidden = !!user;
+      $("panel").hidden = !user;
+      $("logout").hidden = !user || store.mode === "demo";
+      if (user) { $("who").textContent = user.email || ""; if (!subscribed) { subscribed = true; store.subscribe(render); } }
+    });
+  }
+  start();
+})();
+
+</script>
+</body>
+</html>

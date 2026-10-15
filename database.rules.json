@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "baq": {
+      ".read": true,
+      ".write": "auth != null && auth.uid === 'ВСТАВЬТЕ_UID_АДМИНА'"
+    }
+  }
+}
